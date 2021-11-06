@@ -36,10 +36,17 @@ function SignupFormPage() {
             </nav>
             <div className="form-background">
                 <form onSubmit={handleSubmit} className="form-container">
+                    <div className="form-header">
+                        <div className="logo">
+                            <div id="logo-yellow"></div>
+                            <div id="logo-red"></div>
+                            <div id="logo-blue"></div>
+                        </div>
+                        <div className="formHeader-text">Sign up for Pixel</div>
+                    </div>
                     <ul>
                         {errors.map((error, idx) => <li key={idx}>{error}</li>)}
                     </ul>
-                    <div className="form-header">Sign up for Pixel</div>
                     <div className="field-container">
                         <input
                             className="form-field"
@@ -93,8 +100,8 @@ function SignupFormPage() {
                     </div>
                     
                     <div className="redirect-container">
-                        <span>Already a Pixel member? </span>
-                        <NavLink to="/login">Log in here.</NavLink>
+                        <span className="redirect-text">Already a Pixel member? </span>
+                        <NavLink className="redirect-link" to="/login">Log in here.</NavLink>
                     </div>
                 </form>
             </div>
