@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
       references: { model: 'Photos' }
     }
   }, {});
-  Favorite.associate = function(models) {
+  Favorite.associate = function (models) {
     // associations can be defined here
     Favorite.belongsTo(models.User, { foreignKey: 'userId' });
     Favorite.belongsTo(models.Photo, { foreignKey: 'photoId' });

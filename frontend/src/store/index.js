@@ -4,7 +4,7 @@ import sessionReducer from './session';
 
 const rootReducer = combineReducers({
   // add reducer functions here
-  sessionReducer,
+  session: sessionReducer,
 });
 // const user = useSelector((store) => store.sessionReducer.user)
 let enhancer;

@@ -54,16 +54,18 @@ export const thunk_login = ({ credential, password }) => async (dispatch) => {
 };
 
 // Signup thunk
-export const thunk_signup = ({ email, password, username }) => async (dispatch) => {
+export const thunk_signup = ({ firstName, lastName, username, email, password }) => async (dispatch) => {
     const res = await csrfFetch("/api/users", {
         method: 'POST',
         headers: {
             "Content-Type": "application/json"
         },
         body: JSON.stringify({
+            firstName,
+            lastName,
+            username,
             email,
-            password,
-            username
+            password
         })
     });
 

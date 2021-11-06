@@ -6,7 +6,7 @@ import './LoginForm.css';
 
 function LoginFormPage() {
     const dispatch = useDispatch();
-    const sessionUser = useSelector(state => state.sessionReducer.user);
+    const sessionUser = useSelector(state => state.session.user);
     const [credential, setCredential] = useState('');
     const [password, setPassword] = useState('');
     const [errors, setErrors] = useState([]);
