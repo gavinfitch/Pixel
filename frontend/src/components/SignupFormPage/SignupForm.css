@@ -2,6 +2,13 @@
     margin: 0px;
 }
 
+.form-nav {
+    position: fixed;
+    background-color: rgb(30, 30, 30);
+    width: 100vw;
+    height: 48px;
+}
+
 .form-background {
     display: flex;
     align-items: center;
@@ -19,6 +26,7 @@
     align-items: center;
     justify-content: center;
     background-color: white;
-    width: 300px;
-    height: 600px;
+    width: 350px;
+    height: 700px;
+    border-radius: 5px;
 }
