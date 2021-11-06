@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { Redirect, NavLink } from "react-router-dom";
 import * as sessionActions from "../../store/session";
 import './SignupForm.css';
 
@@ -33,74 +33,69 @@ function SignupFormPage() {
     return (
         <>
             <nav className="form-nav">
-
             </nav>
             <div className="form-background">
                 <form onSubmit={handleSubmit} className="form-container">
                     <ul>
                         {errors.map((error, idx) => <li key={idx}>{error}</li>)}
                     </ul>
-                    <label>
-                        {/* First Name */}
+                    <div className="form-header">Sign up for Pixel</div>
+                    <div className="field-container">
                         <input
+                            className="form-field"
                             type="text"
                             placeholder="First name"
                             value={firstName}
                             onChange={(e) => setFirstName(e.target.value)}
                             required
                         />
-                    </label>
-                    <label>
-                        {/* Last Name */}
                         <input
+                            className="form-field"
                             type="text"
                             placeholder="Last name"
                             value={lastName}
                             onChange={(e) => setLastName(e.target.value)}
                             required
                         />
-                    </label>
-                    <label>
-                        {/* Username */}
                         <input
+                            className="form-field"
                             type="text"
                             placeholder="Username"
                             value={username}
                             onChange={(e) => setUsername(e.target.value)}
                             required
                         />
-                    </label>
-                    <label>
-                        {/* Email */}
                         <input
+                            className="form-field"
                             type="text"
                             placeholder="Email address"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                             required
                         />
-                    </label>
-                    <label>
-                        {/* Password */}
                         <input
+                            className="form-field"
                             type="password"
                             placeholder="Password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                             required
                         />
-                    </label>
-                    <label>
-                        {/* Confirm Password */}
                         <input
+                            className="form-field"
                             type="password"
                             placeholder="Confirm password"
                             value={confirmPassword}
                             onChange={(e) => setConfirmPassword(e.target.value)}
                             required
                         />
-                    </label>
-                    <button type="submit">Sign up</button>
+                        <button className="form-button" type="submit">Sign up</button>
+                    </div>
+                    
+                    <div className="redirect-container">
+                        <span>Already a Pixel member? </span>
+                        <NavLink to="/login">Log in here.</NavLink>
+                    </div>
                 </form>
             </div>
         </>

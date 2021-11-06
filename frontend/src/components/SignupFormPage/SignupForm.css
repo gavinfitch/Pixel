@@ -1,7 +1,3 @@
-* {
-    margin: 0px;
-}
-
 .form-nav {
     position: fixed;
     background-color: rgb(30, 30, 30);
@@ -24,9 +20,41 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     background-color: white;
+    padding: 0px 25px;
     width: 350px;
     height: 700px;
     border-radius: 5px;
+    
+}
+
+.form-field {
+    margin: 4px 0px;
+    padding: 15px;
+    height: 60px;
+    border: 1px solid grey;
+    border-radius: 5px;
+    font-size: 15px;
+}
+
+.form-button {
+    background-color: rgb(22, 142, 220);
+    width: 100%;
+    height: 40px;
+    border: none;
+    border-radius: 5px;
+    margin-top: 20px;
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.redirect-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    border-top: 1px solid lightgrey;
+    padding: 20px 0px;
 }
