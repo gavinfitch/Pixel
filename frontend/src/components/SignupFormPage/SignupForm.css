@@ -9,38 +9,25 @@
     color: rgb(60, 60, 60);
 }
 
-.formHeader-text {
+.form-headerText {
     margin-top: 2px;
-}
-
-.logo {
-    width: 30px;
-    height: 30px;
-    display: grid;
-    grid-template-rows: 2fr 1.1fr 1.1fr;
-}
-
-#logo-yellow {
-    background-color: rgb(255, 225, 0);
-    border-top-left-radius: 0px;
-    border-top-right-radius: 3px;
-}
-
-#logo-red {
-    background-color: rgb(255, 45, 45);
-}
-
-#logo-blue {
-    background-color: rgb(0, 65, 135);
-    border-bottom-left-radius: 3px;
-    border-bottom-right-radius: 0px;
 }
 
 .form-nav {
     position: fixed;
+    display: flex;
+    align-items: center;
     background-color: rgb(30, 30, 30);
     width: 100vw;
-    height: 48px;
+    height: 50px;
+    padding: 0px 75px;
+}
+
+.form-logoText {
+    margin-left: 2px;
+    color: white;
+    font-size: 41px;
+    font-weight: bold;
 }
 
 .form-background {

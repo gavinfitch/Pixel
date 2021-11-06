@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Redirect, NavLink } from "react-router-dom";
 import * as sessionActions from "../../store/session";
 import './SignupForm.css';
+import Logo from '../Logo';
 
 function SignupFormPage() {
     const dispatch = useDispatch();
@@ -33,16 +34,19 @@ function SignupFormPage() {
     return (
         <>
             <nav className="form-nav">
+                <Logo />
+                <span className="form-logoText">Pixel</span>
             </nav>
             <div className="form-background">
                 <form onSubmit={handleSubmit} className="form-container">
                     <div className="form-header">
-                        <div className="logo">
+                        {/* <div className="logo">
                             <div id="logo-yellow"></div>
                             <div id="logo-red"></div>
                             <div id="logo-blue"></div>
-                        </div>
-                        <div className="formHeader-text">Sign up for Pixel</div>
+                        </div> */}
+                        <Logo />
+                        <div className="form-headerText">Sign up for Pixel</div>
                     </div>
                     <ul>
                         {errors.map((error, idx) => <li key={idx}>{error}</li>)}
@@ -98,7 +102,7 @@ function SignupFormPage() {
                         />
                         <button className="form-button" type="submit">Sign up</button>
                     </div>
-                    
+
                     <div className="redirect-container">
                         <span className="redirect-text">Already a Pixel member? </span>
                         <NavLink className="redirect-link" to="/login">Log in here.</NavLink>
