@@ -44,8 +44,6 @@ function UploadPhotoForm() {
 
         return dispatch(photoActions.thunk_addphoto({ userId, title, description, photoURL }))
 
-
-
         // if (password === confirmPassword) {
         //     setErrors([]);
         //     return dispatch(sessionActions.thunk_signup({ firstName, lastName, username, email, password }))
@@ -56,6 +54,18 @@ function UploadPhotoForm() {
         // }
         // return setErrors(['Confirm password field must be the same as password field.']);
     };
+
+    const deletePhoto = async (e) => {
+        e.preventDefault();
+        // console.log("you are here")
+
+        ReactS3Client
+            .deleteFile('Hornby Ferry pic.jpeg')
+            .then(response => console.log(response))
+            .catch(err => console.error(err))
+
+    };
+
 
     if (!sessionUser) return <Redirect to="/" />;
 
@@ -106,6 +116,7 @@ function UploadPhotoForm() {
                         // required
                         />
                         <button className="form-button" type="submit">Upload</button>
+                        {/* <button className="form-button" onClick={deletePhoto}>Delete Photo</button> */}
                     </div>
 
                     {/* <div className="redirect-container">
