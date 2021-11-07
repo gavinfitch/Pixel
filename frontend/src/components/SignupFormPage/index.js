@@ -55,9 +55,9 @@ function SignupFormPage() {
                         <Logo />
                         <div className="form-headerText">Sign up for Pixel</div>
                     </div>
-                    <ul>
-                        {errors.map((error, idx) => <li key={idx}>{error}</li>)}
-                    </ul>
+                    {errors.length > 0 && <ul className="errors-container">
+                        {errors.map((error, idx) => <li className="error" key={idx}>{error}</li>)}
+                    </ul>}
                     <div className="field-container">
                         <input
                             className="form-field"
@@ -65,7 +65,7 @@ function SignupFormPage() {
                             placeholder="First name"
                             value={firstName}
                             onChange={(e) => setFirstName(e.target.value)}
-                            required
+                            // required
                         />
                         <input
                             className="form-field"
@@ -73,7 +73,7 @@ function SignupFormPage() {
                             placeholder="Last name"
                             value={lastName}
                             onChange={(e) => setLastName(e.target.value)}
-                            required
+                            // required
                         />
                         <input
                             className="form-field"
@@ -81,7 +81,7 @@ function SignupFormPage() {
                             placeholder="Username"
                             value={username}
                             onChange={(e) => setUsername(e.target.value)}
-                            required
+                            // required
                         />
                         <input
                             className="form-field"
@@ -89,7 +89,7 @@ function SignupFormPage() {
                             placeholder="Email address"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
-                            required
+                            // required
                         />
                         <input
                             className="form-field"
@@ -97,7 +97,7 @@ function SignupFormPage() {
                             placeholder="Password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
-                            required
+                            // required
                         />
                         <input
                             className="form-field"
@@ -105,7 +105,7 @@ function SignupFormPage() {
                             placeholder="Confirm password"
                             value={confirmPassword}
                             onChange={(e) => setConfirmPassword(e.target.value)}
-                            required
+                            // required
                         />
                         <button className="form-button" type="submit">Sign up</button>
                     </div>

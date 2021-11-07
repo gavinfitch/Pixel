@@ -1,16 +1,30 @@
+.errors-container {
+    margin: 20px 0px;
+    padding: 0px;
+}
+
+.error {
+    list-style: none;
+    padding: 3px 0px;
+    color: rgb(255, 45, 45);
+    font-size: 14px;
+}
+
 .form-header {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-around;
+    /* justify-content: space-around;
+    margin-top: 28px; */
     height: 75px;
-    margin-top: 28px;
+    margin-top: 32px;
     font-size: 20px;
     color: rgb(60, 60, 60);
 }
 
 .form-headerText {
-    margin-top: 2px;
+    margin-top: 14px;
+    /* margin-top: 2px; */
 }
 
 .form-nav {
@@ -52,6 +66,7 @@
 }
 
 .form-container {
+    overflow: scroll;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -75,6 +90,7 @@
     border-radius: 5px;
     font-size: 15px;
     transition: all 0.15s linear;
+    color: rgb(60, 60, 60);
 }
 
 .form-field:focus {

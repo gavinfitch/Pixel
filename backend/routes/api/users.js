@@ -8,22 +8,29 @@ const { User } = require('../../db/models');
 const router = express.Router();
 
 const validateSignup = [
-    check('email')
+    check('firstName')
         .exists({ checkFalsy: true })
-        .isEmail()
-        .withMessage('Please provide a valid email.'),
+        .withMessage('Please provide first name.'),
+    check('lastName')
+        .exists({ checkFalsy: true })
+        .withMessage('Please provide last name.'),
     check('username')
-        .exists({ checkFalsy: true })
-        .isLength({ min: 4 })
-        .withMessage('Please provide a username with at least 4 characters.'),
+        // .exists({ checkFalsy: true })
+        .isLength({ min: 1 })
+        .withMessage('Please provide username of at least 1 character.'),
     check('username')
         .not()
         .isEmail()
-        .withMessage('Username cannot be an email.'),
+        .withMessage('Username cannot be an email address.'),
+    check('email')
+        // .exists({ checkFalsy: true })
+        .isEmail()
+        .withMessage('Please provide valid email address.'),
     check('password')
-        .exists({ checkFalsy: true })
+        // .exists({ checkFalsy: true })
         .isLength({ min: 6 })
-        .withMessage('Password must be 6 characters or more.'),
+        .withMessage('Please provide password of at least 6 characters.'),
+
     handleValidationErrors,
 ];
 
