@@ -15,6 +15,8 @@
 
 .form-nav {
     position: fixed;
+    display: flex;
+    align-items: center;
     background-color: rgb(30, 30, 30);
     width: 100vw;
     height: 50px;
@@ -72,6 +74,27 @@
     border: 1px solid grey;
     border-radius: 5px;
     font-size: 15px;
+    transition: all 0.15s linear;
+}
+
+.form-field:focus {
+    outline: none;
+    border: 1px solid rgb(22, 142, 220);
+}
+
+.form-field::placeholder {
+    position: absolute;
+    top: 20px;
+    transition: all 0.15s linear;
+}
+
+.form-field:focus::placeholder {
+    position: absolute;
+    left: 14px;
+    top: 7px;
+    color: rgb(22, 142, 220);
+    font-size: 12px;
+    
 }
 
 .form-button {
@@ -84,6 +107,11 @@
     color: white;
     font-size: 15px;
     font-weight: bold;
+}
+
+.form-button:hover {
+    background-color: rgba(22, 142, 220, 0.92);
+    cursor: pointer;
 }
 
 .redirect-container {
