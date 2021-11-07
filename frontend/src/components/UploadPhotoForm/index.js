@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useHistory } from "react-router-dom";
 import S3 from 'react-aws-s3';
-// import * as sessionActions from "../../store/session";
+import * as photoActions from "../../store/photo";
 import './UploadPhotoForm.css';
 import Logo from '../Logo';
 
@@ -32,13 +32,19 @@ function UploadPhotoForm() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        let amazonPhoto;
+        const userId = sessionUser.id;
+        let s3Photo;
+
         await ReactS3Client
             .uploadFile(photo, title)
-            .then(data => amazonPhoto = data)
+            .then(data => s3Photo = data)
             .catch(err => console.error(err))
 
-        // console.log("this is amazon photo ", amazonPhoto)
+        const photoURL = s3Photo.location;
+
+        return dispatch(photoActions.thunk_addphoto({ userId, title, description, photoURL }))
+
+
 
         // if (password === confirmPassword) {
         //     setErrors([]);
