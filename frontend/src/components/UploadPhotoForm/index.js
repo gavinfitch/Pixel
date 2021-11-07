@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect, useHistory, NavLink } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 import S3 from 'react-aws-s3';
-import * as sessionActions from "../../store/session";
+// import * as sessionActions from "../../store/session";
 import './UploadPhotoForm.css';
 import Logo from '../Logo';
 
@@ -16,15 +16,11 @@ function UploadPhotoForm() {
     // const [album, setAlbum] = useState(null);
     const [errors, setErrors] = useState([]);
 
-    if (!sessionUser) return <Redirect to="/" />;
-
     const config = {
         bucketName: 'pixelphotostorage',
-        // dirName: 'media', /* optional */
         region: 'us-west-2',
         accessKeyId: 'AKIAQ5HCEL66DJMSJ66K',
         secretAccessKey: 'imq9J1MpJbvhLqSvxyG0OTf+tS6OWllAl3np6cly',
-        // s3Url: 'https:/your-custom-s3-url.com/', /* optional */
     }
 
     const ReactS3Client = new S3(config);
@@ -33,24 +29,16 @@ function UploadPhotoForm() {
         history.push("/")
     };
 
-    const fileSelectedHandler = event => {
-        console.log(event.target.files[0])
-    }
-
     const handleSubmit = async (e) => {
         e.preventDefault();
-        // console.log(title, description, photo)
 
-        // const testFetch = await fetch('https://pixelphotostorage.s3.us-west-2.amazonaws.com/4c7tobjdCxZTmT4vc6YNVJ.jpeg')
-        // console.log(testFetch)
         let amazonPhoto;
         await ReactS3Client
             .uploadFile(photo, title)
             .then(data => amazonPhoto = data)
             .catch(err => console.error(err))
 
-        console.log("this is amazon photo ", amazonPhoto.location)
-
+        // console.log("this is amazon photo ", amazonPhoto)
 
         // if (password === confirmPassword) {
         //     setErrors([]);
@@ -62,6 +50,8 @@ function UploadPhotoForm() {
         // }
         // return setErrors(['Confirm password field must be the same as password field.']);
     };
+
+    if (!sessionUser) return <Redirect to="/" />;
 
     return (
         <>
