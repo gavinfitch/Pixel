@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect, NavLink } from "react-router-dom";
+import { Redirect, useHistory, NavLink } from "react-router-dom";
 import * as sessionActions from "../../store/session";
 import './SignupForm.css';
 import Logo from '../Logo';
 
 function SignupFormPage() {
     const dispatch = useDispatch();
+    const history = useHistory();
     const sessionUser = useSelector((state) => state.session.user);
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
@@ -17,6 +18,10 @@ function SignupFormPage() {
     const [errors, setErrors] = useState([]);
 
     if (sessionUser) return <Redirect to="/" />;
+
+    const goHome = () => {
+        history.push("/")
+    };
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -34,8 +39,10 @@ function SignupFormPage() {
     return (
         <>
             <nav className="form-nav">
-                <Logo />
-                <span className="form-logoText">Pixel</span>
+                <div onClick={goHome} className="formNav-logo">
+                    <Logo />
+                    <span className="form-logoText">Pixel</span>
+                </div>
             </nav>
             <div className="form-background">
                 <form onSubmit={handleSubmit} className="form-container">

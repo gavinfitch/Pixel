@@ -15,12 +15,20 @@
 
 .form-nav {
     position: fixed;
-    display: flex;
-    align-items: center;
     background-color: rgb(30, 30, 30);
     width: 100vw;
     height: 50px;
     padding: 0px 75px;
+}
+
+.formNav-logo {
+    display: flex;
+    align-items: center;
+    width: fit-content;
+}
+
+.formNav-logo:hover {
+    cursor: pointer;
 }
 
 .form-logoText {
