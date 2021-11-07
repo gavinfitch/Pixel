@@ -35,10 +35,35 @@ export const thunk_addphoto = ({ userId, title, description, photoURL }) => asyn
     }
 };
 
-const photoReducer = (state = {}, action) => {
+// Delete photo thunk
+export const thunk_deletephoto = ({ userId, title, description, photoURL }) => async (dispatch) => {
+    const res = await csrfFetch("/api/photos", {
+        method: 'POST',
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            userId,
+            title,
+            description,
+            photoURL
+        })
+    });
+
+    if (res.ok) {
+        const photo = await res.json();
+        dispatch(addPhoto(photo));
+        return photo;
+    }
+};
+
+const photoReducer = (state = [], action) => {
     switch (action.type) {
         case ADD_PHOTO: {
-            return { ...state, photo: action.photo }
+            return [...state, action.photo]
+        }
+        case DELETE_PHOTO: {
+            return [...state, action.photo]
         }
         default:
             return state;
