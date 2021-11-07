@@ -19,7 +19,7 @@ function SignupFormPage() {
 
     if (sessionUser) return <Redirect to="/" />;
 
-    const goHome = () => {
+    const redirectHome = () => {
         history.push("/")
     };
 
@@ -33,13 +33,13 @@ function SignupFormPage() {
                     if (data && data.errors) setErrors(data.errors);
                 });
         }
-        return setErrors(['Confirm Password field must be the same as the Password field']);
+        return setErrors(['Confirm password field must be the same as password field.']);
     };
 
     return (
         <>
             <nav className="form-nav">
-                <div onClick={goHome} className="formNav-logo">
+                <div onClick={redirectHome} className="formNav-logo">
                     <Logo />
                     <span className="form-logoText">Pixel</span>
                 </div>
@@ -65,7 +65,7 @@ function SignupFormPage() {
                             placeholder="First name"
                             value={firstName}
                             onChange={(e) => setFirstName(e.target.value)}
-                            // required
+                        // required
                         />
                         <input
                             className="form-field"
@@ -73,7 +73,7 @@ function SignupFormPage() {
                             placeholder="Last name"
                             value={lastName}
                             onChange={(e) => setLastName(e.target.value)}
-                            // required
+                        // required
                         />
                         <input
                             className="form-field"
@@ -81,7 +81,7 @@ function SignupFormPage() {
                             placeholder="Username"
                             value={username}
                             onChange={(e) => setUsername(e.target.value)}
-                            // required
+                        // required
                         />
                         <input
                             className="form-field"
@@ -89,7 +89,7 @@ function SignupFormPage() {
                             placeholder="Email address"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
-                            // required
+                        // required
                         />
                         <input
                             className="form-field"
@@ -97,7 +97,7 @@ function SignupFormPage() {
                             placeholder="Password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
-                            // required
+                        // required
                         />
                         <input
                             className="form-field"
@@ -105,7 +105,7 @@ function SignupFormPage() {
                             placeholder="Confirm password"
                             value={confirmPassword}
                             onChange={(e) => setConfirmPassword(e.target.value)}
-                            // required
+                        // required
                         />
                         <button className="form-button" type="submit">Sign up</button>
                     </div>
