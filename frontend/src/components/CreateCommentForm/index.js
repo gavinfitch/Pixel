@@ -2,28 +2,25 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useHistory } from "react-router-dom";
 import S3 from 'react-aws-s3';
-import * as photoActions from "../../store/photo";
-import './UploadPhotoForm.css';
+import * as commentActions from "../../store/comment";
+import './CreateCommentForm.css';
 import Logo from '../Logo';
 
-function UploadPhotoForm() {
+function CreateCommentForm() {
     const dispatch = useDispatch();
     const history = useHistory();
     const sessionUser = useSelector((state) => state.session.user);
-    const [title, setTitle] = useState("");
-    const [description, setDescription] = useState("");
-    const [photo, setPhoto] = useState();
-    // const [album, setAlbum] = useState(null);
+    const [content, setContent] = useState("");
     const [errors, setErrors] = useState([]);
 
-    const config = {
-        bucketName: 'pixelphotostorage',
-        region: 'us-west-2',
-        accessKeyId: 'AKIAQ5HCEL66DJMSJ66K',
-        secretAccessKey: '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',
-    }
+    // const config = {
+    //     bucketName: 'pixelphotostorage',
+    //     region: 'us-west-2',
+    //     accessKeyId: 'AKIAQ5HCEL66DJMSJ66K',
+    //     secretAccessKey: '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',
+    // }
 
-    const ReactS3Client = new S3(config);
+    // const ReactS3Client = new S3(config);
 
     const redirectHome = () => {
         history.push("/")
@@ -33,16 +30,10 @@ function UploadPhotoForm() {
         e.preventDefault();
 
         const userId = sessionUser.id;
-        let s3Photo;
 
-        await ReactS3Client
-            .uploadFile(photo, title)
-            .then(data => s3Photo = data)
-            .catch(err => console.error(err))
+        // console.log("YOU ARE IN THE HANDLER", userId, title, description)
 
-        const photoURL = s3Photo.location;
-
-        return dispatch(photoActions.thunk_addphoto({ userId, title, description, photoURL }))
+        return dispatch(commentActions.thunk_addcomment({ userId, photoId: 1, content }))
 
         // if (password === confirmPassword) {
         //     setErrors([]);
@@ -55,24 +46,24 @@ function UploadPhotoForm() {
         // return setErrors(['Confirm password field must be the same as password field.']);
     };
 
-    const updatePhoto = async (e) => {
+    const updateComment = async (e) => {
         e.preventDefault();
-        console.log("you are here!!!")
-        return dispatch(photoActions.thunk_updatephoto({ photoId: 1, title, description }))
+        // console.log("you are here!!!")
+        return dispatch(commentActions.thunk_updatecomment({ commentId: 2, content }))
     };
 
-    const deletePhoto = async (e) => {
+    const deleteComment = async (e) => {
         e.preventDefault();
         // console.log("you are here")
 
-        return dispatch(photoActions.thunk_deletephoto({ photoId: 16 }))
+        return dispatch(commentActions.thunk_deletecomment({ commentId: 1 }))
     };
 
-    const getPhotoById = async (e) => {
+    const getCommentById = async (e) => {
         e.preventDefault();
         // console.log("you are here")
 
-        return dispatch(photoActions.thunk_getPhotoById({ photoId: 1 }))
+        return dispatch(commentActions.thunk_getCommentById({ commentId: 2 }))
     };
 
 
@@ -95,7 +86,7 @@ function UploadPhotoForm() {
                             <div id="logo-blue"></div>
                         </div> */}
                         <Logo />
-                        <div className="form-headerText">Upload a photo</div>
+                        <div className="form-headerText">Add Comment</div>
                     </div>
                     {errors.length > 0 && <ul className="errors-container">
                         {errors.map((error, idx) => <li className="error" key={idx}>{error}</li>)}
@@ -104,30 +95,15 @@ function UploadPhotoForm() {
                         <input
                             className="form-field"
                             type="text"
-                            placeholder="Title"
-                            value={title}
-                            onChange={(e) => setTitle(e.target.value)}
+                            placeholder="Enter your comment..."
+                            value={content}
+                            onChange={(e) => setContent(e.target.value)}
                         // required
                         />
-                        <input
-                            className="form-field"
-                            type="text"
-                            placeholder="Description (optional)"
-                            value={description}
-                            onChange={(e) => setDescription(e.target.value)}
-                        // required
-                        />
-                        <input
-                            className="form-field"
-                            type="file"
-                            // value={photo.name}
-                            onChange={(e) => setPhoto(e.target.files[0])}
-                        // required
-                        />
-                        <button className="form-button" type="submit">Upload</button>
-                        <button className="form-button" onClick={deletePhoto}>Delete Photo</button>
-                        <button className="form-button" onClick={updatePhoto}>Update Photo</button>
-                        <button className="form-button" onClick={getPhotoById}>Get photo by Id</button>
+                        <button className="form-button" type="submit">Add comment</button>
+                        <button className="form-button" onClick={deleteComment}>Delete comment</button>
+                        <button className="form-button" onClick={updateComment}>Edit comment</button>
+                        <button className="form-button" onClick={getCommentById}>Get comment by id</button>
                     </div>
 
                     {/* <div className="redirect-container">
@@ -140,4 +116,4 @@ function UploadPhotoForm() {
     );
 }
 
-export default UploadPhotoForm;
+export default CreateCommentForm;

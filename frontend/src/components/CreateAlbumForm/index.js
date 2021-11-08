@@ -2,18 +2,16 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useHistory } from "react-router-dom";
 import S3 from 'react-aws-s3';
-import * as photoActions from "../../store/photo";
-import './UploadPhotoForm.css';
+import * as albumActions from "../../store/album";
+import './CreateAlbumForm.css';
 import Logo from '../Logo';
 
-function UploadPhotoForm() {
+function CreateAlbumForm() {
     const dispatch = useDispatch();
     const history = useHistory();
     const sessionUser = useSelector((state) => state.session.user);
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
-    const [photo, setPhoto] = useState();
-    // const [album, setAlbum] = useState(null);
     const [errors, setErrors] = useState([]);
 
     const config = {
@@ -33,16 +31,10 @@ function UploadPhotoForm() {
         e.preventDefault();
 
         const userId = sessionUser.id;
-        let s3Photo;
 
-        await ReactS3Client
-            .uploadFile(photo, title)
-            .then(data => s3Photo = data)
-            .catch(err => console.error(err))
+        // console.log("YOU ARE IN THE HANDLER", userId, title, description)
 
-        const photoURL = s3Photo.location;
-
-        return dispatch(photoActions.thunk_addphoto({ userId, title, description, photoURL }))
+        return dispatch(albumActions.thunk_addalbum({ userId, title, description }))
 
         // if (password === confirmPassword) {
         //     setErrors([]);
@@ -55,24 +47,24 @@ function UploadPhotoForm() {
         // return setErrors(['Confirm password field must be the same as password field.']);
     };
 
-    const updatePhoto = async (e) => {
+    const updateAlbum = async (e) => {
         e.preventDefault();
         console.log("you are here!!!")
-        return dispatch(photoActions.thunk_updatephoto({ photoId: 1, title, description }))
+        return dispatch(albumActions.thunk_updatealbum({ albumId: 3, title, description }))
     };
 
-    const deletePhoto = async (e) => {
+    const deleteAlbum = async (e) => {
         e.preventDefault();
         // console.log("you are here")
 
-        return dispatch(photoActions.thunk_deletephoto({ photoId: 16 }))
+        return dispatch(albumActions.thunk_deletealbum({ albumId: 1 }))
     };
 
-    const getPhotoById = async (e) => {
+    const getAlbumById = async (e) => {
         e.preventDefault();
         // console.log("you are here")
 
-        return dispatch(photoActions.thunk_getPhotoById({ photoId: 1 }))
+        return dispatch(albumActions.thunk_getAlbumById({ albumId: 1 }))
     };
 
 
@@ -95,7 +87,7 @@ function UploadPhotoForm() {
                             <div id="logo-blue"></div>
                         </div> */}
                         <Logo />
-                        <div className="form-headerText">Upload a photo</div>
+                        <div className="form-headerText">Create Album</div>
                     </div>
                     {errors.length > 0 && <ul className="errors-container">
                         {errors.map((error, idx) => <li className="error" key={idx}>{error}</li>)}
@@ -117,17 +109,10 @@ function UploadPhotoForm() {
                             onChange={(e) => setDescription(e.target.value)}
                         // required
                         />
-                        <input
-                            className="form-field"
-                            type="file"
-                            // value={photo.name}
-                            onChange={(e) => setPhoto(e.target.files[0])}
-                        // required
-                        />
-                        <button className="form-button" type="submit">Upload</button>
-                        <button className="form-button" onClick={deletePhoto}>Delete Photo</button>
-                        <button className="form-button" onClick={updatePhoto}>Update Photo</button>
-                        <button className="form-button" onClick={getPhotoById}>Get photo by Id</button>
+                        <button className="form-button" type="submit">Create Album</button>
+                        <button className="form-button" onClick={deleteAlbum}>Delete Album</button>
+                        <button className="form-button" onClick={updateAlbum}>Edit Album</button>
+                        <button className="form-button" onClick={getAlbumById}>Get album by Id</button>
                     </div>
 
                     {/* <div className="redirect-container">
@@ -140,4 +125,4 @@ function UploadPhotoForm() {
     );
 }
 
-export default UploadPhotoForm;
+export default CreateAlbumForm;
