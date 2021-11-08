@@ -3,12 +3,14 @@ import thunk from "redux-thunk";
 import sessionReducer from './session';
 import photoReducer from './photo';
 import albumReducer from './album';
+import commentReducer from './comment';
 
 const rootReducer = combineReducers({
   // add reducer functions here
   session: sessionReducer,
   photos: photoReducer,
-  albums: albumReducer
+  albums: albumReducer,
+  comments: commentReducer
 });
 // const user = useSelector((store) => store.sessionReducer.user)
 let enhancer;
