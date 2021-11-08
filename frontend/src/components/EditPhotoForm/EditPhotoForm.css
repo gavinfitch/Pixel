@@ -1,3 +1,15 @@
+.errors-container {
+    margin: 20px 0px;
+    padding: 0px;
+}
+
+.error {
+    list-style: none;
+    padding: 3px 0px;
+    color: rgb(255, 45, 45);
+    font-size: 14px;
+}
+
 .form-header {
     display: flex;
     flex-direction: column;
@@ -15,11 +27,10 @@
     /* margin-top: 2px; */
 }
 
-.home-nav {
+.form-nav {
     position: fixed;
     display: flex;
     align-items: center;
-    justify-content: space-between;
     background-color: rgb(30, 30, 30);
     width: 100vw;
     height: 50px;
@@ -67,8 +78,8 @@
     border-radius: 5px;
 }
 
-#loginForm-container {
-    height: 430px;
+#uploadPhoto-form-container {
+    height: 450px;
 }
 
 .field-container {
@@ -142,64 +153,3 @@
     margin-left: 3px;
     color: rgb(22, 142, 220);
 }
-
-.upload-logout-container {
-    display: flex;
-    align-items: center;
-}
-
-.fa-cloud-upload-alt {
- color: white;
- font-size: 28px;
- margin: 0px 15px;
-}
-
-.fa-cloud-upload-alt:hover {
-    color: rgba(255, 255, 255, 0.90);
-}
-
-#logout-button {
-    width: 78px;
-    height: 24px;
-    background-color: white;
-    border: none;
-    border-radius: 4px;
-    font-size: 14px;
-}
-
-#logout-button:hover {
-    cursor: pointer;
-    background-color: rgba(255, 255, 255, 0.90);
-}
-
-#home-logoText:hover {
-    color: rgba(255, 255, 255, 0.90);
-}
-
-
-
-/* .home-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-} */
-
-.home-img {
-    width: 500px;
-}
-
-
-
-/* .solidBlack {
-    background-color: rgba(0, 0, 0, 0.9);
-    position: absolute;
-    width: fit-content;
-    height: 100%;
-}
-
-.photo-li {
-    background-color: black;
-    width: fit-content;
-    height: fit-content;
-} */

@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import LoginFormPage from './components/LoginFormPage';
 import SignupFormPage from "./components/SignupFormPage";
 import UploadPhotoForm from "./components/UploadPhotoForm";
+import EditPhotoForm from "./components/EditPhotoForm";
 import CreateAlbumForm from "./components/CreateAlbumForm";
 import CreateCommentForm from "./components/CreateCommentForm";
 import * as sessionActions from "./store/session";
@@ -35,6 +36,9 @@ function App() {
           </Route>
           <Route path="/photos/new">
             <UploadPhotoForm />
+          </Route>
+          <Route path="/photos/:id/edit">
+            <EditPhotoForm />
           </Route>
           <Route path="/albums/new">
             <CreateAlbumForm />

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { NavLink, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -15,12 +15,18 @@ function Home({ isLoaded }) {
     const sessionUser = useSelector(state => state.session.user);
     const userPhotosObj = useSelector(state => state.photos);
     const userPhotosArr = Object.values(userPhotosObj);
-    const userId = sessionUser.id;
+    let userId;
+    if (sessionUser) {
+        userId = sessionUser.id;
+    }
+    
 
     // console.log("photos arr", userPhotosArr);
 
     const history = useHistory();
     const dispatch = useDispatch();
+
+    let hover = false;
 
     // Redirect home function
     const redirectHome = () => {
@@ -50,23 +56,27 @@ function Home({ isLoaded }) {
     if (sessionUser) {
         return (
             <div className="home-container">
-                <nav className="form-nav">
+                <nav className="home-nav">
                     <div onClick={redirectHome} className="formNav-logo">
                         <Logo />
-                        <span className="form-logoText">Pixel</span>
+                        <span className="form-logoText" id="home-logoText">Pixel</span>
                     </div>
-                    <NavLink to='/photos/new'><i className="fas fa-cloud-upload-alt"></i></NavLink>
-                    <button onClick={logout}>Log out</button>
+                    <div className="upload-logout-container">
+                        <NavLink to='/photos/new'><i className="fas fa-cloud-upload-alt"></i></NavLink>
+                        <button id="logout-button" onClick={logout}>Log out</button>
+                    </div>
                 </nav>
                 <ul className="home-photos-feed">
 
                     {userPhotosArr.map(photo =>
-                        <li key={photo.id}>
-                            <img src={photo.photoURL}></img>
-                            <div>{photo.title}</div>
-                            <div>{photo.description}</div>
-                            <button>Edit</button>
-                            <button value={photo.id} onClick={deletePhoto}>Delete</button>
+                        <li className="photo-li" key={photo.id}>
+                            <img className="home-img" src={photo.photoURL}></img> 
+                            <div>
+                                <div>{photo.title}</div>
+                                <div>{photo.description}</div>
+                                <button onClick={() => history.push(`/photos/${photo.id}/edit`)}>Edit</button>
+                                <button value={photo.id} onClick={deletePhoto}>Delete</button>
+                            </div> 
                         </li>
                     )}
                 </ul>
