@@ -1,44 +1,48 @@
 {
-  "name": "frontend",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "@testing-library/jest-dom": "^5.15.0",
-    "@testing-library/react": "^11.2.7",
-    "@testing-library/user-event": "^12.8.3",
-    "js-cookie": "^3.0.1",
-    "react": "^17.0.2",
-    "react-aws-s3": "^1.5.0",
-    "react-dom": "^17.0.2",
-    "react-redux": "^7.2.6",
-    "react-router-dom": "^5.3.0",
-    "react-scripts": "4.0.3",
-    "redux": "^4.1.2",
-    "redux-thunk": "^2.4.0"
-  },
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "sequelize": "sequelize",
+    "sequelize-cli": "sequelize-cli",
+    "start": "per-env",
+    "start:development": "nodemon -r dotenv/config ./bin/www",
+    "start:production": "node ./bin/www",
+    "nsc-init": "npx sequelize-cli init",
+    "db:create": "npx dotenv sequelize-cli db:create",
+    "db:migrate": "npx dotenv sequelize-cli db:migrate",
+    "db:migrate:undo": "npx dotenv sequelize-cli db:migrate:undo",
+    "db:migrate:undo:all": "npx dotenv sequelize-cli db:migrate:undo:all",
+    "db:seed:all": "npx dotenv sequelize-cli db:seed:all",
+    "db:seed:undo:all": "npx dotenv sequelize-cli db:seed:undo:all",
+    "db:drop": "npx dotenv sequelize-cli db:drop && npx dotenv sequelize-cli db:create && npx dotenv sequelize-cli db:migrate && npx dotenv sequelize-cli db:seed:all"
   },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "2.8.5",
+    "cookie-parser": "~1.4.4",
+    "csurf": "^1.11.0",
+    "debug": "~2.6.9",
+    "express": "~4.16.1",
+    "express-async-handler": "1.1.4",
+    "express-validator": "^6.9.2",
+    "faker": "5.4.0",
+    "helmet": "4.4.1",
+    "jsonwebtoken": "8.5.1",
+    "morgan": "~1.9.1",
+    "per-env": "^1.0.2",
+    "pg": "^8.4.2",
+    "sequelize": "^5.22.3",
+    "sequelize-cli": "^5.5.1"
   },
   "devDependencies": {
-    "redux-logger": "^3.0.6"
-  },
-  "proxy": "http://localhost:5000"
+    "dotenv": "^8.2.0",
+    "dotenv-cli": "^4.0.0",
+    "nodemon": "^2.0.6"
+  }
 }
+
