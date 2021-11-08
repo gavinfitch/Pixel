@@ -68,6 +68,13 @@ function UploadPhotoForm() {
         return dispatch(photoActions.thunk_deletephoto({ photoId: 16 }))
     };
 
+    const getPhotoById = async (e) => {
+        e.preventDefault();
+        // console.log("you are here")
+
+        return dispatch(photoActions.thunk_getPhotoById({ photoId: 1 }))
+    };
+
 
     if (!sessionUser) return <Redirect to="/" />;
 
@@ -120,6 +127,7 @@ function UploadPhotoForm() {
                         <button className="form-button" type="submit">Upload</button>
                         <button className="form-button" onClick={deletePhoto}>Delete Photo</button>
                         <button className="form-button" onClick={updatePhoto}>Update Photo</button>
+                        <button className="form-button" onClick={getPhotoById}>Get photo by Id</button>
                     </div>
 
                     {/* <div className="redirect-container">

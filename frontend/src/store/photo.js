@@ -19,6 +19,23 @@ const updatePhoto = (photoId) => ({
     photoId,
 });
 
+// Get photo by id thunk
+export const thunk_getPhotoById = ({ photoId }) => async (dispatch) => {
+    const res = await csrfFetch(`/api/photos/${photoId}`, {
+        method: 'GET',
+        headers: {
+            "Content-Type": "application/json"
+        },
+    });
+
+    if (res.ok) {
+        const photo = await res.json();
+        // dispatch(getPhotoById(photo));
+        console.log(photo)
+        return photo;
+    }
+};
+
 // Add photo thunk
 export const thunk_addphoto = ({ userId, title, description, photoURL }) => async (dispatch) => {
     const res = await csrfFetch("/api/photos", {

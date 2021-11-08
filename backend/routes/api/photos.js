@@ -21,6 +21,20 @@ router.get(
     }),
 );
 
+// Get photo by id
+router.get(
+    '/:id',
+    asyncHandler(async (req, res) => {
+        const photoId = req.params.id;
+        const photo = await Photo.findByPk(photoId);
+
+        // await setTokenCookie(res, user);
+        return res.json({
+            photo,
+        });
+    }),
+);
+
 // Add Photo
 router.post(
     '/',
