@@ -46,11 +46,11 @@ function CreateCommentForm() {
         // return setErrors(['Confirm password field must be the same as password field.']);
     };
 
-    // const updateAlbum = async (e) => {
-    //     e.preventDefault();
-    //     console.log("you are here!!!")
-    //     return dispatch(albumActions.thunk_updatealbum({ albumId: 3, title, description }))
-    // };
+    const updateComment = async (e) => {
+        e.preventDefault();
+        // console.log("you are here!!!")
+        return dispatch(commentActions.thunk_updatecomment({ commentId: 2, content }))
+    };
 
     const deleteComment = async (e) => {
         e.preventDefault();
@@ -59,12 +59,12 @@ function CreateCommentForm() {
         return dispatch(commentActions.thunk_deletecomment({ commentId: 1 }))
     };
 
-    // const getAlbumById = async (e) => {
-    //     e.preventDefault();
-    //     // console.log("you are here")
+    const getCommentById = async (e) => {
+        e.preventDefault();
+        // console.log("you are here")
 
-    //     return dispatch(albumActions.thunk_getAlbumById({ albumId: 1 }))
-    // };
+        return dispatch(commentActions.thunk_getCommentById({ commentId: 2 }))
+    };
 
 
     if (!sessionUser) return <Redirect to="/" />;
@@ -100,10 +100,10 @@ function CreateCommentForm() {
                             onChange={(e) => setContent(e.target.value)}
                         // required
                         />
-                        <button className="form-button" type="submit">Add Comment</button>
-                        <button className="form-button" onClick={deleteComment}>Delete Comment</button>
-                        {/* <button className="form-button" onClick={updateAlbum}>Edit Album</button>
-                        <button className="form-button" onClick={getAlbumById}>Get album by Id</button> */}
+                        <button className="form-button" type="submit">Add comment</button>
+                        <button className="form-button" onClick={deleteComment}>Delete comment</button>
+                        <button className="form-button" onClick={updateComment}>Edit comment</button>
+                        <button className="form-button" onClick={getCommentById}>Get comment by id</button>
                     </div>
 
                     {/* <div className="redirect-container">

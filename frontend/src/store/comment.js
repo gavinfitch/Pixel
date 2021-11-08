@@ -2,7 +2,7 @@ import { csrfFetch } from "./csrf";
 
 const ADD_COMMENT = "comments/ADD_COMMENT";
 const DELETE_COMMENT = "comments/DELETE_COMMENT";
-// const UPDATE_ALBUM = "album/UPDATE_ALBUM";
+const UPDATE_COMMENT = "comments/UPDATE_COMMENT";
 
 const addComment = (comment) => ({
     type: ADD_COMMENT,
@@ -14,27 +14,27 @@ const deleteComment = (deletedCommentId) => ({
     deletedCommentId,
 });
 
-// const updateAlbum = (album) => ({
-//     type: UPDATE_ALBUM,
-//     album,
-// });
+const updateComment = (comment) => ({
+    type: UPDATE_COMMENT,
+    comment,
+});
 
-// Get album by id thunk
-// export const thunk_getAlbumById = ({ albumId }) => async (dispatch) => {
-//     const res = await csrfFetch(`/api/albums/${albumId}`, {
-//         method: 'GET',
-//         headers: {
-//             "Content-Type": "application/json"
-//         },
-//     });
+// Get comment by id thunk
+export const thunk_getCommentById = ({ commentId }) => async (dispatch) => {
+    const res = await csrfFetch(`/api/comments/${commentId}`, {
+        method: 'GET',
+        headers: {
+            "Content-Type": "application/json"
+        },
+    });
 
-//     if (res.ok) {
-//         const album = await res.json();
-//         // dispatch(getPhotoById(photo));
-//         console.log(album)
-//         return album;
-//     }
-// };
+    if (res.ok) {
+        const comment = await res.json();
+        // dispatch(getPhotoById(photo));
+        console.log(comment.comment)
+        return comment;
+    }
+};
 
 // Add comment thunk
 export const thunk_addcomment = ({ userId, photoId, content }) => async (dispatch) => {
@@ -76,29 +76,28 @@ export const thunk_deletecomment = ({ commentId }) => async (dispatch) => {
     }
 };
 
-// Update album thunk
-// export const thunk_updatealbum = ({ albumId, title, description }) => async (dispatch) => {
+// Update comment thunk
+export const thunk_updatecomment = ({ commentId, content }) => async (dispatch) => {
 
-//     console.log(albumId, title, description)
+    // console.log(albumId, title, description)
 
-//     const res = await csrfFetch(`/api/albums/${albumId}`, {
-//         method: 'PUT',
-//         headers: {
-//             "Content-Type": "application/json"
-//         },
-//         body: JSON.stringify({
-//             albumId,
-//             title,
-//             description
-//         })
-//     });
+    const res = await csrfFetch(`/api/comments/${commentId}`, {
+        method: 'PUT',
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            commentId,
+            content
+        })
+    });
 
-//     if (res.ok) {
-//         const updatedAlbum = await res.json();
-//         dispatch(updateAlbum(updatedAlbum));
-//         return updatedAlbum;
-//     }
-// };
+    if (res.ok) {
+        const updatedComment = await res.json();
+        dispatch(updateComment(updatedComment));
+        return updatedComment;
+    }
+};
 
 
 // Album Reducer
