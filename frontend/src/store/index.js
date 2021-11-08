@@ -6,7 +6,7 @@ import photoReducer from './photo';
 const rootReducer = combineReducers({
   // add reducer functions here
   session: sessionReducer,
-  photo: photoReducer
+  photos: photoReducer
 });
 // const user = useSelector((store) => store.sessionReducer.user)
 let enhancer;

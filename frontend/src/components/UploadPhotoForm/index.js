@@ -55,15 +55,17 @@ function UploadPhotoForm() {
         // return setErrors(['Confirm password field must be the same as password field.']);
     };
 
+    const updatePhoto = async (e) => {
+        e.preventDefault();
+        console.log("you are here!!!")
+        return dispatch(photoActions.thunk_updatephoto({ photoId: 1, title, description }))
+    };
+
     const deletePhoto = async (e) => {
         e.preventDefault();
         // console.log("you are here")
 
-        ReactS3Client
-            .deleteFile('Hornby Ferry pic.jpeg')
-            .then(response => console.log(response))
-            .catch(err => console.error(err))
-
+        return dispatch(photoActions.thunk_deletephoto({ photoId: 16 }))
     };
 
 
@@ -116,7 +118,8 @@ function UploadPhotoForm() {
                         // required
                         />
                         <button className="form-button" type="submit">Upload</button>
-                        {/* <button className="form-button" onClick={deletePhoto}>Delete Photo</button> */}
+                        <button className="form-button" onClick={deletePhoto}>Delete Photo</button>
+                        <button className="form-button" onClick={updatePhoto}>Update Photo</button>
                     </div>
 
                     {/* <div className="redirect-container">
