@@ -42,7 +42,9 @@ function UploadPhotoForm() {
 
         const photoURL = s3Photo.location;
 
+        history.push("/")
         return dispatch(photoActions.thunk_addphoto({ userId, title, description, photoURL }))
+
 
         // if (password === confirmPassword) {
         //     setErrors([]);

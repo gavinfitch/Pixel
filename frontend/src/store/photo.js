@@ -1,8 +1,14 @@
 import { csrfFetch } from "./csrf";
 
+const SET_PHOTOS = "photo/SET_PHOTOS";
 const ADD_PHOTO = "photo/ADD_PHOTO";
 const DELETE_PHOTO = "photo/DELETE_PHOTO";
 const UPDATE_PHOTO = "photo/UPDATE_PHOTO";
+
+const setPhotos = (photos) => ({
+    type: SET_PHOTOS,
+    photos
+});
 
 const addPhoto = (photo) => ({
     type: ADD_PHOTO,
@@ -33,6 +39,27 @@ export const thunk_getPhotoById = ({ photoId }) => async (dispatch) => {
         // dispatch(getPhotoById(photo));
         console.log(photo)
         return photo;
+    }
+};
+
+// // Get photo by user id thunk
+export const thunk_getPhotosByUserId = ({ userId }) => async (dispatch) => {
+
+    console.log("thunk", userId)
+
+    const res = await csrfFetch(`/api/photos/users/${userId}`, {
+        method: 'GET',
+        headers: {
+            "Content-Type": "application/json"
+        },
+    });
+
+    if (res.ok) {
+        const photos = await res.json();
+        console.log("Thunk", photos)
+        dispatch(setPhotos(photos));
+
+        return photos;
     }
 };
 
@@ -103,8 +130,13 @@ export const thunk_updatephoto = ({ photoId, title, description }) => async (dis
 
 
 // Photo Reducer
-const photoReducer = (state = [], action) => {
+const photoReducer = (state = {}, action) => {
     switch (action.type) {
+        case SET_PHOTOS: {
+            const newState = { ...state }
+            action.photos.photos.forEach(photo => newState[photo.id] = photo);
+            return newState;
+        }
         case ADD_PHOTO: {
             const newState = { ...state }
             newState[action.photo.photo.id] = action.photo.photo;

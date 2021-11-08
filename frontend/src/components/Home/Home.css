@@ -157,3 +157,8 @@
 .fa-cloud-upload-alt {
  color: white;
 }
+
+.home-container {
+    display: flex;
+    flex-direction: column;
+}
