@@ -32,6 +32,7 @@ function Home({ isLoaded }) {
                         <Logo />
                         <span className="form-logoText">Pixel</span>
                     </div>
+                    <NavLink to='/photos/new'><i class="fas fa-cloud-upload-alt"></i></NavLink>
                     <button onClick={logout}>Log out</button>
                 </nav>
             </>
