@@ -69,9 +69,9 @@ function Home({ isLoaded }) {
                 <ul className="home-photos-feed">
 
                     {userPhotosArr.map(photo =>
-                        <li className="photo-li" key={photo.id}>
+                        <li className="home-photoLi" key={photo.id}>
                             <img className="home-img" src={photo.photoURL}></img> 
-                            <div>
+                            <div className="home-photoMask">
                                 <div>{photo.title}</div>
                                 <div>{photo.description}</div>
                                 <button onClick={() => history.push(`/photos/${photo.id}/edit`)}>Edit</button>
