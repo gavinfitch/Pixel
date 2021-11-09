@@ -14,8 +14,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* justify-content: space-around;
-    margin-top: 28px; */
     height: 75px;
     margin-top: 32px;
     font-size: 20px;
@@ -24,7 +22,6 @@
 
 .form-headerText {
     margin-top: 14px;
-    /* margin-top: 2px; */
 }
 
 .form-nav {
@@ -65,7 +62,7 @@
     height: 100vh;
 }
 
-.form-container {
+#editPhoto-form-container {
     overflow: scroll;
     display: flex;
     flex-direction: column;
@@ -74,15 +71,11 @@
     background-color: white;
     padding: 0px 25px;
     width: 350px;
-    height: 700px;
+    height: 375px;
     border-radius: 5px;
 }
 
-#uploadPhoto-form-container {
-    height: 450px;
-}
-
-.field-container {
+#edit-field-container {
     margin-bottom: 50px;
 }
 

@@ -121,15 +121,13 @@ function UploadPhotoForm() {
                         />
                         <input
                             className="form-field"
+                            id="uploadPhoto-field"
                             type="file"
                             // value={photo.name}
                             onChange={(e) => setPhoto(e.target.files[0])}
                         // required
                         />
                         <button className="form-button" type="submit">Upload</button>
-                        <button className="form-button" onClick={deletePhoto}>Delete Photo</button>
-                        <button className="form-button" onClick={updatePhoto}>Update Photo</button>
-                        <button className="form-button" onClick={getPhotoById}>Get photo by Id</button>
                     </div>
 
                     {/* <div className="redirect-container">

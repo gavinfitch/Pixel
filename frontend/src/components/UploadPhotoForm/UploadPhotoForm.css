@@ -14,8 +14,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* justify-content: space-around;
-    margin-top: 28px; */
     height: 75px;
     margin-top: 32px;
     font-size: 20px;
@@ -24,7 +22,6 @@
 
 .form-headerText {
     margin-top: 14px;
-    /* margin-top: 2px; */
 }
 
 .form-nav {
@@ -74,7 +71,7 @@
     background-color: white;
     padding: 0px 25px;
     width: 350px;
-    height: 700px;
+    height: 750px;
     border-radius: 5px;
 }
 
@@ -114,7 +111,10 @@
     top: 7px;
     color: rgb(22, 142, 220);
     font-size: 12px;
-    
+}
+
+#uploadPhoto-field {
+    padding-top: 17px;
 }
 
 .form-button {
@@ -153,3 +153,5 @@
     margin-left: 3px;
     color: rgb(22, 142, 220);
 }
+
+
