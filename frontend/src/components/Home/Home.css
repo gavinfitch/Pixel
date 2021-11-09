@@ -193,7 +193,7 @@
 .home-photos-feed {
     display: flex;
     padding-top: 125px;
-    /* padding-left: 75px; */
+    padding-left: 30px;
     
 }
 
@@ -209,21 +209,19 @@
     height: 750px;
 }
 
-.home-photoLi:hover > #home-photoMask {
-    visibility: visible;
-}
 
 #home-photoMask {
-    color: white;
+    color: rgba(255, 255, 255, 0);
     display: flex;
     align-items: flex-end;
     justify-content: space-between;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.0);
     position: absolute;
     top: 0px;
-    visibility: hidden;  
+    transition: all 0.25s linear;
+    /* visibility: hidden;   */
 }
 
 
@@ -232,37 +230,42 @@
     /* height: 50px; */
     display: flex;
     align-items: center;
-    font-size: 20px;
-    margin: 25px;
+    font-size: 18px;
+    margin: 10px 5px 20px 15px
 }
 
 .mask-button {
-    width: 78px;
-    height: 24px;
+    width: 79px;
+    height: 23px;
     background-color: rgba(68, 68, 68, 0);
-    border: 1px solid white;
+    border: 1px solid rgba(255, 255, 255, 0);
     margin: 0px 10px;
     /* border-top: 1px solid white;
     border-bottom: 1px solid white; */
     /* border-radius: 4px; */
     font-size: 15px;
+    color: rgba(255, 255, 255, 0);
+    transition: all 0.25s linear;
+}
+
+.home-photoLi:hover > #home-photoMask {
+    /* visibility: visible; */
+    background-color: rgba(0, 0, 0, 0.5);
     color: white;
-    /* transition: all 2s linear; */
+}
+
+.home-photoLi:hover > #home-photoMask:hover > .mask-item > .mask-button{
+    /* visibility: visible; */
+    border: 1px solid white;
+    color: white;
 }
 
 .mask-button:hover {
     cursor: pointer;
-    border: 1px solid rgba(255, 255, 255, 0.75);
-    color: rgba(255, 255, 255, 0.75)
 }
 
 
-/* .home-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-} */
+
 
 
 
