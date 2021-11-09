@@ -67,9 +67,7 @@ function Home({ isLoaded }) {
                     </div>
                 </nav>
                 <div id="your-photos">Photostream</div>
-                <div></div>
                 <ul className="home-photos-feed">
-
                     {userPhotosArr.map(photo =>
                         <li className="home-photoLi" key={photo.id}>
                             <img className="home-img" src={photo.photoURL}></img>
