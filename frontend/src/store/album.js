@@ -145,6 +145,11 @@ const albumReducer = (state = {}, action) => {
             delete newState[action.deletedAlbumId];
             return newState;
         }
+        case UPDATE_ALBUM: {
+            const newState = { ...state }
+            newState[action.album.updatedAlbum.id] = action.album.updatedAlbum;
+            return newState;
+        }
         default:
             return state;
     }
