@@ -19,7 +19,7 @@ function Home({ isLoaded }) {
     if (sessionUser) {
         userId = sessionUser.id;
     }
-    
+
 
     // console.log("photos arr", userPhotosArr);
 
@@ -67,13 +67,14 @@ function Home({ isLoaded }) {
                     </div>
                 </nav>
                 <div id="your-photos">Photostream</div>
+                <div></div>
                 <ul className="home-photos-feed">
 
                     {userPhotosArr.map(photo =>
                         <li className="home-photoLi" key={photo.id}>
-                            <img className="home-img" src={photo.photoURL}></img> 
+                            <img className="home-img" src={photo.photoURL}></img>
                             <div id="home-photoMask">
-                    
+
                                 <div className="mask-item">
                                     <div>{photo.title}</div>
                                 </div>
@@ -81,8 +82,8 @@ function Home({ isLoaded }) {
                                     <button className="mask-button" onClick={() => history.push(`/photos/${photo.id}/edit`)}>Edit</button>
                                     <button className="mask-button" value={photo.id} onClick={deletePhoto}>Delete</button>
                                 </div>
-                                
-                            </div> 
+
+                            </div>
                         </li>
                     )}
                 </ul>

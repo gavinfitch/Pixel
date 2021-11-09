@@ -190,6 +190,17 @@
 
 }
 
+#feed-dropdown {
+    top: 75px;
+    left: 75px;
+    padding: 2px 10px;
+    position: fixed;
+    border: 1px solid rgb(30, 30, 30);
+    border-radius: 4px;
+    font-size: 16px;
+    color: rgb(30, 30, 30);  
+}
+
 .home-photos-feed {
     display: flex;
     padding-top: 125px;
@@ -208,7 +219,6 @@
 .home-img {
     height: 750px;
 }
-
 
 #home-photoMask {
     color: rgba(255, 255, 255, 0);
