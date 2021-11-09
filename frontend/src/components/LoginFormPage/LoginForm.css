@@ -65,7 +65,7 @@
     height: 100vh;
 }
 
-.form-container {
+#login-form-container {
     overflow: scroll;
     display: flex;
     flex-direction: column;
@@ -74,16 +74,12 @@
     background-color: white;
     padding: 0px 25px;
     width: 350px;
-    height: 700px;
+    height: 425px;
     border-radius: 5px;
 }
 
-#loginForm-container {
-    height: 430px;
-}
-
-.field-container {
-    margin-bottom: 50px;
+#login-field-container {
+    margin-bottom: 25px;
 }
 
 .form-field {

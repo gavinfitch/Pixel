@@ -45,7 +45,7 @@ function SignupFormPage() {
                 </div>
             </nav>
             <div className="form-background">
-                <form onSubmit={handleSubmit} className="form-container">
+                <form onSubmit={handleSubmit} id="signup-form-container">
                     <div className="form-header">
                         {/* <div className="logo">
                             <div id="logo-yellow"></div>
@@ -58,7 +58,7 @@ function SignupFormPage() {
                     {errors.length > 0 && <ul className="errors-container">
                         {errors.map((error, idx) => <li className="error" key={idx}>{error}</li>)}
                     </ul>}
-                    <div className="field-container">
+                    <div id="signup-field-container">
                         <input
                             className="form-field"
                             type="text"
@@ -107,10 +107,10 @@ function SignupFormPage() {
                             onChange={(e) => setConfirmPassword(e.target.value)}
                         // required
                         />
-                        <button className="form-button" type="submit">Sign up</button>
+                        <button id="signup-form-button" type="submit">Sign up</button>
                     </div>
 
-                    <div className="redirect-container">
+                    <div id="signup-redirect-container">
                         <span className="redirect-text">Already a Pixel member? </span>
                         <NavLink className="redirect-link" to="/login">Log in here.</NavLink>
                     </div>

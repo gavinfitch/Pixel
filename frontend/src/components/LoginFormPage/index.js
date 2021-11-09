@@ -40,7 +40,7 @@ function LoginFormPage() {
                 </div>
             </nav>
             <div className="form-background">
-                <form onSubmit={handleSubmit} className="form-container" id="loginForm-container">
+                <form onSubmit={handleSubmit} className="form-container" id="login-form-container">
                     <div className="form-header">
                         {/* <div className="logo">
                             <div id="logo-yellow"></div>
@@ -53,7 +53,7 @@ function LoginFormPage() {
                     {errors.length > 0 && <ul className="errors-container">
                         {errors.map((error, idx) => <li className="error" key={idx}>{error}</li>)}
                     </ul>}
-                    <div className="field-container">
+                    <div id="login-field-container">
                         <input
                             className="form-field"
                             placeholder="Username or email"
