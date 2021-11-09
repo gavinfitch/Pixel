@@ -54,6 +54,15 @@ function Home({ isLoaded }) {
         return dispatch(photoActions.thunk_deletephoto({ photoId: e.target.value }))
     };
 
+    // Delete photo function
+    const deleteAlbum = async (e) => {
+        e.preventDefault();
+        // console.log("you are here")
+
+        // console.log(e.target.value)
+        return dispatch(albumActions.thunk_deletealbum({ albumId: e.target.value }))
+    };
+
     useEffect(() => {
         dispatch(photoActions.thunk_getPhotosByUserId({ userId }))
         dispatch(albumActions.thunk_getAlbumsByUserId({ userId }))
@@ -110,7 +119,7 @@ function Home({ isLoaded }) {
                                     <div className="album-maskItem">{albumPhotos.length} photos</div>
                                     <div className="album-maskItem">
                                         <button className="album-maskButton">Edit</button>
-                                        <button className="album-maskButton">Delete</button> 
+                                        <button value={album.id} onClick={deleteAlbum} className="album-maskButton">Delete</button> 
                                     </div>        
                                 </div>         
                             </li>
