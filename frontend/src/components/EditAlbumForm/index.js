@@ -1,35 +1,19 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useHistory, useParams } from "react-router-dom";
-import S3 from 'react-aws-s3';
-import * as photoActions from "../../store/photo";
-import './EditPhotoForm.css';
+import * as albumActions from "../../store/album";
+import './EditAlbumForm.css';
 import Logo from '../Logo';
 
-function EditPhotoForm() {
-
-    const photos = useSelector((state) => state.photos);
-    const { id } = useParams()
-    const currentPhoto = photos[id];
-
+function CreateAlbumForm() {
     const dispatch = useDispatch();
     const history = useHistory();
     const sessionUser = useSelector((state) => state.session.user);
-    const [title, setTitle] = useState(currentPhoto?.title);
-    const [description, setDescription] = useState(currentPhoto?.description);
-    const [photo, setPhoto] = useState();
-    // const [album, setAlbum] = useState(null);
+    const [title, setTitle] = useState("");
+    const [description, setDescription] = useState("");
     const [errors, setErrors] = useState([]);
 
-
-    const config = {
-        bucketName: 'pixelphotostorage',
-        region: 'us-west-2',
-        accessKeyId: 'AKIAQ5HCEL66DJMSJ66K',
-        secretAccessKey: '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',
-    }
-
-    const ReactS3Client = new S3(config);
+    const { id } = useParams()
 
     const redirectHome = () => {
         history.push("/")
@@ -39,18 +23,9 @@ function EditPhotoForm() {
         e.preventDefault();
 
         const userId = sessionUser.id;
-        let s3Photo;
 
-        await ReactS3Client
-            .uploadFile(photo, title)
-            .then(data => s3Photo = data)
-            .catch(err => console.error(err))
 
-        const photoURL = s3Photo.location;
-
-        history.push("/")
-        return dispatch(photoActions.thunk_addphoto({ userId, title, description, photoURL }))
-
+        return dispatch(albumActions.thunk_addalbum({ userId: id, title, description }))
 
         // if (password === confirmPassword) {
         //     setErrors([]);
@@ -63,38 +38,13 @@ function EditPhotoForm() {
         // return setErrors(['Confirm password field must be the same as password field.']);
     };
 
-    const updatePhoto = async (e) => {
+    const updateAlbum = async (e) => {
         e.preventDefault();
-        // console.log("you are here!!!")
-        history.push("/")
-        return dispatch(photoActions.thunk_updatephoto({ photoId: id, title, description }))
+        return dispatch(albumActions.thunk_updatealbum({ albumId: id, title, description }))
     };
-
-    const deletePhoto = async (e) => {
-        e.preventDefault();
-        // console.log("you are here")
-
-        return dispatch(photoActions.thunk_deletephoto({ photoId: 16 }))
-    };
-
-    const getPhotoById = async (e) => {
-        e.preventDefault();
-        // console.log("you are here")
-
-        return dispatch(photoActions.thunk_getPhotoById({ photoId: 1 }))
-    };
-
-
-    useEffect(() => {
-        const userId = sessionUser.id;
-        dispatch(photoActions.thunk_getPhotosByUserId({ userId }))
-    }, [dispatch])
-
 
 
     if (!sessionUser) return <Redirect to="/" />;
-
-
 
     return (
         <>
@@ -105,15 +55,15 @@ function EditPhotoForm() {
                 </div>
             </nav>
             <div className="form-background">
-                <form onSubmit={handleSubmit} id="editPhoto-form-container">
+                <form onSubmit={handleSubmit} className="form-container" id="uploadPhoto-form-container">
                     <div className="form-header">
                         <Logo />
-                        <div className="form-headerText">Edit {title || "photo"}</div>
+                        <div className="form-headerText">Edit Album</div>
                     </div>
-                    {/* {errors.length > 0 && <ul className="errors-container">
+                    {errors.length > 0 && <ul className="errors-container">
                         {errors.map((error, idx) => <li className="error" key={idx}>{error}</li>)}
-                    </ul>} */}
-                    <div id="edit-field-container" className="field-container">
+                    </ul>}
+                    <div className="field-container">
                         <input
                             className="form-field"
                             type="text"
@@ -130,7 +80,7 @@ function EditPhotoForm() {
                             onChange={(e) => setDescription(e.target.value)}
                         // required
                         />
-                        <button className="form-button" onClick={updatePhoto}>Edit</button>
+                        <button className="form-button" onClick={updateAlbum}>Edit Album</button>
                     </div>
 
                     {/* <div className="redirect-container">
@@ -143,4 +93,4 @@ function EditPhotoForm() {
     );
 }
 
-export default EditPhotoForm;
+export default CreateAlbumForm;
