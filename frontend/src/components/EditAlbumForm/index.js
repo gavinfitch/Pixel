@@ -19,27 +19,15 @@ function CreateAlbumForm() {
         history.push("/")
     };
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+    // const handleSubmit = async (e) => {
+    //     e.preventDefault();
 
-        const userId = sessionUser.id;
-
-
-        return dispatch(albumActions.thunk_addalbum({ userId: id, title, description }))
-
-        // if (password === confirmPassword) {
-        //     setErrors([]);
-        //     return dispatch(sessionActions.thunk_signup({ firstName, lastName, username, email, password }))
-        //         .catch(async (res) => {
-        //             const data = await res.json();
-        //             if (data && data.errors) setErrors(data.errors);
-        //         });
-        // }
-        // return setErrors(['Confirm password field must be the same as password field.']);
-    };
+    //     return dispatch(albumActions.thunk_updatealbum({ albumId: id, title, description }))
+    // };
 
     const updateAlbum = async (e) => {
         e.preventDefault();
+        history.push("/")
         return dispatch(albumActions.thunk_updatealbum({ albumId: id, title, description }))
     };
 
@@ -55,7 +43,7 @@ function CreateAlbumForm() {
                 </div>
             </nav>
             <div className="form-background">
-                <form onSubmit={handleSubmit} className="form-container" id="uploadPhoto-form-container">
+                <form className="form-container" id="uploadPhoto-form-container">
                     <div className="form-header">
                         <Logo />
                         <div className="form-headerText">Edit Album</div>
