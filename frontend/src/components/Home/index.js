@@ -17,7 +17,7 @@ function Home({ isLoaded }) {
     const sessionUser = useSelector(state => state.session.user);
     const userPhotosObj = useSelector(state => state.photos);
     const userAlbumsObj = useSelector(state => state.albums);
-    
+
     const userPhotosArr = Object.values(userPhotosObj);
     const userAlbumsArr = Object.values(userAlbumsObj);
 
@@ -95,17 +95,22 @@ function Home({ isLoaded }) {
                 </ul>}
 
                 {feedDisplay === "Albums" && <ul className="home-albums-feed">
-                    {userAlbumsArr.map(album => {
+                    {userAlbumsArr.map((album) => {
 
                         const albumPhotos = userPhotosArr.filter(photo => photo.albumId === album.id)
                         const date = new Date(album.createdAt).toString().split(" ");
-                    
+
                         return (
                             <li>
                                 <div>{album.title}</div>
                                 <div>Created {date[1]} {date[3]}</div>
                                 <div>{albumPhotos.length} photos</div>
-                                <img src={albumPhotos[0].photoURL} />
+
+                                <div style={{backgroundImage: `url(${albumPhotos[0].photoURL})`}} className="album-thumb-container">
+                                </div>
+
+
+
                                 <button>Edit</button>
                                 <button>Delete</button>
                             </li>

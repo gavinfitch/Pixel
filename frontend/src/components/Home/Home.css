@@ -126,3 +126,11 @@
     padding-top: 125px;
     padding-left: 30px;  
 }
+
+.album-thumb-container {
+    width: 550px;
+    height: 550px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    
+}
