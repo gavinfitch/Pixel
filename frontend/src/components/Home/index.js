@@ -66,6 +66,7 @@ function Home({ isLoaded }) {
                         <button id="logout-button" onClick={logout}>Log out</button>
                     </div>
                 </nav>
+                <div id="your-photos">Your photos</div>
                 <ul className="home-photos-feed">
 
                     {userPhotosArr.map(photo =>
