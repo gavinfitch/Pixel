@@ -11,18 +11,16 @@ function EditPhotoForm() {
     const photos = useSelector((state) => state.photos);
     const { id } = useParams()
     const currentPhoto = photos[id];
-    console.log(currentPhoto)
 
     const dispatch = useDispatch();
     const history = useHistory();
     const sessionUser = useSelector((state) => state.session.user);
-    const [title, setTitle] = useState(currentPhoto.title);
-    const [description, setDescription] = useState(currentPhoto.description);
+    const [title, setTitle] = useState(currentPhoto?.title);
+    const [description, setDescription] = useState(currentPhoto?.description);
     const [photo, setPhoto] = useState();
     // const [album, setAlbum] = useState(null);
     const [errors, setErrors] = useState([]);
 
-    
 
     const config = {
         bucketName: 'pixelphotostorage',
@@ -86,11 +84,13 @@ function EditPhotoForm() {
         return dispatch(photoActions.thunk_getPhotoById({ photoId: 1 }))
     };
 
-    const userId = sessionUser.id;
 
     useEffect(() => {
+        const userId = sessionUser.id;
         dispatch(photoActions.thunk_getPhotosByUserId({ userId }))
+
     }, [dispatch])
+
 
 
     if (!sessionUser) return <Redirect to="/" />;
@@ -106,20 +106,15 @@ function EditPhotoForm() {
                 </div>
             </nav>
             <div className="form-background">
-                <form onSubmit={handleSubmit} className="form-container" id="uploadPhoto-form-container">
+                <form onSubmit={handleSubmit} id="editPhoto-form-container">
                     <div className="form-header">
-                        {/* <div className="logo">
-                            <div id="logo-yellow"></div>
-                            <div id="logo-red"></div>
-                            <div id="logo-blue"></div>
-                        </div> */}
                         <Logo />
-                        <div className="form-headerText">Edit photo</div>
+                        <div className="form-headerText">Edit {title || "photo"}</div>
                     </div>
-                    {errors.length > 0 && <ul className="errors-container">
+                    {/* {errors.length > 0 && <ul className="errors-container">
                         {errors.map((error, idx) => <li className="error" key={idx}>{error}</li>)}
-                    </ul>}
-                    <div className="field-container">
+                    </ul>} */}
+                    <div id="edit-field-container" className="field-container">
                         <input
                             className="form-field"
                             type="text"

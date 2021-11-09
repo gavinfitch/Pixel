@@ -1,4 +1,4 @@
-.errors-container {
+/* .errors-container {
     margin: 20px 0px;
     padding: 0px;
 }
@@ -14,8 +14,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* justify-content: space-around;
-    margin-top: 28px; */
     height: 75px;
     margin-top: 32px;
     font-size: 20px;
@@ -24,7 +22,6 @@
 
 .form-headerText {
     margin-top: 14px;
-    /* margin-top: 2px; */
 }
 
 .form-nav {
@@ -152,4 +149,4 @@
 .redirect-link {
     margin-left: 3px;
     color: rgb(22, 142, 220);
-}
+} */
