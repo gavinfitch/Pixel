@@ -101,18 +101,18 @@ function Home({ isLoaded }) {
                         const date = new Date(album.createdAt).toString().split(" ");
 
                         return (
-                            <li>
-                                <div>{album.title}</div>
-                                <div>Created {date[1]} {date[3]}</div>
-                                <div>{albumPhotos.length} photos</div>
-
-                                <div style={{backgroundImage: `url(${albumPhotos[0].photoURL})`}} className="album-thumb-container">
-                                </div>
-
-
-
-                                <button>Edit</button>
-                                <button>Delete</button>
+                            <li style={{backgroundImage: `url(${albumPhotos[0].photoURL})`}} className="album-thumb-container">
+                                <div id="album-thumbMask">
+                                    <div className="album-maskItem">
+                                        <div>{album.title}</div>
+                                        <div>Created {date[1]} {date[3]}</div>
+                                    </div>
+                                    <div className="album-maskItem">{albumPhotos.length} photos</div>
+                                    <div className="album-maskItem">
+                                        <button className="album-maskButton">Edit</button>
+                                        <button className="album-maskButton">Delete</button> 
+                                    </div>        
+                                </div>         
                             </li>
                         )
                     })}

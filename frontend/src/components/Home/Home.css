@@ -125,12 +125,56 @@
     display: flex;
     padding-top: 125px;
     padding-left: 30px;  
+    
 }
 
 .album-thumb-container {
+    position: relative;
+    box-sizing: border-box;
     width: 550px;
     height: 550px;
+    padding: 0px;
+    margin: 0px 10px;
     background-repeat: no-repeat;
     background-size: cover;
-    
+}
+
+#album-thumbMask {
+    color: rgb(255, 255, 255);
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.75);
+    position: absolute;
+    top: 0px;
+    transition: all 0.25s linear;
+};
+
+.album-thumb-container > #album-thumbMask {
+    background-color: rgba(0, 0, 0, 0.0);
+    color: rgba(255, 255, 255, 0);
+}
+
+.album-maskButton {
+    width: 79px;
+    height: 23px;
+    background-color: rgba(68, 68, 68, 0);
+    border: 1px solid rgb(255, 255, 255);
+    margin: 0px 10px;
+    font-size: 15px;
+    color: rgb(255, 255, 255);
+    transition: all 0.25s linear;
+}
+
+.album-maskButton:hover {
+    cursor: pointer;
+}
+
+.album-maskItem {
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+    margin: 10px 5px 20px 15px
 }
