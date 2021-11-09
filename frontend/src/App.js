@@ -5,10 +5,12 @@ import { useDispatch } from 'react-redux';
 import LoginFormPage from './components/LoginFormPage';
 import SignupFormPage from "./components/SignupFormPage";
 import UploadPhotoForm from "./components/UploadPhotoForm";
+import EditPhotoForm from "./components/EditPhotoForm";
 import CreateAlbumForm from "./components/CreateAlbumForm";
 import CreateCommentForm from "./components/CreateCommentForm";
 import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
+import Home from "./components/Home";
 
 function App() {
   const dispatch = useDispatch();
@@ -23,7 +25,8 @@ function App() {
       {isLoaded && (
         <Switch>
           <Route exact path="/">
-            <Navigation isLoaded={isLoaded} />
+            {/* <Navigation isLoaded={isLoaded} /> */}
+            <Home isLoaded={isLoaded} />
           </Route>
           <Route path="/login">
             <LoginFormPage />
@@ -33,6 +36,9 @@ function App() {
           </Route>
           <Route path="/photos/new">
             <UploadPhotoForm />
+          </Route>
+          <Route path="/photos/:id/edit">
+            <EditPhotoForm />
           </Route>
           <Route path="/albums/new">
             <CreateAlbumForm />

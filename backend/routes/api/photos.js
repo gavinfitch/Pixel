@@ -35,6 +35,22 @@ router.get(
     }),
 );
 
+// Get photo by userId
+router.get(
+    '/users/:id',
+    asyncHandler(async (req, res) => {
+        const userId = req.params.id;
+        const photos = await Photo.findAll({
+            where: { userId }
+        });
+
+        // await setTokenCookie(res, user);
+        return res.json({
+            photos,
+        });
+    }),
+);
+
 // Add Photo
 router.post(
     '/',
