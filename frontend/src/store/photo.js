@@ -99,7 +99,9 @@ export const thunk_deletephoto = ({ photoId }) => async (dispatch) => {
 
     if (res.ok) {
         const deletedPhoto = await res.json();
-        dispatch(deletePhoto(deletedPhoto.id));
+        // console.log("THIS IS THE CONESOLE", deletedPhoto.photoToDelete.id)
+        dispatch(deletePhoto(deletedPhoto.photoToDelete.id));
+        
         return "Deletion successful";
     }
 };

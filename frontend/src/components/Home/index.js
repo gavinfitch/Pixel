@@ -71,11 +71,16 @@ function Home({ isLoaded }) {
                     {userPhotosArr.map(photo =>
                         <li className="home-photoLi" key={photo.id}>
                             <img className="home-img" src={photo.photoURL}></img> 
-                            <div className="home-photoMask">
-                                <div>{photo.title}</div>
-                                <div>{photo.description}</div>
-                                <button onClick={() => history.push(`/photos/${photo.id}/edit`)}>Edit</button>
-                                <button value={photo.id} onClick={deletePhoto}>Delete</button>
+                            <div id="home-photoMask">
+                    
+                                <div className="mask-item">
+                                    <div>{photo.title}</div>
+                                </div>
+                                <div className="mask-item">
+                                    <button className="mask-button" onClick={() => history.push(`/photos/${photo.id}/edit`)}>Edit</button>
+                                    <button className="mask-button" value={photo.id} onClick={deletePhoto}>Delete</button>
+                                </div>
+                                
                             </div> 
                         </li>
                     )}
