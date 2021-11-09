@@ -1,8 +1,14 @@
 import { csrfFetch } from "./csrf";
 
+const SET_ALBUMS = "albums/SET_PHOTOS";
 const ADD_ALBUM = "album/ADD_ALBUM";
 const DELETE_ALBUM = "album/DELETE_ALBUM";
 const UPDATE_ALBUM = "album/UPDATE_ALBUM";
+
+const setAlbums = (albums) => ({
+    type: SET_ALBUMS,
+    albums
+});
 
 const addAlbum = (album) => ({
     type: ADD_ALBUM,
@@ -33,6 +39,26 @@ export const thunk_getAlbumById = ({ albumId }) => async (dispatch) => {
         // dispatch(getPhotoById(photo));
         console.log(album)
         return album;
+    }
+};
+
+// Get photo by user id thunk
+export const thunk_getAlbumsByUserId = ({ userId }) => async (dispatch) => {
+
+    // console.log("thunk", userId)
+    const res = await csrfFetch(`/api/albums/users/${userId}`, {
+        method: 'GET',
+        headers: {
+            "Content-Type": "application/json"
+        },
+    });
+
+    if (res.ok) {
+        const albums = await res.json();
+        // console.log("Thunk", albums)
+        dispatch(setAlbums(albums));
+
+        return albums;
     }
 };
 
@@ -102,8 +128,13 @@ export const thunk_updatealbum = ({ albumId, title, description }) => async (dis
 
 
 // Album Reducer
-const albumReducer = (state = [], action) => {
+const albumReducer = (state = {}, action) => {
     switch (action.type) {
+        case SET_ALBUMS: {
+            const newState = { ...state }
+            action.albums.albums.forEach(album => newState[album.id] = album);
+            return newState;
+        }
         case ADD_ALBUM: {
             const newState = { ...state }
             newState[action.album.album.id] = action.album.album;

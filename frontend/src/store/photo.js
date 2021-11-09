@@ -42,7 +42,7 @@ export const thunk_getPhotoById = ({ photoId }) => async (dispatch) => {
     }
 };
 
-// // Get photo by user id thunk
+// Get photo by user id thunk
 export const thunk_getPhotosByUserId = ({ userId }) => async (dispatch) => {
 
     console.log("thunk", userId)

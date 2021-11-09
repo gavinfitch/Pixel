@@ -38,6 +38,21 @@ router.get(
     }),
 );
 
+// Get photo by userId
+router.get(
+    '/users/:id',
+    asyncHandler(async (req, res) => {
+        const userId = req.params.id;
+        const albums = await Album.findAll({
+            where: { userId }
+        });
+
+        return res.json({
+            albums,
+        });
+    }),
+);
+
 
 // Add album
 router.post(

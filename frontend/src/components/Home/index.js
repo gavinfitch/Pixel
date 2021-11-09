@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import * as sessionActions from '../../store/session';
 import * as photoActions from "../../store/photo";
+import * as albumActions from "../../store/album";
 
 import ProfileButton from '../Navigation/ProfileButton';
 import Logo from '../Logo';
@@ -11,10 +12,15 @@ import './Home.css';
 
 function Home({ isLoaded }) {
 
+    const [feedDisplay, setFeedDisplay] = useState("Albums");
 
     const sessionUser = useSelector(state => state.session.user);
     const userPhotosObj = useSelector(state => state.photos);
+    const userAlbumsObj = useSelector(state => state.albums);
+    
     const userPhotosArr = Object.values(userPhotosObj);
+    const userAlbumsArr = Object.values(userAlbumsObj);
+
     let userId;
     if (sessionUser) {
         userId = sessionUser.id;
@@ -26,7 +32,7 @@ function Home({ isLoaded }) {
     const history = useHistory();
     const dispatch = useDispatch();
 
-    let hover = false;
+    // let hover = false;
 
     // Redirect home function
     const redirectHome = () => {
@@ -50,6 +56,7 @@ function Home({ isLoaded }) {
 
     useEffect(() => {
         dispatch(photoActions.thunk_getPhotosByUserId({ userId }))
+        dispatch(albumActions.thunk_getAlbumsByUserId({ userId }))
     }, [dispatch])
 
 
@@ -66,8 +73,9 @@ function Home({ isLoaded }) {
                         <button id="logout-button" onClick={logout}>Log out</button>
                     </div>
                 </nav>
-                <div id="your-photos">Photostream</div>
-                <ul className="home-photos-feed">
+                <div id="your-photos">{feedDisplay}</div>
+
+                {feedDisplay === "Photostream" && <ul className="home-photos-feed">
                     {userPhotosArr.map(photo =>
                         <li className="home-photoLi" key={photo.id}>
                             <img className="home-img" src={photo.photoURL}></img>
@@ -84,7 +92,27 @@ function Home({ isLoaded }) {
                             </div>
                         </li>
                     )}
-                </ul>
+                </ul>}
+
+                {feedDisplay === "Albums" && <ul className="home-albums-feed">
+                    {userAlbumsArr.map(album => {
+
+                        const albumPhotos = userPhotosArr.filter(photo => photo.albumId === album.id)
+                        const date = new Date(album.createdAt).toString().split(" ");
+                    
+                        return (
+                            <li>
+                                <div>{album.title}</div>
+                                <div>Created {date[1]} {date[3]}</div>
+                                <div>{albumPhotos.length} photos</div>
+                                <img src={albumPhotos[0].photoURL} />
+                                <button>Edit</button>
+                                <button>Delete</button>
+                            </li>
+                        )
+                    })}
+
+                </ul>}
 
             </div>
         );

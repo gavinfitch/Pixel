@@ -117,3 +117,12 @@
     border: 1px solid white;
     color: white;
 }
+
+
+
+/* Album feed */
+.home-albums-feed {
+    display: flex;
+    padding-top: 125px;
+    padding-left: 30px;  
+}
