@@ -152,7 +152,7 @@
     transition: all 0.25s linear;
 };
 
-.album-thumb-container > #album-thumbMask {
+.album-thumb-container:hover > #album-thumbMask {
     background-color: rgba(0, 0, 0, 0.0);
     color: rgba(255, 255, 255, 0);
 }

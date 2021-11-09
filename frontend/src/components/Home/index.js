@@ -118,7 +118,7 @@ function Home({ isLoaded }) {
                                     </div>
                                     <div className="album-maskItem">{albumPhotos.length} photos</div>
                                     <div className="album-maskItem">
-                                        <button className="album-maskButton">Edit</button>
+                                        <button onClick={() => history.push(`/albums/${album.id}/edit`)} className="album-maskButton">Edit</button>
                                         <button value={album.id} onClick={deleteAlbum} className="album-maskButton">Delete</button> 
                                     </div>        
                                 </div>         
