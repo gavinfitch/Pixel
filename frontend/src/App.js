@@ -9,6 +9,7 @@ import EditPhotoForm from "./components/EditPhotoForm";
 import EditAlbumForm from "./components/EditAlbumForm";
 import CreateAlbumForm from "./components/CreateAlbumForm";
 import CreateCommentForm from "./components/CreateCommentForm";
+import AlbumSelectForm from "./components/AlbumSelectForm";
 import * as sessionActions from "./store/session";
 // import Navigation from "./components/Navigation";
 import Home from "./components/Home";
@@ -40,6 +41,9 @@ function App() {
           </Route>
           <Route path="/photos/:id/edit">
             <EditPhotoForm />
+          </Route>
+          <Route path="/photos/:id/albumselect">
+            <AlbumSelectForm />
           </Route>
           <Route path="/albums/:id/edit">
             <EditAlbumForm />

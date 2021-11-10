@@ -1,0 +1,157 @@
+/* .errors-container {
+    margin: 20px 0px;
+    padding: 0px;
+}
+
+.error {
+    list-style: none;
+    padding: 3px 0px;
+    color: rgb(255, 45, 45);
+    font-size: 14px;
+}
+
+.form-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 75px;
+    margin-top: 32px;
+    font-size: 20px;
+    color: rgb(60, 60, 60);
+}
+
+.form-headerText {
+    margin-top: 14px;
+}
+
+.form-nav {
+    position: fixed;
+    display: flex;
+    align-items: center;
+    background-color: rgb(30, 30, 30);
+    width: 100vw;
+    height: 50px;
+    padding: 0px 75px;
+}
+
+.formNav-logo {
+    display: flex;
+    align-items: center;
+    width: fit-content;
+}
+
+.formNav-logo:hover {
+    cursor: pointer;
+}
+
+.form-logoText {
+    margin-left: 2px;
+    color: white;
+    font-size: 41px;
+    font-weight: bold;
+}
+
+.form-background {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url("../../images/form_background_mountains.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100vw;
+    height: 100vh;
+}
+
+.form-container {
+    overflow: scroll;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    background-color: white;
+    padding: 0px 25px;
+    width: 350px;
+    height: 750px;
+    border-radius: 5px;
+}
+
+#uploadPhoto-form-container {
+    height: 450px;
+}
+
+.field-container {
+    margin-bottom: 50px;
+}
+
+.form-field {
+    margin: 4px 0px;
+    padding: 15px;
+    height: 60px;
+    border: 1px solid grey;
+    border-radius: 5px;
+    font-size: 15px;
+    transition: all 0.15s linear;
+    color: rgb(60, 60, 60);
+}
+
+.form-field:focus {
+    outline: none;
+    border: 1px solid rgb(22, 142, 220);
+}
+
+.form-field::placeholder {
+    position: absolute;
+    top: 20px;
+    transition: all 0.15s linear;
+}
+
+.form-field:focus::placeholder {
+    position: absolute;
+    left: 14px;
+    top: 7px;
+    color: rgb(22, 142, 220);
+    font-size: 12px;
+}
+
+#uploadPhoto-field {
+    padding-top: 17px;
+}
+
+.form-button {
+    background-color: rgb(22, 142, 220);
+    width: 100%;
+    height: 40px;
+    border: none;
+    border-radius: 5px;
+    margin-top: 20px;
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.form-button:hover {
+    background-color: rgba(22, 142, 220, 0.92);
+    cursor: pointer;
+}
+
+.redirect-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    border-top: 1px solid lightgrey;
+    padding: 20px 0px;
+    color: rgb(60, 60, 60);
+    font-size: 14px;
+}
+
+.redirect-text {
+    margin-right: 3px;
+}
+
+.redirect-link {
+    margin-left: 3px;
+    color: rgb(22, 142, 220);
+} */
+
+

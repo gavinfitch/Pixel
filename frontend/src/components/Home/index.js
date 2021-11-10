@@ -131,7 +131,7 @@ function Home({ isLoaded }) {
                         <li className="home-photoLi" key={photo.id}>
                             <img className="home-img" src={photo.photoURL}></img>
                             <div id="home-photoMask">
-
+                                <div onClick={() => history.push(`/photos/${photo.id}/albumselect`)} className="photo-albumSelect"><i class="far fa-plus-square"></i></div>
                                 <div className="mask-item">
                                     <div>{photo.title}</div>
                                 </div>
@@ -154,7 +154,6 @@ function Home({ isLoaded }) {
                         return (
                             <li style={{ backgroundImage: `url(${albumPhotos[0].photoURL})` }} className="album-thumb-container">
                                 <div id="album-thumbMask">
-                                    <div onClick={() => history.push(`/albums/${album.id}/addphoto`)} className="album-addPhoto"><i class="far fa-plus-square"></i></div>
 
                                     <div id="album-details" className="album-maskItem">
                                         <div id="album-title">{album.title}</div>

@@ -259,13 +259,13 @@
     left: 80px;
 }
 
-.album-addPhoto {
+.photo-albumSelect {
     position: absolute;
     top: 20px;
     right: 15px;
 }
 
-.album-addPhoto:hover {
+.photo-albumSelect:hover {
     cursor: pointer;
 }
 

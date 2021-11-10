@@ -87,6 +87,26 @@ router.put(
     }),
 );
 
+// Update Photo
+router.put(
+    '/:id/albumselect',
+    asyncHandler(async (req, res) => {
+        const { photoId, albumId } = req.body;
+        const photoToUpdate = await Photo.findByPk(photoId);
+
+        await photoToUpdate.update({
+            albumId
+        })
+
+        const updatedPhoto = await Photo.findByPk(photoId);
+
+        // await setTokenCookie(res, user);
+        return res.json({
+            updatedPhoto,
+        });
+    }),
+);
+
 // Delete photo by id
 router.delete(
     '/:id',
