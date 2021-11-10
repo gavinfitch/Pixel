@@ -258,3 +258,17 @@
     top: 88px;
     left: 80px;
 }
+
+.album-addPhoto {
+    position: absolute;
+    top: 20px;
+    right: 15px;
+}
+
+.album-addPhoto:hover {
+    cursor: pointer;
+}
+
+.fa-plus-square {
+    font-size: 26px;
+}

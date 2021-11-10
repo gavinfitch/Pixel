@@ -154,13 +154,14 @@ function Home({ isLoaded }) {
                         return (
                             <li style={{ backgroundImage: `url(${albumPhotos[0].photoURL})` }} className="album-thumb-container">
                                 <div id="album-thumbMask">
+                                    <div onClick={() => history.push(`/albums/${album.id}/addphoto`)} className="album-addPhoto"><i class="far fa-plus-square"></i></div>
+
                                     <div id="album-details" className="album-maskItem">
                                         <div id="album-title">{album.title}</div>
                                         <div id="album-photoCount">{albumPhotos.length} photos</div>
                                         <div id="album-date">Created {date[1]} {date[3]}</div>
 
                                     </div>
-
                                     <div className="album-editDelete-buttons">
                                         <button onClick={() => history.push(`/albums/${album.id}/edit`)} className="album-maskButton">Edit</button>
                                         <button value={album.id} onClick={deleteAlbum} className="album-maskButton">Delete</button>

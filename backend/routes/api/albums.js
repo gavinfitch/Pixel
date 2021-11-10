@@ -3,7 +3,7 @@ const asyncHandler = require('express-async-handler');
 // const { check } = require('express-validator');
 // const { handleValidationErrors } = require('../../utils/validation');
 const { setTokenCookie, restoreUser } = require('../../utils/auth');
-const { Album } = require('../../db/models');
+const { Album, Photo } = require('../../db/models');
 
 const router = express.Router();
 
@@ -97,6 +97,18 @@ router.delete(
     '/:id',
     asyncHandler(async (req, res) => {
         const albumId = req.params.id;
+        const albumPhotos = await Photo.findAll({
+            where: {
+                albumId
+            }
+        })
+
+        await albumPhotos.forEach((photo) => {
+            photo.update({
+                albumId: null
+            })
+        })
+
         // const { userId, title, description, photoURL } = req.body;
         const albumToDelete = await Album.findByPk(albumId);
         await albumToDelete.destroy()
