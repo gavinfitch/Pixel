@@ -45,6 +45,8 @@
 }
 
 #your-photos {
+    display: flex;
+    align-items: center;
     top: 75px;
     left: 75px;
     padding: 2px 10px;
@@ -54,7 +56,13 @@
     color: rgb(30, 30, 30);
 }
 
-#your-photos {
+.fa-chevron-down {
+    margin-left: 6px;
+    font-size: 12px;
+    color: rgb(30, 30, 30);
+}
+
+#your-photos:hover {
     cursor: pointer;
 }
 
@@ -107,6 +115,8 @@
     transition: all 0.25s linear;
 }
 
+
+
 .mask-button:hover {
     cursor: pointer;
 }
@@ -131,6 +141,8 @@
     
 }
 
+
+
 .album-thumb-container {
     position: relative;
     box-sizing: border-box;
@@ -149,7 +161,7 @@
     justify-content: space-between;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.0);
+    background-color: rgba(0, 0, 0, 0);
     position: absolute;
     top: 0px;
     transition: all 0.25s linear;
@@ -160,7 +172,7 @@
     color: white;
 }
 
-.album-thumb-container:hover > #album-thumbMask > .album-maskItem > .album-maskButton {
+.album-thumb-container:hover > #album-thumbMask > .album-editDelete-buttons > .album-maskButton {
     border: 1px solid white;
     color: white;
 }
@@ -170,7 +182,7 @@
     height: 23px;
     background-color: rgba(68, 68, 68, 0);
     border: 1px solid rgba(255, 255, 255, 0);
-    margin: 0px 10px;
+    margin: 20px 10px;
     font-size: 15px;
     color: rgba(255, 255, 255, 0);
     transition: all 0.25s linear;
@@ -180,38 +192,32 @@
     cursor: pointer;
 }
 
-.album-maskItem {
+#album-details {
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    align-items: start;
     font-size: 18px;
-    margin: 10px 5px 20px 15px
+    margin: 15px 15px;
 }
 
-
-
-/* test dropdown */
-
-
-/* #english {
-    display: flex;
-    justify-content: center;
-    font-size: 16px;
-    color: gray;
-    font-family: Arial, Helvetica, sans-serif; */
-/* } */
-
-.fa-chevron-down {
-    padding-left: 8px;
-    font-size: 80%;
-    color: rgb(255, 255, 255, 0.75)
+#album-title {
+    font-size: 24px;
+    font-weight: bold;
 }
 
-/* #english:focus-within ul {
-    display: block;
+#album-photoCount {
     font-size: 16px;
-    color: black;
-    font-family: Arial, Helvetica, sans-serif;
-} */
+    padding-top: 4px;
+}
+
+#album-date {
+    font-size: 16px;
+    padding-top: 4px;
+}
+
+.album-editDelete-buttons {
+   margin-right: 5px;
+}
 
 
 
@@ -240,10 +246,6 @@
     background-color: rgba(255, 255, 255, 0.90);
     color: rgb(30, 30, 30);
     cursor: pointer;
-}
-
-.fa-chevron-down {
-    color: rgb(30, 30, 30);
 }
 
 .fa-caret-up {

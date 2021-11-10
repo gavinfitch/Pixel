@@ -41,7 +41,8 @@ function Home({ isLoaded }) {
 
     // Redirect home function
     const redirectHome = () => {
-        history.push("/")
+        setFeedDisplay("Photostream");
+        history.push("/");
     };
 
     // Logout function
@@ -110,7 +111,7 @@ function Home({ isLoaded }) {
                 
                 {dropDownOpen && 
                     <>
-                        <div id="caretDiv"><i class="fas fa-caret-up"></i></div>
+                        <div id="caretDiv"><i className="fas fa-caret-up"></i></div>
                         <ul ref={dropdownRef} className="feedDisplay-list">
                             <li onClick={() => {
                                 setFeedDisplay("Photostream")
@@ -153,12 +154,14 @@ function Home({ isLoaded }) {
                         return (
                             <li style={{ backgroundImage: `url(${albumPhotos[0].photoURL})` }} className="album-thumb-container">
                                 <div id="album-thumbMask">
-                                    <div className="album-maskItem">
-                                        <div>{album.title}</div>
-                                        <div>Created {date[1]} {date[3]}</div>
+                                    <div id="album-details" className="album-maskItem">
+                                        <div id="album-title">{album.title}</div>
+                                        <div id="album-photoCount">{albumPhotos.length} photos</div>
+                                        <div id="album-date">Created {date[1]} {date[3]}</div>
+                                        
                                     </div>
-                                    <div className="album-maskItem">{albumPhotos.length} photos</div>
-                                    <div className="album-maskItem">
+                                    
+                                    <div className="album-editDelete-buttons">
                                         <button onClick={() => history.push(`/albums/${album.id}/edit`)} className="album-maskButton">Edit</button>
                                         <button value={album.id} onClick={deleteAlbum} className="album-maskButton">Delete</button>
                                     </div>
