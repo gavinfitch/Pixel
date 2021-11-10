@@ -106,9 +106,19 @@ function Home({ isLoaded }) {
     if (sessionUser) {
         return (
             <div className="home-container">
+
                 {fullScreen && <div id="fullScreen-container">
-                    <div className="fullScreen-photo-container"><img className="fullScreen-photo" src={fullScreenPhoto.photoURL}></img><div>{fullScreenPhoto.title}</div></div>
+                    <i onClick={() => {
+                            setFullScreen(false);
+                            setFullScreenPhoto(null);
+                            document.body.className -= 'stop-scrolling';
+                        }} class="far fa-window-close"></i>
+                    <div className="fullScreen-photo-container">
+                        <img className="fullScreen-photo" src={fullScreenPhoto.photoURL}></img>
+                        <div>{fullScreenPhoto.title}</div>
+                    </div>
                 </div>}
+
                 <nav className="home-nav">
                     <div onClick={redirectHome} className="formNav-logo">
                         <Logo />
