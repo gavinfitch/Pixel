@@ -174,7 +174,7 @@ function Home({ isLoaded }) {
                 </ul>}
 
                 {feedDisplay === "Albums" && <ul className="home-albums-feed">
-                    <div id="createAlbum-button" onClick={() => history.push("/albums/new/")}>+Create Album</div>
+                    <div id="createAlbum-button" onClick={() => history.push("/albums/new/")}><i className="far fa-plus-square createAlbum-plus"></i><span className="createAlbum-text">Create album</span></div>
                     {userAlbumsArr.map((album) => {
 
                         const albumPhotos = userPhotosArr.filter(photo => photo.albumId === album.id)

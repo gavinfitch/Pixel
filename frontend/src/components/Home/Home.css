@@ -64,6 +64,7 @@
 
 #your-photos:hover {
     cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.08);
 }
 
 .home-photos-feed {
@@ -217,10 +218,6 @@
    margin-right: 5px;
 }
 
-
-
-
-
 .feedDisplay-list {
     display: block;
     color: white;
@@ -334,5 +331,29 @@
 
 .credits-name {
     font-style: italic;
+}
+
+#createAlbum-button {
+    color: black;
+    position: fixed;
+    top: 75px;
+    right: 75px;
+    border: 1px solid black;
+    border-radius: 4px;
+    padding: 4px 10px 2px 10px;
+}
+
+#createAlbum-button:hover {
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.08);
+}
+
+.createAlbum-plus {
+    font-size: 16px;
+    padding-right: 5px;
+}
+
+.createAlbum-text {
+    font-size: 16px;
 }
 
