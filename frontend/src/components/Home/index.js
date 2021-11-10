@@ -12,7 +12,8 @@ import './Home.css';
 
 function Home({ isLoaded }) {
 
-    const [feedDisplay, setFeedDisplay] = useState("Albums");
+    const [feedDisplay, setFeedDisplay] = useState("Photostream");
+    const [dropDownOpen, setDropDownOpen] = useState(false);
 
     const sessionUser = useSelector(state => state.session.user);
     const userPhotosObj = useSelector(state => state.photos);
@@ -72,7 +73,7 @@ function Home({ isLoaded }) {
     if (sessionUser) {
         return (
             <div className="home-container">
-                <nav className="home-nav">
+                <nav className="home-nav" onClick={() => setDropDownOpen(false)}>
                     <div onClick={redirectHome} className="formNav-logo">
                         <Logo />
                         <span className="form-logoText" id="home-logoText">Pixel</span>
@@ -82,9 +83,21 @@ function Home({ isLoaded }) {
                         <button id="logout-button" onClick={logout}>Log out</button>
                     </div>
                 </nav>
-                <div id="your-photos">{feedDisplay}</div>
+                <div onClick={() => setDropDownOpen(!dropDownOpen)} id="your-photos">{feedDisplay}</div>
 
-                {feedDisplay === "Photostream" && <ul className="home-photos-feed">
+                {dropDownOpen &&<ul className="feedDisplay-list">
+                        <li onClick={() => {
+                            setFeedDisplay("Photostream") 
+                            setDropDownOpen(false)
+                        }}>Photostream</li>
+
+                        <li onClick={() => { 
+                            setFeedDisplay("Albums")
+                            setDropDownOpen(false)
+                        }}>Albums</li>
+                    </ul>}
+
+                {feedDisplay === "Photostream" && <ul onClick={() => setDropDownOpen(false)} className="home-photos-feed">
                     {userPhotosArr.map(photo =>
                         <li className="home-photoLi" key={photo.id}>
                             <img className="home-img" src={photo.photoURL}></img>
@@ -103,14 +116,14 @@ function Home({ isLoaded }) {
                     )}
                 </ul>}
 
-                {feedDisplay === "Albums" && <ul className="home-albums-feed">
+                {feedDisplay === "Albums" && <ul onClick={() => setDropDownOpen(false)} className="home-albums-feed">
                     {userAlbumsArr.map((album) => {
 
                         const albumPhotos = userPhotosArr.filter(photo => photo.albumId === album.id)
                         const date = new Date(album.createdAt).toString().split(" ");
 
                         return (
-                            <li style={{backgroundImage: `url(${albumPhotos[0].photoURL})`}} className="album-thumb-container">
+                            <li style={{ backgroundImage: `url(${albumPhotos[0].photoURL})` }} className="album-thumb-container">
                                 <div id="album-thumbMask">
                                     <div className="album-maskItem">
                                         <div>{album.title}</div>
@@ -119,9 +132,9 @@ function Home({ isLoaded }) {
                                     <div className="album-maskItem">{albumPhotos.length} photos</div>
                                     <div className="album-maskItem">
                                         <button onClick={() => history.push(`/albums/${album.id}/edit`)} className="album-maskButton">Edit</button>
-                                        <button value={album.id} onClick={deleteAlbum} className="album-maskButton">Delete</button> 
-                                    </div>        
-                                </div>         
+                                        <button value={album.id} onClick={deleteAlbum} className="album-maskButton">Delete</button>
+                                    </div>
+                                </div>
                             </li>
                         )
                     })}
