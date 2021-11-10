@@ -43,7 +43,7 @@ function CreateAlbumForm() {
                 </div>
             </nav>
             <div className="form-background">
-                <form className="form-container" id="uploadPhoto-form-container">
+                <form className="form-container" id="editAlbum-form-container">
                     <div className="form-header">
                         <Logo />
                         <div className="form-headerText">Edit Album</div>
@@ -51,7 +51,7 @@ function CreateAlbumForm() {
                     {errors.length > 0 && <ul className="errors-container">
                         {errors.map((error, idx) => <li className="error" key={idx}>{error}</li>)}
                     </ul>}
-                    <div className="field-container">
+                    <div className="editAlbum-field-container">
                         <input
                             className="form-field"
                             type="text"
@@ -68,7 +68,7 @@ function CreateAlbumForm() {
                             onChange={(e) => setDescription(e.target.value)}
                         // required
                         />
-                        <button className="form-button" onClick={updateAlbum}>Edit Album</button>
+                        <button className="form-button" onClick={updateAlbum}>Edit</button>
                     </div>
 
                     {/* <div className="redirect-container">
