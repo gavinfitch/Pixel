@@ -254,7 +254,7 @@
 }
 
 #caretDiv {
-    position: absolute;
+    position: fixed;
     top: 88px;
     left: 80px;
 }
