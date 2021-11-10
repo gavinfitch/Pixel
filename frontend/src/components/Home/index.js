@@ -109,10 +109,10 @@ function Home({ isLoaded }) {
 
                 {fullScreen && <div id="fullScreen-container">
                     <i onClick={() => {
-                            setFullScreen(false);
-                            setFullScreenPhoto(null);
-                            document.body.className -= 'stop-scrolling';
-                        }} class="far fa-window-close"></i>
+                        setFullScreen(false);
+                        setFullScreenPhoto(null);
+                        document.body.classList.remove('stop-scrolling');
+                    }} class="far fa-window-close"></i>
                     <div className="fullScreen-photo-container">
                         <img className="fullScreen-photo" src={fullScreenPhoto.photoURL}></img>
                         <div>{fullScreenPhoto.title}</div>
@@ -153,7 +153,7 @@ function Home({ isLoaded }) {
                         <li onClick={() => {
                             setFullScreen(true);
                             setFullScreenPhoto(photo);
-                            document.body.className += 'stop-scrolling';
+                            document.body.classList.add('stop-scrolling');
                         }} className="home-photoLi" key={photo.id}>
                             <img className="home-img" src={photo.photoURL}></img>
                             <div id="home-photoMask">
