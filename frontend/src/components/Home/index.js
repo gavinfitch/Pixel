@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { NavLink, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -12,8 +12,12 @@ import './Home.css';
 
 function Home({ isLoaded }) {
 
+    const dropdownRef = useRef(null);
+
     const [feedDisplay, setFeedDisplay] = useState("Photostream");
     const [dropDownOpen, setDropDownOpen] = useState(false);
+
+
 
     const sessionUser = useSelector(state => state.session.user);
     const userPhotosObj = useSelector(state => state.photos);
@@ -69,11 +73,30 @@ function Home({ isLoaded }) {
         dispatch(albumActions.thunk_getAlbumsByUserId({ userId }))
     }, [dispatch])
 
+    useEffect(() => {
+
+        const pageClickEvent = (e) => {
+            console.log(e)
+            if (dropdownRef.current !== null && !dropdownRef.current.contains(e.target)) {
+                setDropDownOpen(!dropDownOpen);
+            }
+        };
+
+        if (dropDownOpen) {
+            window.addEventListener('click', pageClickEvent);
+        }
+
+        return () => {
+            window.removeEventListener('click', pageClickEvent);
+        }
+
+    }, [dropDownOpen])
+
 
     if (sessionUser) {
         return (
             <div className="home-container">
-                <nav className="home-nav" onClick={() => setDropDownOpen(false)}>
+                <nav className="home-nav">
                     <div onClick={redirectHome} className="formNav-logo">
                         <Logo />
                         <span className="form-logoText" id="home-logoText">Pixel</span>
@@ -85,19 +108,19 @@ function Home({ isLoaded }) {
                 </nav>
                 <div onClick={() => setDropDownOpen(!dropDownOpen)} id="your-photos">{feedDisplay}</div>
 
-                {dropDownOpen &&<ul className="feedDisplay-list">
-                        <li onClick={() => {
-                            setFeedDisplay("Photostream") 
-                            setDropDownOpen(false)
-                        }}>Photostream</li>
+                {dropDownOpen && <ul ref={dropdownRef} className="feedDisplay-list">
+                    <li onClick={() => {
+                        setFeedDisplay("Photostream")
+                        setDropDownOpen(false)
+                    }}>Photostream</li>
 
-                        <li onClick={() => { 
-                            setFeedDisplay("Albums")
-                            setDropDownOpen(false)
-                        }}>Albums</li>
-                    </ul>}
+                    <li onClick={() => {
+                        setFeedDisplay("Albums")
+                        setDropDownOpen(false)
+                    }}>Albums</li>
+                </ul>}
 
-                {feedDisplay === "Photostream" && <ul onClick={() => setDropDownOpen(false)} className="home-photos-feed">
+                {feedDisplay === "Photostream" && <ul className="home-photos-feed">
                     {userPhotosArr.map(photo =>
                         <li className="home-photoLi" key={photo.id}>
                             <img className="home-img" src={photo.photoURL}></img>
@@ -116,7 +139,7 @@ function Home({ isLoaded }) {
                     )}
                 </ul>}
 
-                {feedDisplay === "Albums" && <ul onClick={() => setDropDownOpen(false)} className="home-albums-feed">
+                {feedDisplay === "Albums" && <ul className="home-albums-feed">
                     {userAlbumsArr.map((album) => {
 
                         const albumPhotos = userPhotosArr.filter(photo => photo.albumId === album.id)
