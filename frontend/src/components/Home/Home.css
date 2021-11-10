@@ -207,14 +207,16 @@
 
 
 
+
+
 .feedDisplay-list {
     display: block;
     color: white;
     position: fixed;
-    width: fit-content;
+    width: 132px;
     height: fit-content;
-    top: 125px;
-    left: 100px;
+    top: 112px;
+    left: 75px;
     background-color: black;
     border-radius: 3px;
     padding: 10px 0px;
@@ -229,4 +231,19 @@
 .feedDisplay-list li:hover {
     background-color: rgb(220, 220, 220);
     cursor: pointer;
+}
+
+.fa-chevron-down {
+    color: black;
+}
+
+.fa-caret-up {
+    color: black;
+    font-size: 48px;
+}
+
+#caretDiv {
+    position: absolute;
+    top: 88px;
+    left: 80px;
 }

@@ -106,19 +106,24 @@ function Home({ isLoaded }) {
                         <button id="logout-button" onClick={logout}>Log out</button>
                     </div>
                 </nav>
-                <div onClick={() => setDropDownOpen(!dropDownOpen)} id="your-photos">{feedDisplay}</div>
+                <div onClick={() => setDropDownOpen(!dropDownOpen)} id="your-photos">{feedDisplay}<i class="fas fa-chevron-down"></i></div>
+                
+                {dropDownOpen && 
+                    <>
+                        <div id="caretDiv"><i class="fas fa-caret-up"></i></div>
+                        <ul ref={dropdownRef} className="feedDisplay-list">
+                            <li onClick={() => {
+                                setFeedDisplay("Photostream")
+                                setDropDownOpen(false)
+                            }}>Photostream</li>
 
-                {dropDownOpen && <ul ref={dropdownRef} className="feedDisplay-list">
-                    <li onClick={() => {
-                        setFeedDisplay("Photostream")
-                        setDropDownOpen(false)
-                    }}>Photostream</li>
-
-                    <li onClick={() => {
-                        setFeedDisplay("Albums")
-                        setDropDownOpen(false)
-                    }}>Albums</li>
-                </ul>}
+                            <li onClick={() => {
+                                setFeedDisplay("Albums")
+                                setDropDownOpen(false)
+                            }}>Albums</li>
+                        </ul>
+                    </>
+                }
 
                 {feedDisplay === "Photostream" && <ul className="home-photos-feed">
                     {userPhotosArr.map(photo =>
