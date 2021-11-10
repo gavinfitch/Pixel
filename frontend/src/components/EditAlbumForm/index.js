@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useHistory, useParams } from "react-router-dom";
 import * as albumActions from "../../store/album";
@@ -6,14 +6,23 @@ import './EditAlbumForm.css';
 import Logo from '../Logo';
 
 function CreateAlbumForm() {
+
+    const albums = useSelector((state) => state.albums);
+    const { id } = useParams()
+    const currentAlbum = albums[id];
+
+    let titleString;
+    if (currentAlbum?.title) {
+        titleString = currentAlbum.title;
+    }
+
+
     const dispatch = useDispatch();
     const history = useHistory();
     const sessionUser = useSelector((state) => state.session.user);
-    const [title, setTitle] = useState("");
-    const [description, setDescription] = useState("");
+    const [title, setTitle] = useState(currentAlbum?.title);
+    const [description, setDescription] = useState(currentAlbum?.description);
     const [errors, setErrors] = useState([]);
-
-    const { id } = useParams()
 
     const redirectHome = () => {
         history.push("/")
@@ -31,6 +40,11 @@ function CreateAlbumForm() {
         return dispatch(albumActions.thunk_updatealbum({ albumId: id, title, description }))
     };
 
+    useEffect(() => {
+        const userId = sessionUser.id;
+        dispatch(albumActions.thunk_getAlbumsByUserId({ userId }))
+    }, [dispatch])
+
 
     if (!sessionUser) return <Redirect to="/" />;
 
@@ -46,7 +60,7 @@ function CreateAlbumForm() {
                 <form className="form-container" id="editAlbum-form-container">
                     <div className="form-header">
                         <Logo />
-                        <div className="form-headerText">Edit Album</div>
+                        <div className="form-headerText">Edit {titleString || "album"}</div>
                     </div>
                     {errors.length > 0 && <ul className="errors-container">
                         {errors.map((error, idx) => <li className="error" key={idx}>{error}</li>)}
