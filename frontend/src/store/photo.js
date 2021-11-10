@@ -20,9 +20,9 @@ const deletePhoto = (deletedPhotoId) => ({
     deletedPhotoId,
 });
 
-const updatePhoto = (photoId) => ({
+const updatePhoto = (photo) => ({
     type: UPDATE_PHOTO,
-    photoId,
+    photo,
 });
 
 // Get photo by id thunk
@@ -101,7 +101,7 @@ export const thunk_deletephoto = ({ photoId }) => async (dispatch) => {
         const deletedPhoto = await res.json();
         // console.log("THIS IS THE CONESOLE", deletedPhoto.photoToDelete.id)
         dispatch(deletePhoto(deletedPhoto.photoToDelete.id));
-        
+
         return "Deletion successful";
     }
 };
@@ -126,6 +126,7 @@ export const thunk_updatephoto = ({ photoId, title, description }) => async (dis
     if (res.ok) {
         const updatedPhoto = await res.json();
         dispatch(updatePhoto(updatedPhoto));
+        // console.log("This is the updated photo ---> ", updatedPhoto);
         return updatedPhoto;
     }
 };
@@ -147,6 +148,11 @@ const photoReducer = (state = {}, action) => {
         case DELETE_PHOTO: {
             const newState = { ...state }
             delete newState[action.deletedPhotoId];
+            return newState;
+        }
+        case UPDATE_PHOTO: {
+            const newState = { ...state }
+            newState[action.photo.updatedPhoto.id] = action.photo.updatedPhoto;
             return newState;
         }
         default:
