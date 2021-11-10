@@ -16,8 +16,8 @@ function Home({ isLoaded }) {
 
     const [feedDisplay, setFeedDisplay] = useState("Photostream");
     const [dropDownOpen, setDropDownOpen] = useState(false);
-
-
+    const [fullScreen, setFullScreen] = useState(false);
+    const [fullScreenPhoto, setFullScreenPhoto] = useState(null);
 
     const sessionUser = useSelector(state => state.session.user);
     const userPhotosObj = useSelector(state => state.photos);
@@ -106,6 +106,9 @@ function Home({ isLoaded }) {
     if (sessionUser) {
         return (
             <div className="home-container">
+                {fullScreen && <div id="fullScreen-container">
+                    <div className="fullScreen-photo-container"><img className="fullScreen-photo" src={fullScreenPhoto.photoURL}></img><div>{fullScreenPhoto.title}</div></div>
+                </div>}
                 <nav className="home-nav">
                     <div onClick={redirectHome} className="formNav-logo">
                         <Logo />
@@ -137,7 +140,11 @@ function Home({ isLoaded }) {
 
                 {feedDisplay === "Photostream" && <ul className="home-photos-feed">
                     {userPhotosArr.map(photo =>
-                        <li className="home-photoLi" key={photo.id}>
+                        <li onClick={() => {
+                            setFullScreen(true);
+                            setFullScreenPhoto(photo);
+                            document.body.className += 'stop-scrolling';
+                        }} className="home-photoLi" key={photo.id}>
                             <img className="home-img" src={photo.photoURL}></img>
                             <div id="home-photoMask">
                                 <div onClick={() => history.push(`/photos/${photo.id}/albumselect`)} className="photo-albumSelect"><i class="far fa-plus-square"></i></div>
