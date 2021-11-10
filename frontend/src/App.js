@@ -10,7 +10,7 @@ import EditAlbumForm from "./components/EditAlbumForm";
 import CreateAlbumForm from "./components/CreateAlbumForm";
 import CreateCommentForm from "./components/CreateCommentForm";
 import * as sessionActions from "./store/session";
-import Navigation from "./components/Navigation";
+// import Navigation from "./components/Navigation";
 import Home from "./components/Home";
 
 function App() {

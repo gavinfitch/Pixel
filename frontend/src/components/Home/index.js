@@ -107,9 +107,9 @@ function Home({ isLoaded }) {
                         <button id="logout-button" onClick={logout}>Log out</button>
                     </div>
                 </nav>
-                <div onClick={() => setDropDownOpen(!dropDownOpen)} id="your-photos">{feedDisplay}<i class="fas fa-chevron-down"></i></div>
-                
-                {dropDownOpen && 
+                <div onClick={() => setDropDownOpen(!dropDownOpen)} id="your-photos">{feedDisplay}<i className="fas fa-chevron-down"></i></div>
+
+                {dropDownOpen &&
                     <>
                         <div id="caretDiv"><i className="fas fa-caret-up"></i></div>
                         <ul ref={dropdownRef} className="feedDisplay-list">
@@ -158,9 +158,9 @@ function Home({ isLoaded }) {
                                         <div id="album-title">{album.title}</div>
                                         <div id="album-photoCount">{albumPhotos.length} photos</div>
                                         <div id="album-date">Created {date[1]} {date[3]}</div>
-                                        
+
                                     </div>
-                                    
+
                                     <div className="album-editDelete-buttons">
                                         <button onClick={() => history.push(`/albums/${album.id}/edit`)} className="album-maskButton">Edit</button>
                                         <button value={album.id} onClick={deleteAlbum} className="album-maskButton">Delete</button>
