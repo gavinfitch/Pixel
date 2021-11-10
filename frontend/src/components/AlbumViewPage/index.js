@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { NavLink, useHistory } from 'react-router-dom';
+import { NavLink, useHistory, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
 import * as sessionActions from '../../store/session';
@@ -8,9 +8,9 @@ import * as albumActions from "../../store/album";
 
 import ProfileButton from '../Navigation/ProfileButton';
 import Logo from '../Logo';
-import './Home.css';
+import '../Home/Home.css';
 
-function Home({ isLoaded }) {
+function AlbumViewPage({ isLoaded }) {
 
     const dropdownRef = useRef(null);
 
@@ -23,7 +23,15 @@ function Home({ isLoaded }) {
     const userPhotosObj = useSelector(state => state.photos);
     const userAlbumsObj = useSelector(state => state.albums);
 
-    const userPhotosArr = Object.values(userPhotosObj);
+    const albumId = useParams().id;
+    const currentAlbum = userAlbumsObj[albumId];
+    
+    let albumTitle = null;
+    if (currentAlbum) {
+        albumTitle = currentAlbum.title;
+    }
+    
+    const userPhotosArr = Object.values(userPhotosObj).filter((photo) => photo.albumId === +albumId);
     const userAlbumsArr = Object.values(userAlbumsObj);
 
     let userId;
@@ -61,21 +69,19 @@ function Home({ isLoaded }) {
     };
 
     // Delete photo function
-    const removePhotoFromAlbum = async (e) => {
-        e.preventDefault();
-        // console.log("you are here")
-
-        // console.log(e.target.value)
-        return dispatch(photoActions.thunk_deletephoto({ photoId: e.target.value }))
-    };
-
-    // Delete photo function
     const deleteAlbum = async (e) => {
         e.preventDefault();
         // console.log("you are here")
 
         // console.log(e.target.value)
         return dispatch(albumActions.thunk_deletealbum({ albumId: e.target.value }))
+    };
+
+    // Remove album function
+    const removeAlbum = async (e) => {
+        e.preventDefault();
+        
+        return dispatch(photoActions.thunk_removealbum({ photoId: e.target.value }))
     };
 
     useEffect(() => {
@@ -116,7 +122,7 @@ function Home({ isLoaded }) {
                         <button id="logout-button" onClick={logout}>Log out</button>
                     </div>
                 </nav>
-                <div onClick={() => setDropDownOpen(!dropDownOpen)} id="your-photos">{feedDisplay}<i className="fas fa-chevron-down"></i></div>
+                {albumTitle && <div id="your-photos">{albumTitle}</div>}
 
                 {dropDownOpen &&
                     <>
@@ -140,7 +146,7 @@ function Home({ isLoaded }) {
                         <li className="home-photoLi" key={photo.id}>
                             <img className="home-img" src={photo.photoURL}></img>
                             <div id="home-photoMask">
-                                <div onClick={() => history.push(`/photos/${photo.id}/albumselect`)} className="photo-albumSelect"><i class="far fa-plus-square"></i></div>
+                                <button onClick={removeAlbum} value={photo.id} className="photo-albumSelect far fa-minus-square"></button>
                                 <div className="mask-item">
                                     <div>{photo.title}</div>
                                 </div>
@@ -195,4 +201,4 @@ function Home({ isLoaded }) {
     }
 }
 
-export default Home;
+export default AlbumViewPage;

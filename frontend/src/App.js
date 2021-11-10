@@ -13,6 +13,7 @@ import AlbumSelectForm from "./components/AlbumSelectForm";
 import * as sessionActions from "./store/session";
 // import Navigation from "./components/Navigation";
 import Home from "./components/Home";
+import AlbumViewPage from "./components/AlbumViewPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -44,6 +45,9 @@ function App() {
           </Route>
           <Route path="/photos/:id/albumselect">
             <AlbumSelectForm />
+          </Route>
+          <Route exact path="/albums/:id/">
+            <AlbumViewPage />
           </Route>
           <Route path="/albums/:id/edit">
             <EditAlbumForm />

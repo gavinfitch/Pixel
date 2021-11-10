@@ -131,7 +131,7 @@ export const thunk_updatephoto = ({ photoId, title, description }) => async (dis
     }
 };
 
-// Update photo thunk
+// Album select photo thunk
 export const thunk_selectalbum = ({ photoId, albumId }) => async (dispatch) => {
 
     const res = await csrfFetch(`/api/photos/${photoId}/albumselect`, {
@@ -142,6 +142,27 @@ export const thunk_selectalbum = ({ photoId, albumId }) => async (dispatch) => {
         body: JSON.stringify({
             photoId,
             albumId
+        })
+    });
+
+    if (res.ok) {
+        const updatedPhoto = await res.json();
+        dispatch(updatePhoto(updatedPhoto));
+        // console.log("This is the updated photo ---> ", updatedPhoto);
+        return updatedPhoto;
+    }
+};
+
+// Album remove photo thunk
+export const thunk_removealbum = ({ photoId }) => async (dispatch) => {
+
+    const res = await csrfFetch(`/api/photos/${photoId}/albumremove`, {
+        method: 'PUT',
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            photoId
         })
     });
 

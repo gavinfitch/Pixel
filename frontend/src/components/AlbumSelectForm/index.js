@@ -22,7 +22,7 @@ function AlbumSelectForm() {
     // const [album, setAlbum] = useState(null);
     const [errors, setErrors] = useState([]);
 
-    
+
 
     let userId;
     if (sessionUser) {
