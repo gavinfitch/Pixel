@@ -1,4 +1,4 @@
-/* .errors-container {
+.errors-container {
     margin: 20px 0px;
     padding: 0px;
 }
@@ -75,11 +75,14 @@
     border-radius: 5px;
 }
 
-#uploadPhoto-form-container {
-    height: 450px;
+#selectAlbum-form-container {
+    height: 295px;
 }
 
-.field-container {
+#albumSelect-field-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     margin-bottom: 50px;
 }
 
@@ -117,19 +120,19 @@
     padding-top: 17px;
 }
 
-.form-button {
+#selectAlbum-form-button {
     background-color: rgb(22, 142, 220);
     width: 100%;
     height: 40px;
     border: none;
     border-radius: 5px;
-    margin-top: 20px;
+    margin-top: 35px;
     color: white;
     font-size: 15px;
     font-weight: bold;
 }
 
-.form-button:hover {
+#selectAlbum-form-button:hover {
     background-color: rgba(22, 142, 220, 0.92);
     cursor: pointer;
 }
@@ -152,6 +155,20 @@
 .redirect-link {
     margin-left: 3px;
     color: rgb(22, 142, 220);
-} */
+}
 
+#albumSelect-dropdown {
+    border-radius: 5px;
+    padding: 10px;
+    width: 235px;
+}
+
+#albumSelect-dropdown:hover {
+    background-color: rgba(0, 0, 0, 0.08);
+    cursor: pointer;
+}
+
+#albumSelect-dropdown:focus {
+    outline: none;
+}
 

@@ -114,7 +114,7 @@ function AlbumSelectForm() {
                 </div>
             </nav>
             <div className="form-background">
-                <form onSubmit={handleSubmit} className="form-container" id="uploadPhoto-form-container">
+                <form onSubmit={handleSubmit} className="form-container" id="selectAlbum-form-container">
                     <div className="form-header">
                         {/* <div className="logo">
                             <div id="logo-yellow"></div>
@@ -127,9 +127,9 @@ function AlbumSelectForm() {
                     {errors.length > 0 && <ul className="errors-container">
                         {errors.map((error, idx) => <li className="error" key={idx}>{error}</li>)}
                     </ul>}
-                    <div className="field-container">
-                        <select onChange={(e) => setAlbumId(e.target.value)}>
-                            <option hidden>Please select album</option>
+                    <div id="albumSelect-field-container">
+                        <select id="albumSelect-dropdown" onChange={(e) => setAlbumId(e.target.value)}>
+                            <option hidden>Please select album </option>
                             {userAlbumsArr.map(album => {
                                 return (
                                     <option key={album.id} value={album.id}>
@@ -138,7 +138,7 @@ function AlbumSelectForm() {
                                 )
                             })}
                         </select>
-                        <button className="form-button" type="submit">Add to album</button>
+                        <button id="selectAlbum-form-button" type="submit">Add photo to album</button>
                     </div>
 
                     {/* <div className="redirect-container">
