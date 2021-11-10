@@ -26,12 +26,12 @@ function AlbumViewPage({ isLoaded }) {
 
     const albumId = useParams().id;
     const currentAlbum = userAlbumsObj[albumId];
-    
+
     let albumTitle = null;
     if (currentAlbum) {
         albumTitle = currentAlbum.title;
     }
-    
+
     const userPhotosArr = Object.values(userPhotosObj).filter((photo) => photo.albumId === +albumId);
     const userAlbumsArr = Object.values(userAlbumsObj);
 
@@ -81,7 +81,7 @@ function AlbumViewPage({ isLoaded }) {
     // Remove album function
     const removeAlbum = async (e) => {
         e.preventDefault();
-        
+
         return dispatch(photoActions.thunk_removealbum({ photoId: e.target.value }))
     };
 
@@ -142,7 +142,7 @@ function AlbumViewPage({ isLoaded }) {
                     </>
                 }
 
-                <div id="createAlbum-button" onClick={() => history.push("/albums/new/")}>+Create Album</div>
+                <div id="createAlbum-button" onClick={() => history.push("/albums/new/")}><i className="far fa-plus-square createAlbum-plus"></i><span className="createAlbum-text">Create album</span></div>
 
                 {feedDisplay === "Photostream" && <ul className="home-photos-feed">
                     {userPhotosArr.map(photo =>
