@@ -123,13 +123,20 @@ function AlbumViewPage({ isLoaded }) {
                         <button id="logout-button" onClick={logout}>Log out</button>
                     </div>
                 </nav>
-                {albumTitle && <div id="your-photos">{albumTitle}</div>}
+                {albumTitle && <div onClick={() => setDropDownOpen(!dropDownOpen)} id="your-photos">{albumTitle}<i className="fas fa-chevron-down"></i></div>}
 
                 {dropDownOpen &&
                     <>
                         <div id="caretDiv"><i className="fas fa-caret-up"></i></div>
                         <ul ref={dropdownRef} className="feedDisplay-list">
-                            <li onClick={() => {
+                            {userAlbumsArr.map(album => {
+                                return (<li onClick={() => {
+                                    setFeedDisplay("Photostream")
+                                    setDropDownOpen(false)
+                                    history.push(`/albums/${album.id}`)
+                                }}>{album.title}</li>)
+                            })}
+                            {/* <li onClick={() => {
                                 setFeedDisplay("Photostream")
                                 setDropDownOpen(false)
                             }}>Photostream</li>
@@ -137,7 +144,7 @@ function AlbumViewPage({ isLoaded }) {
                             <li onClick={() => {
                                 setFeedDisplay("Albums")
                                 setDropDownOpen(false)
-                            }}>Albums</li>
+                            }}>Albums</li> */}
                         </ul>
                     </>
                 }
@@ -149,12 +156,12 @@ function AlbumViewPage({ isLoaded }) {
                         <li className="home-photoLi" key={photo.id}>
                             <img className="home-img" src={photo.photoURL}></img>
                             <div id="home-photoMask">
-                                
+
                                 <div className="mask-item">
                                     <div>{photo.title}</div>
                                 </div>
                                 <div className="mask-item">
-                                <button id="albumRemove-button" onClick={removeAlbum} value={photo.id} className="photo-albumSelect far fa-minus-square"></button>
+                                    <button id="albumRemove-button" onClick={removeAlbum} value={photo.id} className="photo-albumSelect far fa-minus-square"></button>
                                     <button className="mask-button" onClick={() => history.push(`/photos/${photo.id}/edit`)}>Edit</button>
                                     <button className="mask-button" value={photo.id} onClick={deletePhoto}>Delete</button>
                                 </div>
