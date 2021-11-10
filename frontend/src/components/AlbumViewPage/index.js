@@ -9,6 +9,7 @@ import * as albumActions from "../../store/album";
 import ProfileButton from '../Navigation/ProfileButton';
 import Logo from '../Logo';
 import '../Home/Home.css';
+import './AlbumViewPage.css';
 
 function AlbumViewPage({ isLoaded }) {
 
@@ -140,6 +141,8 @@ function AlbumViewPage({ isLoaded }) {
                         </ul>
                     </>
                 }
+
+                <div id="createAlbum-button" onClick={() => history.push("/albums/new/")}>+Create Album</div>
 
                 {feedDisplay === "Photostream" && <ul className="home-photos-feed">
                     {userPhotosArr.map(photo =>

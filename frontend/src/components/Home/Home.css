@@ -136,12 +136,10 @@
 /* Album feed */
 .home-albums-feed {
     display: flex;
+    flex-wrap: wrap;
     padding-top: 125px;
     padding-left: 30px;  
-    
 }
-
-
 
 .album-thumb-container {
     position: relative;
@@ -149,7 +147,7 @@
     width: 550px;
     height: 550px;
     padding: 0px;
-    margin: 0px 10px;
+    margin: 0px 10px 20px 10px;
     background-repeat: no-repeat;
     background-size: cover;
 }

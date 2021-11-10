@@ -46,15 +46,17 @@ function App() {
           <Route path="/photos/:id/albumselect">
             <AlbumSelectForm />
           </Route>
+          <Route path="/albums/new/">
+            <CreateAlbumForm />
+          </Route>
           <Route exact path="/albums/:id/">
             <AlbumViewPage />
           </Route>
           <Route path="/albums/:id/edit">
             <EditAlbumForm />
           </Route>
-          <Route path="/albums/new">
-            <CreateAlbumForm />
-          </Route>
+          
+          
           <Route path="/comments/new">
             <CreateCommentForm />
           </Route>

@@ -155,13 +155,21 @@ function Home({ isLoaded }) {
                 </ul>}
 
                 {feedDisplay === "Albums" && <ul className="home-albums-feed">
+                    <div id="createAlbum-button" onClick={() => history.push("/albums/new/")}>+Create Album</div>
                     {userAlbumsArr.map((album) => {
 
                         const albumPhotos = userPhotosArr.filter(photo => photo.albumId === album.id)
-                        const date = new Date(album.createdAt).toString().split(" ");
+                        const date = new Date(album?.createdAt).toString().split(" ");
+
+                        let backgroundImgURL;
+                        if (albumPhotos[0]) {
+                            backgroundImgURL = albumPhotos[0].photoURL;
+                        } else {
+                            backgroundImgURL = "https://pixelphotostorage.s3.us-west-2.amazonaws.com/pixel-seeder-photos/Trip+to+Japan/beautiful_tree.jpg";
+                        }
 
                         return (
-                            <li onClick={() => history.push(`/albums/${album.id}`)} style={{ backgroundImage: `url(${albumPhotos[0].photoURL})` }} className="album-thumb-container">
+                            <li onClick={() => history.push(`/albums/${album.id}`)} style={{ backgroundImage: `url(${backgroundImgURL})` }} className="album-thumb-container">
                                 <div id="album-thumbMask">
 
                                     <div id="album-details" className="album-maskItem">

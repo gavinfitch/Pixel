@@ -12,6 +12,7 @@ function CreateAlbumForm() {
     const sessionUser = useSelector((state) => state.session.user);
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
+    const [photo, setPhoto] = useState("");
     const [errors, setErrors] = useState([]);
 
     const config = {
@@ -110,9 +111,6 @@ function CreateAlbumForm() {
                         // required
                         />
                         <button className="form-button" type="submit">Create Album</button>
-                        <button className="form-button" onClick={deleteAlbum}>Delete Album</button>
-                        <button className="form-button" onClick={updateAlbum}>Edit Album</button>
-                        <button className="form-button" onClick={getAlbumById}>Get album by Id</button>
                     </div>
 
                     {/* <div className="redirect-container">
