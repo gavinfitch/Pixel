@@ -115,7 +115,8 @@ function Home({ isLoaded }) {
                     }} class="far fa-window-close"></i>
                     <div className="fullScreen-photo-container">
                         <img className="fullScreen-photo" src={fullScreenPhoto.photoURL}></img>
-                        <div>{fullScreenPhoto.title}</div>
+                        <div id="fullScreen-title" className="fullScreen-caption">{fullScreenPhoto.title}</div>
+                        <div className="fullScreen-caption">By <span className="credits-name">{fullScreenPhoto.User.firstName} {fullScreenPhoto.User.lastName}</span></div>
                     </div>
                 </div>}
 

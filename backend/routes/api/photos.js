@@ -3,7 +3,7 @@ const asyncHandler = require('express-async-handler');
 // const { check } = require('express-validator');
 // const { handleValidationErrors } = require('../../utils/validation');
 const { setTokenCookie, requireAuth } = require('../../utils/auth');
-const { Photo } = require('../../db/models');
+const { Photo, User } = require('../../db/models');
 
 const router = express.Router();
 
@@ -41,7 +41,8 @@ router.get(
     asyncHandler(async (req, res) => {
         const userId = req.params.id;
         const photos = await Photo.findAll({
-            where: { userId }
+            where: { userId },
+            include: [User]
         });
 
         // await setTokenCookie(res, user);
