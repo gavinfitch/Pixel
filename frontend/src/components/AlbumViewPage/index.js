@@ -149,11 +149,12 @@ function AlbumViewPage({ isLoaded }) {
                         <li className="home-photoLi" key={photo.id}>
                             <img className="home-img" src={photo.photoURL}></img>
                             <div id="home-photoMask">
-                                <button onClick={removeAlbum} value={photo.id} className="photo-albumSelect far fa-minus-square"></button>
+                                
                                 <div className="mask-item">
                                     <div>{photo.title}</div>
                                 </div>
                                 <div className="mask-item">
+                                <button id="albumRemove-button" onClick={removeAlbum} value={photo.id} className="photo-albumSelect far fa-minus-square"></button>
                                     <button className="mask-button" onClick={() => history.push(`/photos/${photo.id}/edit`)}>Edit</button>
                                     <button className="mask-button" value={photo.id} onClick={deletePhoto}>Delete</button>
                                 </div>
