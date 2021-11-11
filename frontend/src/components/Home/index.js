@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { NavLink, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
+import S3 from 'react-aws-s3';
 
 import * as sessionActions from '../../store/session';
 import * as photoActions from "../../store/photo";
@@ -25,6 +26,15 @@ function Home({ isLoaded }) {
 
     const userPhotosArr = Object.values(userPhotosObj);
     const userAlbumsArr = Object.values(userAlbumsObj);
+
+    const config = {
+        bucketName: 'pixelphotostorage',
+        region: 'us-west-2',
+        accessKeyId: 'AKIAQ5HCEL66DJMSJ66K',
+        secretAccessKey: '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',
+    }
+
+    const ReactS3Client = new S3(config);
 
     let userId;
     if (sessionUser) {
@@ -55,10 +65,17 @@ function Home({ isLoaded }) {
     const deletePhoto = async (e) => {
         e.preventDefault();
         e.stopPropagation();
-        // console.log("you are here")
 
-        // console.log(e.target.value)
-        return dispatch(photoActions.thunk_deletephoto({ photoId: e.target.value }))
+        console.log(e.target.value)
+        const { id, name } = JSON.parse(e.target.value);
+        console.log(id, name)
+
+        await ReactS3Client
+            .deleteFile(`${name}.jpeg`)
+            .then(response => console.log(response))
+            .catch(err => console.error(err))
+
+        return dispatch(photoActions.thunk_deletephoto({ photoId: id }))
     };
 
     // Delete photo function
@@ -175,7 +192,7 @@ function Home({ isLoaded }) {
                                         history.push(`/photos/${photo.id}/edit`)
                                     }
                                     }>Edit</button>
-                                    <button className="mask-button" value={photo.id} onClick={deletePhoto}>Delete</button>
+                                    <button className="mask-button" value={JSON.stringify({ id: photo.id, name: photo.title })} onClick={deletePhoto}>Delete</button>
                                 </div>
 
                             </div>
