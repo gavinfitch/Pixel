@@ -7,6 +7,8 @@
     transition: background-image 2s ease-in-out;
 }
 
+
+/* Nav bar */
 #splash-nav {
     height: 55px;
     background-color: rgba(30, 30, 30, 0.65);
@@ -72,6 +74,8 @@
     color: rgb(30, 30, 30); */
 }
 
+
+/* Middle section */
 #splash-signup-container {
     width: 100vw;
     height: 100vh;
@@ -79,6 +83,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    padding-bottom: 60px;
 }
 
 #slogan-container {
@@ -89,20 +94,29 @@
 }
 
 .slogan {
-    margin: 10px 0px;
+    margin: 8px 0px;
 }
 
 #inspiration {
-    font-size: 48px;
+    font-size: 50px;
 }
 
-#free {
-    font-size: 24px;
+#join {
+    font-size: 25px;
+}
+
+#startForFree {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 50px;
+    width: 200px;
+    height: 60px;
+    font-size: 25px;
 }
 
 
 /* Footer */
-
 .splash-footer {
     position: fixed;
     display: flex;

@@ -71,18 +71,20 @@ function SplashPage() {
                     <span className="form-logoText" id="home-logoText">Pixel</span>
                 </div>
                 <div className="upload-logout-container">
-                    <NavLink id="login-button" to="/login">Log In</NavLink>
+                    <NavLink id="login-button" to="/login">Log in</NavLink>
                     <button id="guestLogin-button" className="splash-button" onClick={guestLogin}>Log in as guest</button>
                     <NavLink id="nav-signup" className="signup-button splash-button" to="/signup">Sign up</NavLink>
                 </div>
             </nav>
+
             <div id="splash-signup-container">
                 <div id="slogan-container">
                     <div id="inspiration" className="slogan">Find your inspiration.</div>
-                    <div id="free" className="slogan">Join the Pixel community, home to three seeder files and one guest account.</div>
+                    <div id="join" className="slogan">Join the Pixel community, home to three seeder files and one guest account.</div>
                 </div>
-                <NavLink id="center-signup" className="signup-button splash-button" to="/signup">Start for free</NavLink>
+                <NavLink id="startForFree" className="signup-button splash-button" to="/signup">Start for free</NavLink>
             </div>
+
             <footer className="splash-footer">
                 <div className="connect">
                     <div className="connect-item" id="connect-text">Connect with the developer</div>
