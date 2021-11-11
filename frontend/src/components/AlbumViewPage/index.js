@@ -83,7 +83,7 @@ function AlbumViewPage({ isLoaded }) {
     // Remove album function
     const removeAlbum = async (e) => {
         e.preventDefault();
-
+        e.stopPropagation();
         return dispatch(photoActions.thunk_removealbum({ photoId: e.target.value }))
     };
 
