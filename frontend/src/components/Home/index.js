@@ -72,10 +72,14 @@ function Home({ isLoaded }) {
     // Delete photo function
     const deleteAlbum = async (e) => {
         e.preventDefault();
+        e.stopPropagation();
         // console.log("you are here")
 
         // console.log(e.target.value)
         history.push("/");
+        if (!(userAlbumsArr.length - 1)) {
+            setFeedDisplay("Photostream")
+        } 
         return dispatch(albumActions.thunk_deletealbum({ albumId: e.target.value }))
     };
 
@@ -189,7 +193,7 @@ function Home({ isLoaded }) {
                         }
 
                         return (
-                            
+
                             <li onClick={() => history.push(`/albums/${album.id}`)} style={{ backgroundImage: `url(${backgroundImgURL})` }} className="album-thumb-container">
                                 <div id="album-thumbMask">
 
@@ -200,7 +204,11 @@ function Home({ isLoaded }) {
 
                                     </div>
                                     <div className="album-editDelete-buttons">
-                                        <button onClick={() => history.push(`/albums/${album.id}/edit`)} className="album-maskButton">Edit</button>
+                                        <button onClick={(e) => {
+                                            e.stopPropagation();
+                                            history.push(`/albums/${album.id}/edit`)
+                                        }
+                                        } className="album-maskButton">Edit</button>
                                         <button value={album.id} onClick={deleteAlbum} className="album-maskButton">Delete</button>
                                     </div>
                                 </div>
