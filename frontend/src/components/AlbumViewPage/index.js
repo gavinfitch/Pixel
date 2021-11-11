@@ -17,6 +17,8 @@ function AlbumViewPage({ isLoaded }) {
 
     const [feedDisplay, setFeedDisplay] = useState("Photostream");
     const [dropDownOpen, setDropDownOpen] = useState(false);
+    const [fullScreen, setFullScreen] = useState(false);
+    const [fullScreenPhoto, setFullScreenPhoto] = useState(null);
 
 
 
@@ -88,6 +90,7 @@ function AlbumViewPage({ isLoaded }) {
     useEffect(() => {
         dispatch(photoActions.thunk_getPhotosByUserId({ userId }))
         dispatch(albumActions.thunk_getAlbumsByUserId({ userId }))
+        document.body.classList.remove('stop-scrolling');
     }, [dispatch])
 
     useEffect(() => {
@@ -113,6 +116,20 @@ function AlbumViewPage({ isLoaded }) {
     if (sessionUser) {
         return (
             <div className="home-container">
+
+                {fullScreen && <div id="fullScreen-container">
+                    <i onClick={() => {
+                        setFullScreen(false);
+                        setFullScreenPhoto(null);
+                        document.body.classList.remove('stop-scrolling');
+                    }} class="far fa-window-close"></i>
+                    <div className="fullScreen-photo-container">
+                        <img className="fullScreen-photo" src={fullScreenPhoto.photoURL}></img>
+                        <div id="fullScreen-title" className="fullScreen-caption">{fullScreenPhoto.title}</div>
+                        <div className="fullScreen-caption">By <span className="credits-name">{fullScreenPhoto.User.firstName} {fullScreenPhoto.User.lastName}</span></div>
+                    </div>
+                </div>}
+
                 <nav className="home-nav">
                     <div onClick={redirectHome} className="formNav-logo">
                         <Logo />
@@ -153,7 +170,11 @@ function AlbumViewPage({ isLoaded }) {
 
                 {feedDisplay === "Photostream" && <ul className="home-photos-feed">
                     {userPhotosArr.map(photo =>
-                        <li className="home-photoLi" key={photo.id}>
+                        <li onClick={() => {
+                            setFullScreen(true);
+                            setFullScreenPhoto(photo);
+                            document.body.classList.add('stop-scrolling');
+                        }} className="home-photoLi" key={photo.id}>
                             <img className="home-img" src={photo.photoURL}></img>
                             <div id="home-photoMask">
 

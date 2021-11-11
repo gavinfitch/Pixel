@@ -98,7 +98,6 @@ export const thunk_deletealbum = ({ albumId }) => async (dispatch) => {
     if (res.ok) {
         const deletedAlbum = await res.json();
         dispatch(deleteAlbum(deletedAlbum.albumToDelete.id));
-
         return "Deletion successful";
     }
 };

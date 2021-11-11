@@ -75,6 +75,7 @@ function Home({ isLoaded }) {
         // console.log("you are here")
 
         // console.log(e.target.value)
+        history.push("/");
         return dispatch(albumActions.thunk_deletealbum({ albumId: e.target.value }))
     };
 
@@ -188,6 +189,7 @@ function Home({ isLoaded }) {
                         }
 
                         return (
+                            
                             <li onClick={() => history.push(`/albums/${album.id}`)} style={{ backgroundImage: `url(${backgroundImgURL})` }} className="album-thumb-container">
                                 <div id="album-thumbMask">
 

@@ -34,7 +34,7 @@ function CreateAlbumForm() {
         const userId = sessionUser.id;
 
         // console.log("YOU ARE IN THE HANDLER", userId, title, description)
-
+        history.push("/");
         return dispatch(albumActions.thunk_addalbum({ userId, title, description }))
 
         // if (password === confirmPassword) {
@@ -80,7 +80,7 @@ function CreateAlbumForm() {
                 </div>
             </nav>
             <div className="form-background">
-                <form onSubmit={handleSubmit} className="form-container" id="uploadPhoto-form-container">
+                <form onSubmit={handleSubmit} className="form-container" id="createAlbum-form-container">
                     <div className="form-header">
                         {/* <div className="logo">
                             <div id="logo-yellow"></div>
@@ -110,7 +110,7 @@ function CreateAlbumForm() {
                             onChange={(e) => setDescription(e.target.value)}
                         // required
                         />
-                        <button className="form-button" type="submit">Create Album</button>
+                        <button id="createAlbum-form-button" className="form-button" type="submit">Create Album</button>
                     </div>
 
                     {/* <div className="redirect-container">

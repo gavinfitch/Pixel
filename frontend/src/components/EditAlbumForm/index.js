@@ -36,7 +36,7 @@ function CreateAlbumForm() {
 
     const updateAlbum = async (e) => {
         e.preventDefault();
-        history.push("/")
+        history.push("/");
         return dispatch(albumActions.thunk_updatealbum({ albumId: id, title, description }))
     };
 

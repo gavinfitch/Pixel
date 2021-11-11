@@ -75,10 +75,6 @@
     border-radius: 5px;
 }
 
-#uploadPhoto-form-container {
-    height: 450px;
-}
-
 .field-container {
     margin-bottom: 50px;
 }
@@ -149,4 +145,12 @@
 .redirect-link {
     margin-left: 3px;
     color: rgb(22, 142, 220);
+}
+
+#createAlbum-form-container {
+    height: 370px;
+}
+
+#createAlbum-form-button {
+    margin-top: 25px;
 }
