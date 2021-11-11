@@ -17,16 +17,16 @@ function Home({ isLoaded }) {
     const dropdownRef = useRef(null);
 
     const [errors, setErrors] = useState(null)
-    const [feedDisplay, setFeedDisplay] = useState("Photostream");
+    const [feedDisplay, setFeedDisplay] = useState("Your feed");
     const [dropDownOpen, setDropDownOpen] = useState(false);
     const [fullScreen, setFullScreen] = useState(false);
     const [fullScreenPhoto, setFullScreenPhoto] = useState(null);
 
     const sessionUser = useSelector(state => state.session.user);
-    const userPhotosObj = useSelector(state => state.photos);
+    const allPhotosObj = useSelector(state => state.photos);
     const userAlbumsObj = useSelector(state => state.albums);
 
-    const userPhotosArr = Object.values(userPhotosObj);
+    const allPhotosArr = Object.values(allPhotosObj);
     const userAlbumsArr = Object.values(userAlbumsObj);
 
     const config = {
@@ -42,6 +42,8 @@ function Home({ isLoaded }) {
     if (sessionUser) {
         userId = sessionUser.id;
     }
+
+    const userPhotosArr = allPhotosArr.filter(photo => photo.userId === userId)
 
 
     // console.log("photos arr", userPhotosArr);
@@ -174,6 +176,11 @@ function Home({ isLoaded }) {
                         <div id="caretDiv"><i className="fas fa-caret-up"></i></div>
                         <ul ref={dropdownRef} className="feedDisplay-list">
                             <li onClick={() => {
+                                setFeedDisplay("Your feed")
+                                setDropDownOpen(false)
+                            }}>Your feed</li>
+
+                            <li onClick={() => {
                                 setFeedDisplay("Photostream")
                                 setDropDownOpen(false)
                             }}>Photostream</li>
@@ -185,6 +192,33 @@ function Home({ isLoaded }) {
                         </ul>
                     </>
                 }
+
+                {feedDisplay === "Your feed" && <ul className="home-photos-feed">
+                    {allPhotosArr.map(photo =>
+                        <li onClick={() => {
+                            setFullScreen(true);
+                            setFullScreenPhoto(photo);
+                            document.body.classList.add('stop-scrolling');
+                        }} className="home-photoLi" key={photo.id}>
+                            <img className="home-img" src={photo.photoURL}></img>
+                            <div id="home-photoMask">
+                                <div onClick={() => history.push(`/photos/${photo.id}/albumselect`)} className="photo-albumSelect"><i class="far fa-plus-square"></i></div>
+                                <div className="mask-item">
+                                    <div>{photo.title}</div>
+                                </div>
+                                {photo.userId === userId && <div className="mask-item">
+                                    <button className="mask-button" onClick={(e) => {
+                                        e.stopPropagation();
+                                        history.push(`/photos/${photo.id}/edit`)
+                                    }
+                                    }>Edit</button>
+                                    <button className="mask-button" value={JSON.stringify({ id: photo.id, s3Name: photo.s3Name })} onClick={deletePhoto}>Delete</button>
+                                </div>}
+
+                            </div>
+                        </li>
+                    )}
+                </ul>}
 
                 {feedDisplay === "Photostream" && <ul className="home-photos-feed">
                     {userPhotosArr.map(photo =>

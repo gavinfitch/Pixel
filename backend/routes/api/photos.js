@@ -41,7 +41,7 @@ router.get(
     asyncHandler(async (req, res) => {
         const userId = req.params.id;
         const photos = await Photo.findAll({
-            where: { userId },
+            // where: { userId },
             include: [User]
         });
 
