@@ -56,8 +56,8 @@ router.get(
 router.post(
     '/',
     asyncHandler(async (req, res) => {
-        const { userId, title, description, photoURL } = req.body;
-        const photo = await Photo.create({ userId, title, description, photoURL });
+        const { userId, title, description, photoURL, s3Name } = req.body;
+        const photo = await Photo.create({ userId, title, description, photoURL, s3Name });
 
         // await setTokenCookie(res, user);
         return res.json({
