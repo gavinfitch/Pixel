@@ -80,7 +80,7 @@ function Home({ isLoaded }) {
         history.push("/");
         if (!(userAlbumsArr.length - 1)) {
             setFeedDisplay("Photostream")
-        } 
+        }
         return dispatch(albumActions.thunk_deletealbum({ albumId: e.target.value }))
     };
 
@@ -172,8 +172,9 @@ function Home({ isLoaded }) {
                                 <div className="mask-item">
                                     <button className="mask-button" onClick={(e) => {
                                         e.stopPropagation();
-                                        history.push(`/photos/${photo.id}/edit`)}
-                                        }>Edit</button>
+                                        history.push(`/photos/${photo.id}/edit`)
+                                    }
+                                    }>Edit</button>
                                     <button className="mask-button" value={photo.id} onClick={deletePhoto}>Delete</button>
                                 </div>
 
