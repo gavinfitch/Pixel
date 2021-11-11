@@ -21,6 +21,9 @@ module.exports = {
         type: Sequelize.TEXT,
         allowNull: false
       },
+      s3Name: {
+        type: Sequelize.STRING
+      },
       title: {
         type: Sequelize.STRING
       },
