@@ -76,20 +76,22 @@ function SplashPage() {
                 </div>
             </nav>
             <div id="splash-signup-container">
-                <div>Slogan</div>
-                <div onClick={slideShow} id="signup-button">Sign up</div>
+                <div id="slogan-container">
+                    <div id="inspiration" className="slogan">Find your inspiration.</div>
+                    <div id="free" className="slogan">Start for free.</div>
+                </div>
+                <NavLink id="signup-button" to="/signup">Sign Up</NavLink>
             </div>
             <footer className="splash-footer">
-                <div>About</div>
+                <div id="about">About</div>
                 <div className="connect">
-                    <div>Connect with the developer</div>
-                    <a href="mailto:gavin.fitch@gmail.com"><i class="fas fa-envelope"></i></a>  
-                    <div><i class="fab fa-linkedin"></i></div>
-                    <div><i class="fab fa-github"></i></div>
+                    <div className="connect-item" id="connect-text">Connect with the developer</div>
+                    <a className="connect-item" id="email-link" href="mailto:gavin.fitch@gmail.com"><i class="fas fa-envelope"></i></a>  
+                    <a className="connect-item" id="linkedin-link" href="https://www.linkedin.com/in/gavinfitch/" target="_blank"><i class="fab fa-linkedin"></i></a>
+                    <a className="connect-item" id="github-link" href="https://github.com/gavinfitch/authenticate-me" target="_blank"><i class="fab fa-github"></i></a>
                 </div>
 
             </footer>
-            <NavLink className="signup-button" to="/signup">Sign Up</NavLink>
         </div>
     )
 }

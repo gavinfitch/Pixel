@@ -59,11 +59,54 @@
     justify-content: center;
 }
 
-#slogan {
+#slogan-container {
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     color: white;
+}
 
+.slogan {
+    margin: 10px 0px;
+}
+
+#inspiration {
+    font-size: 48px;
+}
+
+#free {
+    font-size: 24px;
 }
 
 #signup-button {
-    
+    background-color: white;
+    border-radius: 4px;
+    margin-top: 50px;
+    padding: 4px 12px;
+    font-size: 26px;
 }
+
+#about {
+    font-size: 18px;
+    color: white;
+}
+
+.connect {
+    color: white;
+    display: flex;
+    align-items: center;
+}
+
+.connect-item {
+    font-size: 22px;
+    color: white;
+    margin: 10px;
+}
+
+#connect-text {
+    font-size: 18px;
+    border-right: 1px solid white;
+    padding: 0px 20px;
+}
+
 
