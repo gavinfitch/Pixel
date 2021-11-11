@@ -1,0 +1,22 @@
+.splash-footer {
+    position: fixed;
+    display: flex;
+    align-items: center;
+    bottom: 0px;
+    justify-content: space-between;
+    background-color: rgb(30, 30, 30);
+    width: 100vw;
+    height: 50px;
+    padding: 0px 75px;
+    z-index: 1000;
+}
+
+#splash-signup-container {
+    width: 100vw;
+    height: 100vh;
+    background-color: blue;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}

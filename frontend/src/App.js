@@ -55,8 +55,6 @@ function App() {
           <Route path="/albums/:id/edit">
             <EditAlbumForm />
           </Route>
-          
-          
           <Route path="/comments/new">
             <CreateCommentForm />
           </Route>

@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { NavLink, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import S3 from 'react-aws-s3';
+import SplashPage from '../SplashPage';
 
 import * as sessionActions from '../../store/session';
 import * as photoActions from "../../store/photo";
@@ -15,6 +16,7 @@ function Home({ isLoaded }) {
 
     const dropdownRef = useRef(null);
 
+    const [errors, setErrors] = useState(null)
     const [feedDisplay, setFeedDisplay] = useState("Photostream");
     const [dropDownOpen, setDropDownOpen] = useState(false);
     const [fullScreen, setFullScreen] = useState(false);
@@ -54,6 +56,16 @@ function Home({ isLoaded }) {
         setFeedDisplay("Photostream");
         history.push("/");
     };
+
+    const guestLogin = e => {
+        e.preventDefault();
+        setErrors([]);
+        return dispatch(sessionActions.thunk_login({ credential: "acek123", password: "password" }))
+            .catch(async (res) => {
+                const data = await res.json();
+                if (data && data.errors) setErrors(data.errors);
+            });
+    }
 
     // Logout function
     const logout = (e) => {
@@ -247,10 +259,7 @@ function Home({ isLoaded }) {
 
     else {
         return (
-            <>
-                <NavLink to="/login">Log In</NavLink>
-                <NavLink to="/signup">Sign Up</NavLink>
-            </>
+            <SplashPage />
         );
     }
 }

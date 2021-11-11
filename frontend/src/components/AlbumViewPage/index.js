@@ -65,6 +65,7 @@ function AlbumViewPage({ isLoaded }) {
     // Delete photo function
     const deletePhoto = async (e) => {
         e.preventDefault();
+        e.stopPropagation();
         // console.log("you are here")
 
         // console.log(e.target.value)
@@ -183,7 +184,10 @@ function AlbumViewPage({ isLoaded }) {
                                 </div>
                                 <div className="mask-item">
                                     <button id="albumRemove-button" onClick={removeAlbum} value={photo.id} className="photo-albumSelect far fa-minus-square"></button>
-                                    <button className="mask-button" onClick={() => history.push(`/photos/${photo.id}/edit`)}>Edit</button>
+                                    <button className="mask-button" onClick={(e) => { 
+                                        e.stopPropagation();
+                                        history.push(`/photos/${photo.id}/edit`) 
+                                    }}>Edit</button>
                                     <button className="mask-button" value={photo.id} onClick={deletePhoto}>Delete</button>
                                 </div>
 
