@@ -62,7 +62,7 @@
     height: 100vh;
 }
 
-.form-container {
+#editAlbum-form-container {
     overflow: scroll;
     display: flex;
     flex-direction: column;
@@ -71,11 +71,11 @@
     background-color: white;
     padding: 0px 25px;
     width: 350px;
-    height: 700px;
+    height: 365px;
     border-radius: 5px;
 }
 
-.field-container {
+.editAlbum-field-container {
     margin-bottom: 50px;
 }
 
@@ -145,12 +145,4 @@
 .redirect-link {
     margin-left: 3px;
     color: rgb(22, 142, 220);
-}
-
-#createAlbum-form-container {
-    height: 370px;
-}
-
-#createAlbum-form-button {
-    margin-top: 25px;
 }

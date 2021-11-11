@@ -1,19 +1,36 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect, useHistory } from "react-router-dom";
+import { Redirect, useHistory, useParams } from "react-router-dom";
 import S3 from 'react-aws-s3';
+import * as photoActions from "../../store/photo";
 import * as albumActions from "../../store/album";
-import './CreateAlbumForm.css';
+import './AlbumSelectForm.css';
 import Logo from '../Logo';
 
-function CreateAlbumForm() {
+function AlbumSelectForm() {
+
+    const userAlbumsObj = useSelector(state => state.albums);
+    const userAlbumsArr = Object.values(userAlbumsObj);
+
     const dispatch = useDispatch();
     const history = useHistory();
     const sessionUser = useSelector((state) => state.session.user);
     const [title, setTitle] = useState("");
+    const [albumId, setAlbumId] = useState(null);
     const [description, setDescription] = useState("");
-    const [photo, setPhoto] = useState("");
+    const [photo, setPhoto] = useState();
+    // const [album, setAlbum] = useState(null);
     const [errors, setErrors] = useState([]);
+
+
+
+    let userId;
+    if (sessionUser) {
+        userId = sessionUser.id;
+    }
+
+    const photoId = useParams().id
+    // console.log(photoId)
 
     const config = {
         bucketName: 'pixelphotostorage',
@@ -31,11 +48,24 @@ function CreateAlbumForm() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const userId = sessionUser.id;
+        console.log(albumId)
 
-        // console.log("YOU ARE IN THE HANDLER", userId, title, description)
-        history.push("/");
-        return dispatch(albumActions.thunk_addalbum({ userId, title, description }))
+        history.push("/")
+        return dispatch(photoActions.thunk_selectalbum({ photoId, albumId }))
+
+        // const userId = sessionUser.id;
+        // let s3Photo;
+
+        // await ReactS3Client
+        //     .uploadFile(photo, title)
+        //     .then(data => s3Photo = data)
+        //     .catch(err => console.error(err))
+
+        // const photoURL = s3Photo.location;
+
+        // history.push("/")
+        // return dispatch(photoActions.thunk_addphoto({ userId, title, description, photoURL }))
+
 
         // if (password === confirmPassword) {
         //     setErrors([]);
@@ -48,25 +78,29 @@ function CreateAlbumForm() {
         // return setErrors(['Confirm password field must be the same as password field.']);
     };
 
-    const updateAlbum = async (e) => {
+    const updatePhoto = async (e) => {
         e.preventDefault();
         console.log("you are here!!!")
-        return dispatch(albumActions.thunk_updatealbum({ albumId: 3, title, description }))
+        return dispatch(photoActions.thunk_updatephoto({ photoId: 1, title, description }))
     };
 
-    const deleteAlbum = async (e) => {
+    const deletePhoto = async (e) => {
         e.preventDefault();
         // console.log("you are here")
 
-        return dispatch(albumActions.thunk_deletealbum({ albumId: 1 }))
+        return dispatch(photoActions.thunk_deletephoto({ photoId: 16 }))
     };
 
-    const getAlbumById = async (e) => {
+    const getPhotoById = async (e) => {
         e.preventDefault();
         // console.log("you are here")
 
-        return dispatch(albumActions.thunk_getAlbumById({ albumId: 1 }))
+        return dispatch(photoActions.thunk_getPhotoById({ photoId: 1 }))
     };
+
+    useEffect(() => {
+        dispatch(albumActions.thunk_getAlbumsByUserId({ userId }))
+    }, [dispatch])
 
 
     if (!sessionUser) return <Redirect to="/" />;
@@ -80,7 +114,7 @@ function CreateAlbumForm() {
                 </div>
             </nav>
             <div className="form-background">
-                <form onSubmit={handleSubmit} className="form-container" id="createAlbum-form-container">
+                <form onSubmit={handleSubmit} className="form-container" id="selectAlbum-form-container">
                     <div className="form-header">
                         {/* <div className="logo">
                             <div id="logo-yellow"></div>
@@ -88,29 +122,23 @@ function CreateAlbumForm() {
                             <div id="logo-blue"></div>
                         </div> */}
                         <Logo />
-                        <div className="form-headerText">Create Album</div>
+                        <div className="form-headerText">Select album</div>
                     </div>
                     {errors.length > 0 && <ul className="errors-container">
                         {errors.map((error, idx) => <li className="error" key={idx}>{error}</li>)}
                     </ul>}
-                    <div className="field-container">
-                        <input
-                            className="form-field"
-                            type="text"
-                            placeholder="Title"
-                            value={title}
-                            onChange={(e) => setTitle(e.target.value)}
-                        // required
-                        />
-                        <input
-                            className="form-field"
-                            type="text"
-                            placeholder="Description (optional)"
-                            value={description}
-                            onChange={(e) => setDescription(e.target.value)}
-                        // required
-                        />
-                        <button id="createAlbum-form-button" className="form-button" type="submit">Create Album</button>
+                    <div id="albumSelect-field-container">
+                        <select id="albumSelect-dropdown" onChange={(e) => setAlbumId(e.target.value)}>
+                            <option hidden>Please select album </option>
+                            {userAlbumsArr.map(album => {
+                                return (
+                                    <option key={album.id} value={album.id}>
+                                        {album.title}
+                                    </option>
+                                )
+                            })}
+                        </select>
+                        <button id="selectAlbum-form-button" type="submit">Add photo to album</button>
                     </div>
 
                     {/* <div className="redirect-container">
@@ -123,4 +151,4 @@ function CreateAlbumForm() {
     );
 }
 
-export default CreateAlbumForm;
+export default AlbumSelectForm;

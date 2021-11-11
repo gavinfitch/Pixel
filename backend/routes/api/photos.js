@@ -3,7 +3,7 @@ const asyncHandler = require('express-async-handler');
 // const { check } = require('express-validator');
 // const { handleValidationErrors } = require('../../utils/validation');
 const { setTokenCookie, requireAuth } = require('../../utils/auth');
-const { Photo } = require('../../db/models');
+const { Photo, User } = require('../../db/models');
 
 const router = express.Router();
 
@@ -41,7 +41,8 @@ router.get(
     asyncHandler(async (req, res) => {
         const userId = req.params.id;
         const photos = await Photo.findAll({
-            where: { userId }
+            where: { userId },
+            include: [User]
         });
 
         // await setTokenCookie(res, user);
@@ -76,6 +77,46 @@ router.put(
         await photoToUpdate.update({
             title,
             description
+        })
+
+        const updatedPhoto = await Photo.findByPk(photoId);
+
+        // await setTokenCookie(res, user);
+        return res.json({
+            updatedPhoto,
+        });
+    }),
+);
+
+// Album select
+router.put(
+    '/:id/albumselect',
+    asyncHandler(async (req, res) => {
+        const { photoId, albumId } = req.body;
+        const photoToUpdate = await Photo.findByPk(photoId);
+
+        await photoToUpdate.update({
+            albumId
+        })
+
+        const updatedPhoto = await Photo.findByPk(photoId);
+
+        // await setTokenCookie(res, user);
+        return res.json({
+            updatedPhoto,
+        });
+    }),
+);
+
+// Album select
+router.put(
+    '/:id/albumremove',
+    asyncHandler(async (req, res) => {
+        const { photoId } = req.body;
+        const photoToUpdate = await Photo.findByPk(photoId);
+
+        await photoToUpdate.update({
+            albumId: null
         })
 
         const updatedPhoto = await Photo.findByPk(photoId);

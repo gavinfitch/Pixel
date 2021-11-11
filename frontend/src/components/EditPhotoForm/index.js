@@ -12,6 +12,11 @@ function EditPhotoForm() {
     const { id } = useParams()
     const currentPhoto = photos[id];
 
+    let titleString;
+    if (currentPhoto?.title) {
+        titleString = currentPhoto.title;
+    }
+
     const dispatch = useDispatch();
     const history = useHistory();
     const sessionUser = useSelector((state) => state.session.user);
@@ -88,7 +93,6 @@ function EditPhotoForm() {
     useEffect(() => {
         const userId = sessionUser.id;
         dispatch(photoActions.thunk_getPhotosByUserId({ userId }))
-
     }, [dispatch])
 
 
@@ -109,7 +113,7 @@ function EditPhotoForm() {
                 <form onSubmit={handleSubmit} id="editPhoto-form-container">
                     <div className="form-header">
                         <Logo />
-                        <div className="form-headerText">Edit {title || "photo"}</div>
+                        <div className="form-headerText">Edit {titleString || "photo"}</div>
                     </div>
                     {/* {errors.length > 0 && <ul className="errors-container">
                         {errors.map((error, idx) => <li className="error" key={idx}>{error}</li>)}

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { NavLink, useHistory } from 'react-router-dom';
+import { NavLink, useHistory, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
 import * as sessionActions from '../../store/session';
@@ -8,9 +8,10 @@ import * as albumActions from "../../store/album";
 
 import ProfileButton from '../Navigation/ProfileButton';
 import Logo from '../Logo';
-import './Home.css';
+import '../Home/Home.css';
+import './AlbumViewPage.css';
 
-function Home({ isLoaded }) {
+function AlbumViewPage({ isLoaded }) {
 
     const dropdownRef = useRef(null);
 
@@ -19,11 +20,21 @@ function Home({ isLoaded }) {
     const [fullScreen, setFullScreen] = useState(false);
     const [fullScreenPhoto, setFullScreenPhoto] = useState(null);
 
+
+
     const sessionUser = useSelector(state => state.session.user);
     const userPhotosObj = useSelector(state => state.photos);
     const userAlbumsObj = useSelector(state => state.albums);
 
-    const userPhotosArr = Object.values(userPhotosObj);
+    const albumId = useParams().id;
+    const currentAlbum = userAlbumsObj[albumId];
+
+    let albumTitle = null;
+    if (currentAlbum) {
+        albumTitle = currentAlbum.title;
+    }
+
+    const userPhotosArr = Object.values(userPhotosObj).filter((photo) => photo.albumId === +albumId);
     const userAlbumsArr = Object.values(userAlbumsObj);
 
     let userId;
@@ -61,26 +72,19 @@ function Home({ isLoaded }) {
     };
 
     // Delete photo function
-    const removePhotoFromAlbum = async (e) => {
-        e.preventDefault();
-        // console.log("you are here")
-
-        // console.log(e.target.value)
-        return dispatch(photoActions.thunk_deletephoto({ photoId: e.target.value }))
-    };
-
-    // Delete photo function
     const deleteAlbum = async (e) => {
         e.preventDefault();
-        e.stopPropagation();
         // console.log("you are here")
 
         // console.log(e.target.value)
-        history.push("/");
-        if (!(userAlbumsArr.length - 1)) {
-            setFeedDisplay("Photostream")
-        } 
         return dispatch(albumActions.thunk_deletealbum({ albumId: e.target.value }))
+    };
+
+    // Remove album function
+    const removeAlbum = async (e) => {
+        e.preventDefault();
+
+        return dispatch(photoActions.thunk_removealbum({ photoId: e.target.value }))
     };
 
     useEffect(() => {
@@ -136,13 +140,20 @@ function Home({ isLoaded }) {
                         <button id="logout-button" onClick={logout}>Log out</button>
                     </div>
                 </nav>
-                <div onClick={() => setDropDownOpen(!dropDownOpen)} id="your-photos">{feedDisplay}<i className="fas fa-chevron-down"></i></div>
+                {albumTitle && <div onClick={() => setDropDownOpen(!dropDownOpen)} id="your-photos">{albumTitle}<i className="fas fa-chevron-down"></i></div>}
 
                 {dropDownOpen &&
                     <>
                         <div id="caretDiv"><i className="fas fa-caret-up"></i></div>
                         <ul ref={dropdownRef} className="feedDisplay-list">
-                            <li onClick={() => {
+                            {userAlbumsArr.map(album => {
+                                return (<li onClick={() => {
+                                    setFeedDisplay("Photostream")
+                                    setDropDownOpen(false)
+                                    history.push(`/albums/${album.id}`)
+                                }}>{album.title}</li>)
+                            })}
+                            {/* <li onClick={() => {
                                 setFeedDisplay("Photostream")
                                 setDropDownOpen(false)
                             }}>Photostream</li>
@@ -150,10 +161,12 @@ function Home({ isLoaded }) {
                             <li onClick={() => {
                                 setFeedDisplay("Albums")
                                 setDropDownOpen(false)
-                            }}>Albums</li>
+                            }}>Albums</li> */}
                         </ul>
                     </>
                 }
+
+                <div id="createAlbum-button" onClick={() => history.push("/albums/new/")}><i className="far fa-plus-square createAlbum-plus"></i><span className="createAlbum-text">Create album</span></div>
 
                 {feedDisplay === "Photostream" && <ul className="home-photos-feed">
                     {userPhotosArr.map(photo =>
@@ -164,11 +177,12 @@ function Home({ isLoaded }) {
                         }} className="home-photoLi" key={photo.id}>
                             <img className="home-img" src={photo.photoURL}></img>
                             <div id="home-photoMask">
-                                <div onClick={() => history.push(`/photos/${photo.id}/albumselect`)} className="photo-albumSelect"><i class="far fa-plus-square"></i></div>
+
                                 <div className="mask-item">
                                     <div>{photo.title}</div>
                                 </div>
                                 <div className="mask-item">
+                                    <button id="albumRemove-button" onClick={removeAlbum} value={photo.id} className="photo-albumSelect far fa-minus-square"></button>
                                     <button className="mask-button" onClick={() => history.push(`/photos/${photo.id}/edit`)}>Edit</button>
                                     <button className="mask-button" value={photo.id} onClick={deletePhoto}>Delete</button>
                                 </div>
@@ -179,22 +193,13 @@ function Home({ isLoaded }) {
                 </ul>}
 
                 {feedDisplay === "Albums" && <ul className="home-albums-feed">
-                    <div id="createAlbum-button" onClick={() => history.push("/albums/new/")}><i className="far fa-plus-square createAlbum-plus"></i><span className="createAlbum-text">Create album</span></div>
                     {userAlbumsArr.map((album) => {
 
                         const albumPhotos = userPhotosArr.filter(photo => photo.albumId === album.id)
-                        const date = new Date(album?.createdAt).toString().split(" ");
-
-                        let backgroundImgURL;
-                        if (albumPhotos[0]) {
-                            backgroundImgURL = albumPhotos[0].photoURL;
-                        } else {
-                            backgroundImgURL = "https://pixelphotostorage.s3.us-west-2.amazonaws.com/pixel-seeder-photos/Trip+to+Japan/beautiful_tree.jpg";
-                        }
+                        const date = new Date(album.createdAt).toString().split(" ");
 
                         return (
-
-                            <li onClick={() => history.push(`/albums/${album.id}`)} style={{ backgroundImage: `url(${backgroundImgURL})` }} className="album-thumb-container">
+                            <li onClick={() => history.push(`/albums/${album.id}`)} style={{ backgroundImage: `url(${albumPhotos[0].photoURL})` }} className="album-thumb-container">
                                 <div id="album-thumbMask">
 
                                     <div id="album-details" className="album-maskItem">
@@ -204,11 +209,7 @@ function Home({ isLoaded }) {
 
                                     </div>
                                     <div className="album-editDelete-buttons">
-                                        <button onClick={(e) => {
-                                            e.stopPropagation();
-                                            history.push(`/albums/${album.id}/edit`)
-                                        }
-                                        } className="album-maskButton">Edit</button>
+                                        <button onClick={() => history.push(`/albums/${album.id}/edit`)} className="album-maskButton">Edit</button>
                                         <button value={album.id} onClick={deleteAlbum} className="album-maskButton">Delete</button>
                                     </div>
                                 </div>
@@ -232,4 +233,4 @@ function Home({ isLoaded }) {
     }
 }
 
-export default Home;
+export default AlbumViewPage;

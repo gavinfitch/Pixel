@@ -20,9 +20,9 @@ const deletePhoto = (deletedPhotoId) => ({
     deletedPhotoId,
 });
 
-const updatePhoto = (photoId) => ({
+const updatePhoto = (photo) => ({
     type: UPDATE_PHOTO,
-    photoId,
+    photo,
 });
 
 // Get photo by id thunk
@@ -42,7 +42,7 @@ export const thunk_getPhotoById = ({ photoId }) => async (dispatch) => {
     }
 };
 
-// // Get photo by user id thunk
+// Get photo by user id thunk
 export const thunk_getPhotosByUserId = ({ userId }) => async (dispatch) => {
 
     console.log("thunk", userId)
@@ -101,7 +101,7 @@ export const thunk_deletephoto = ({ photoId }) => async (dispatch) => {
         const deletedPhoto = await res.json();
         // console.log("THIS IS THE CONESOLE", deletedPhoto.photoToDelete.id)
         dispatch(deletePhoto(deletedPhoto.photoToDelete.id));
-        
+
         return "Deletion successful";
     }
 };
@@ -126,6 +126,50 @@ export const thunk_updatephoto = ({ photoId, title, description }) => async (dis
     if (res.ok) {
         const updatedPhoto = await res.json();
         dispatch(updatePhoto(updatedPhoto));
+        // console.log("This is the updated photo ---> ", updatedPhoto);
+        return updatedPhoto;
+    }
+};
+
+// Album select photo thunk
+export const thunk_selectalbum = ({ photoId, albumId }) => async (dispatch) => {
+
+    const res = await csrfFetch(`/api/photos/${photoId}/albumselect`, {
+        method: 'PUT',
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            photoId,
+            albumId
+        })
+    });
+
+    if (res.ok) {
+        const updatedPhoto = await res.json();
+        dispatch(updatePhoto(updatedPhoto));
+        // console.log("This is the updated photo ---> ", updatedPhoto);
+        return updatedPhoto;
+    }
+};
+
+// Album remove photo thunk
+export const thunk_removealbum = ({ photoId }) => async (dispatch) => {
+
+    const res = await csrfFetch(`/api/photos/${photoId}/albumremove`, {
+        method: 'PUT',
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            photoId
+        })
+    });
+
+    if (res.ok) {
+        const updatedPhoto = await res.json();
+        dispatch(updatePhoto(updatedPhoto));
+        // console.log("This is the updated photo ---> ", updatedPhoto);
         return updatedPhoto;
     }
 };
@@ -147,6 +191,11 @@ const photoReducer = (state = {}, action) => {
         case DELETE_PHOTO: {
             const newState = { ...state }
             delete newState[action.deletedPhotoId];
+            return newState;
+        }
+        case UPDATE_PHOTO: {
+            const newState = { ...state }
+            newState[action.photo.updatedPhoto.id] = action.photo.updatedPhoto;
             return newState;
         }
         default:
