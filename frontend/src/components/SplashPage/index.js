@@ -44,7 +44,7 @@ function SplashPage() {
 
     // Background image slideshow function
     let i = 0;
-    let time = 4500;
+    let time = 5000;
 
     const slideShow = () => {
         const splashContainer = document.getElementById('splash-container');
@@ -61,7 +61,7 @@ function SplashPage() {
         const slideShowTimer = setInterval(slideShow, time);
 
         return () => clearInterval(slideShowTimer);
-    }, [i])
+    }, [])
 
     return (
         <div id="splash-container">

@@ -4,7 +4,7 @@
     background-size: cover;
     width: 100vw;
     height: 100vh;
-    transition: background-image 2s ease-in-out;
+    transition: background-image 1s linear;
 }
 
 
