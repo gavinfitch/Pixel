@@ -10,6 +10,9 @@
     z-index: 1000;
 }
 
+#home-logoText {
+    font-size: 35px;
+}
 #home-logoText:hover {
     color: rgba(255, 255, 255, 0.90);
 }

@@ -39,10 +39,10 @@ function SignupFormPage() {
     return (
         <>
             <nav className="form-nav">
-                <div onClick={redirectHome} className="formNav-logo">
+                <a href="/" className="formNav-logo">
                     <Logo />
                     <span className="form-logoText">Pixel</span>
-                </div>
+                </a>
             </nav>
             <div className="form-background">
                 <form onSubmit={handleSubmit} id="signup-form-container">

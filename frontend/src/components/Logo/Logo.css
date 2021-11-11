@@ -1,6 +1,6 @@
 .logo {
-    width: 30px;
-    height: 30px;
+    width: 26px;
+    height: 26px;
     display: grid;
     grid-template-rows: 2fr 1.1fr 1.1fr;
 }
