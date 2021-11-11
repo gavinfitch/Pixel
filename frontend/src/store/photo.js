@@ -64,7 +64,7 @@ export const thunk_getPhotosByUserId = ({ userId }) => async (dispatch) => {
 };
 
 // Add photo thunk
-export const thunk_addphoto = ({ userId, title, description, photoURL }) => async (dispatch) => {
+export const thunk_addphoto = ({ userId, title, description, photoURL, s3Name }) => async (dispatch) => {
     const res = await csrfFetch("/api/photos", {
         method: 'POST',
         headers: {
@@ -74,7 +74,8 @@ export const thunk_addphoto = ({ userId, title, description, photoURL }) => asyn
             userId,
             title,
             description,
-            photoURL
+            photoURL,
+            s3Name
         })
     });
 

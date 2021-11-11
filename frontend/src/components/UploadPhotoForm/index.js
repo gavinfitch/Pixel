@@ -40,10 +40,12 @@ function UploadPhotoForm() {
             .then(data => s3Photo = data)
             .catch(err => console.error(err))
 
+        const s3Name = s3Photo.key;
         const photoURL = s3Photo.location;
+        
 
         history.push("/")
-        return dispatch(photoActions.thunk_addphoto({ userId, title, description, photoURL }))
+        return dispatch(photoActions.thunk_addphoto({ userId, title, description, photoURL, s3Name }))
 
 
         // if (password === confirmPassword) {

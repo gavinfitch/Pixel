@@ -66,12 +66,13 @@ function Home({ isLoaded }) {
         e.preventDefault();
         e.stopPropagation();
 
-        console.log(e.target.value)
-        const { id, name } = JSON.parse(e.target.value);
-        console.log(id, name)
+        const { id, s3Name } = JSON.parse(e.target.value);
+
+        console.log(s3Name)
+
 
         await ReactS3Client
-            .deleteFile(`${name}.jpeg`)
+            .deleteFile(s3Name)
             .then(response => console.log(response))
             .catch(err => console.error(err))
 
@@ -192,7 +193,7 @@ function Home({ isLoaded }) {
                                         history.push(`/photos/${photo.id}/edit`)
                                     }
                                     }>Edit</button>
-                                    <button className="mask-button" value={JSON.stringify({ id: photo.id, name: photo.title })} onClick={deletePhoto}>Delete</button>
+                                    <button className="mask-button" value={JSON.stringify({ id: photo.id, s3Name: photo.s3Name })} onClick={deletePhoto}>Delete</button>
                                 </div>
 
                             </div>
