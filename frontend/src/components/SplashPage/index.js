@@ -71,8 +71,8 @@ function SplashPage() {
                     <span className="form-logoText" id="home-logoText">Pixel</span>
                 </div>
                 <div className="upload-logout-container">
-                    <NavLink to="/login">Log In</NavLink>
-                    <button id="logout-button" onClick={guestLogin}>Log in as guest</button>
+                    <NavLink id="login-button" to="/login">Log In</NavLink>
+                    <button id="guestLogin-button" onClick={guestLogin}>Log in as guest</button>
                 </div>
             </nav>
             <div id="splash-signup-container">
@@ -81,10 +81,11 @@ function SplashPage() {
             </div>
             <footer className="splash-footer">
                 <div>About</div>
-                <div>
-                    <div>Connect with the developer:</div>
-                    <div>Linked in</div>
-                    <div>Git hub</div>
+                <div className="connect">
+                    <div>Connect with the developer</div>
+                    <a href="mailto:gavin.fitch@gmail.com"><i class="fas fa-envelope"></i></a>  
+                    <div><i class="fab fa-linkedin"></i></div>
+                    <div><i class="fab fa-github"></i></div>
                 </div>
 
             </footer>
