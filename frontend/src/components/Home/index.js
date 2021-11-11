@@ -221,7 +221,8 @@ function Home({ isLoaded }) {
                 </ul>}
 
                 {feedDisplay === "Photostream" && <ul className="home-photos-feed">
-                    {userPhotosArr.map(photo =>
+                    {userPhotosArr.length < 1 && <div className="noContent-container"><div className="noContent-text">You don't have any photos yet, try <span className="noContent-link" onClick={() => history.push("/photos/new")}>uploading</span> some.</div></div>}
+                    {userPhotosArr.length > 0 && userPhotosArr.map(photo =>
                         <li onClick={() => {
                             setFullScreen(true);
                             setFullScreenPhoto(photo);
@@ -249,7 +250,8 @@ function Home({ isLoaded }) {
 
                 {feedDisplay === "Albums" && <ul className="home-albums-feed">
                     <div id="createAlbum-button" onClick={() => history.push("/albums/new/")}><i className="far fa-plus-square createAlbum-plus"></i><span className="createAlbum-text">Create album</span></div>
-                    {userAlbumsArr.map((album) => {
+                    {userAlbumsArr.length < 1 && <div className="noContent-container"><div className="noContent-text">You don't have any albums yet, try <span className="noContent-link" onClick={() => history.push("/albums/new")}>creating</span> one.</div></div>}
+                    {userAlbumsArr.length > 0 && userAlbumsArr.map((album) => {
 
                         const albumPhotos = userPhotosArr.filter(photo => photo.albumId === album.id)
                         const date = new Date(album?.createdAt).toString().split(" ");
