@@ -54,6 +54,7 @@ function Home({ isLoaded }) {
     // Delete photo function
     const deletePhoto = async (e) => {
         e.preventDefault();
+        e.stopPropagation();
         // console.log("you are here")
 
         // console.log(e.target.value)
@@ -122,7 +123,7 @@ function Home({ isLoaded }) {
                     <div className="fullScreen-photo-container">
                         <img className="fullScreen-photo" src={fullScreenPhoto.photoURL}></img>
                         <div id="fullScreen-title" className="fullScreen-caption">{fullScreenPhoto.title}</div>
-                        <div className="fullScreen-caption">By <span className="credits-name">{fullScreenPhoto.User.firstName} {fullScreenPhoto.User.lastName}</span></div>
+                        <div className="fullScreen-caption">By <span className="credits-name">{fullScreenPhoto.User?.firstName} {fullScreenPhoto.User?.lastName}</span></div>
                     </div>
                 </div>}
 
@@ -169,7 +170,10 @@ function Home({ isLoaded }) {
                                     <div>{photo.title}</div>
                                 </div>
                                 <div className="mask-item">
-                                    <button className="mask-button" onClick={() => history.push(`/photos/${photo.id}/edit`)}>Edit</button>
+                                    <button className="mask-button" onClick={(e) => {
+                                        e.stopPropagation();
+                                        history.push(`/photos/${photo.id}/edit`)}
+                                        }>Edit</button>
                                     <button className="mask-button" value={photo.id} onClick={deletePhoto}>Delete</button>
                                 </div>
 
