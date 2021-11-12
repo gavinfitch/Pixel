@@ -34,9 +34,9 @@ function LoginFormPage() {
     return (
         <>
             <nav className="form-nav">
-                <a href="/" className="formNav-logo">
+                <a href="/" id="logo-container">
                     <Logo />
-                    <span className="form-logoText">Pixel</span>
+                    <div className="form-logoText" id="home-logoText">Pixel</div>
                 </a>
             </nav>
             <div className="form-background">
