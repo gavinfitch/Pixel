@@ -15,15 +15,15 @@ import Logo from '../Logo'
 function SplashPage() {
 
     const slideShowArr = [];
-    slideShowArr[0] = "https://pixelphotostorage.s3.us-west-2.amazonaws.com/splash-images/Power-plant.jpg";
-    slideShowArr[1] = "https://pixelphotostorage.s3.us-west-2.amazonaws.com/splash-images/Frog.jpg";
-    slideShowArr[2] = "https://pixelphotostorage.s3.us-west-2.amazonaws.com/splash-images/Car.jpg";
-    slideShowArr[3] = "https://pixelphotostorage.s3.us-west-2.amazonaws.com/splash-images/Reflection.jpg";
-    slideShowArr[4] = "https://pixelphotostorage.s3.us-west-2.amazonaws.com/splash-images/Beach.jpg";
-    slideShowArr[5] = "https://pixelphotostorage.s3.us-west-2.amazonaws.com/splash-images/Snowy-mountains.jpg";
+    slideShowArr[0] = "https://pixelphotostorage.s3.us-west-2.amazonaws.com/splash-images/Desert.jpg";
+    slideShowArr[1] = "https://pixelphotostorage.s3.us-west-2.amazonaws.com/splash-images/Reflection.jpg";
+    slideShowArr[2] = "https://pixelphotostorage.s3.us-west-2.amazonaws.com/splash-images/Frog.jpg";
+    slideShowArr[3] = "https://pixelphotostorage.s3.us-west-2.amazonaws.com/splash-images/Car.jpg";
+    slideShowArr[4] = "https://pixelphotostorage.s3.us-west-2.amazonaws.com/splash-images/Snowy-mountains.jpg";
+    slideShowArr[5] = "https://pixelphotostorage.s3.us-west-2.amazonaws.com/splash-images/Power-plant.jpg";
     slideShowArr[6] = "https://pixelphotostorage.s3.us-west-2.amazonaws.com/splash-images/Sheep.jpg";
-    slideShowArr[7] = "https://pixelphotostorage.s3.us-west-2.amazonaws.com/splash-images/Desert.jpg";
-    slideShowArr[8] = "https://pixelphotostorage.s3.us-west-2.amazonaws.com/splash-images/Cottage.jpg";
+    slideShowArr[7] = "https://pixelphotostorage.s3.us-west-2.amazonaws.com/splash-images/Cottage.jpg";
+    slideShowArr[8] = "https://pixelphotostorage.s3.us-west-2.amazonaws.com/splash-images/Beach.jpg";
 
     const [errors, setErrors] = useState(null)
     const dispatch = useDispatch();
