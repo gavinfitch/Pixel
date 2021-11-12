@@ -118,6 +118,7 @@ function Home({ isLoaded }) {
 
     useEffect(() => {
         dispatch(photoActions.thunk_getPhotosByUserId({ userId }))
+        console.log("this is the userId", userId)
         dispatch(albumActions.thunk_getAlbumsByUserId({ userId }))
         document.body.classList.remove('stop-scrolling');
     }, [dispatch])
@@ -169,8 +170,11 @@ function Home({ isLoaded }) {
                         <button id="logout-button" onClick={logout}>Log out</button>
                     </div>
                 </nav>
-                <div onClick={() => setDropDownOpen(!dropDownOpen)} id="your-photos">{feedDisplay}<i className="fas fa-chevron-down"></i></div>
-
+                
+                <div id="dropdown-container">
+                    <div onClick={() => setDropDownOpen(!dropDownOpen)} id="your-photos">{feedDisplay}<i className="fas fa-chevron-down"></i></div>
+                </div>
+                
                 {dropDownOpen &&
                     <>
                         <div id="caretDiv"><i className="fas fa-caret-up"></i></div>

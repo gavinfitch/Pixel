@@ -85,9 +85,9 @@ function UploadPhotoForm() {
     return (
         <>
             <nav className="form-nav">
-                <div onClick={redirectHome} className="formNav-logo">
+                <div onClick={redirectHome} id="logo-container">
                     <Logo />
-                    <span className="form-logoText">Pixel</span>
+                    <span className="form-logoText" id="home-logoText">Pixel</span>
                 </div>
             </nav>
             <div className="form-background">

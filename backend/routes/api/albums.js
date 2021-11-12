@@ -43,9 +43,11 @@ router.get(
     '/users/:id',
     asyncHandler(async (req, res) => {
         const userId = req.params.id;
+        console.log("YOU ARE HITTING THE BACKEND", userId)
         const albums = await Album.findAll({
             where: { userId }
         });
+        console.log("ALBUMS", albums)
 
         return res.json({
             albums,

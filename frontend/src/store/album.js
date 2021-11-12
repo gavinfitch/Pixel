@@ -45,7 +45,7 @@ export const thunk_getAlbumById = ({ albumId }) => async (dispatch) => {
 // Get photo by user id thunk
 export const thunk_getAlbumsByUserId = ({ userId }) => async (dispatch) => {
 
-    // console.log("thunk", userId)
+    console.log("thunk_getAlbumsByUserId", userId)
     const res = await csrfFetch(`/api/albums/users/${userId}`, {
         method: 'GET',
         headers: {
@@ -55,7 +55,7 @@ export const thunk_getAlbumsByUserId = ({ userId }) => async (dispatch) => {
 
     if (res.ok) {
         const albums = await res.json();
-        // console.log("Thunk", albums)
+        // console.log("Frontend thunk albums", albums)
         dispatch(setAlbums(albums));
 
         return albums;

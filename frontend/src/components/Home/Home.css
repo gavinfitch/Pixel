@@ -10,6 +10,15 @@
     z-index: 1000;
 }
 
+#dropdown-container {
+    position: fixed;
+    top: 50px;
+    height: 60px;
+    width: 100vw;
+    background-color: white;
+    z-index: 1000;
+}
+
 
 #home-logoText {
     padding-top: 1px;
@@ -30,10 +39,11 @@
  color: white;
  font-size: 28px;
  margin: 0px 15px;
+ transition: all 0.15s linear;
 }
 
 .fa-cloud-upload-alt:hover {
-    color: rgba(255, 255, 255, 0.90);
+    color: rgb(228, 228, 228);
 }
 
 #logout-button {
@@ -42,14 +52,17 @@
     background-color: white;
     border: none;
     border-radius: 4px;
-    font-size: 14px;
+    font-size: 15px;
     color: rgb(30, 30, 30);
+    transition: all 0.15s linear;
 }
 
 #logout-button:hover {
     cursor: pointer;
-    background-color: rgba(255, 255, 255, 0.90);
+    background-color: rgb(228, 228, 228);
 }
+
+
 
 #your-photos {
     display: flex;
@@ -61,6 +74,7 @@
     border: 1px solid rgb(30, 30, 30);
     border-radius: 4px;
     color: rgb(30, 30, 30);
+    transition: all 0.15s linear;
 }
 
 .fa-chevron-down {
@@ -71,7 +85,7 @@
 
 #your-photos:hover {
     cursor: pointer;
-    background-color: rgba(0, 0, 0, 0.08);
+    background-color: rgb(228, 228, 228);
 }
 
 .home-photos-feed {
@@ -122,8 +136,6 @@
     color: rgba(255, 255, 255, 0);
     transition: all 0.25s linear;
 }
-
-
 
 .mask-button:hover {
     cursor: pointer;
@@ -247,7 +259,7 @@
     display: block;
     color: white;
     position: fixed;
-    width: 132px;
+    width: fit-content;
     height: fit-content;
     top: 112px;
     left: 75px;
@@ -271,12 +283,14 @@
 .fa-caret-up {
     color: rgb(30, 30, 30);
     font-size: 48px;
+    z-index: 3000;
 }
 
 #caretDiv {
     position: fixed;
     top: 88px;
     left: 80px;
+    z-index: 3000;
 }
 
 .photo-albumSelect {
@@ -362,11 +376,13 @@
     border: 1px solid black;
     border-radius: 4px;
     padding: 4px 10px 2px 10px;
+    transition: all 0.15s linear;
+    z-index: 1000;
 }
 
 #createAlbum-button:hover {
     cursor: pointer;
-    background-color: rgba(0, 0, 0, 0.08);
+    background-color: rgb(228, 228, 228);
 }
 
 .createAlbum-plus {
@@ -391,6 +407,20 @@
     background-size: cover;
     width: 100vw;
     height: 100vh;
+}
+
+.noContent-text {
+    margin-top: 150px;
+    font-size: 24px;
+}
+
+.noContent-link {
+    color: rgb(255, 225, 0);
+}
+
+.noContent-link:hover {
+    cursor: pointer;
+    text-decoration: underline;
 }
 
 
