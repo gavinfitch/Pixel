@@ -51,11 +51,11 @@
     font-weight: bold;
 }
 
-.form-background {
+#editPhoto-form-background {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-image: url("../../images/form_background_mountains.jpg");
+    background-image: url("https://pixelphotostorage.s3.us-west-2.amazonaws.com/splash-images/Stockwell-road.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     width: 100vw;

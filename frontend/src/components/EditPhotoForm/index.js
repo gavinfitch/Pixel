@@ -109,7 +109,7 @@ function EditPhotoForm() {
                     <span className="form-logoText" id="home-logoText">Pixel</span>
                 </div>
             </nav>
-            <div className="form-background">
+            <div id="editPhoto-form-background">
                 <form onSubmit={handleSubmit} id="editPhoto-form-container">
                     <div className="form-header">
                         <Logo />

@@ -90,7 +90,7 @@ function UploadPhotoForm() {
                     <span className="form-logoText" id="home-logoText">Pixel</span>
                 </div>
             </nav>
-            <div className="form-background">
+            <div id="uploadPhoto-form-background">
                 <form onSubmit={handleSubmit} className="form-container" id="uploadPhoto-form-container">
                     <div className="form-header">
                         {/* <div className="logo">

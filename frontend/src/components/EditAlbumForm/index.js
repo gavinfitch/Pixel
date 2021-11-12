@@ -56,7 +56,7 @@ function CreateAlbumForm() {
                     <span className="form-logoText" id="home-logoText">Pixel</span>
                 </div>
             </nav>
-            <div className="form-background">
+            <div id="editAlbum-form-background">
                 <form className="form-container" id="editAlbum-form-container">
                     <div className="form-header">
                         <Logo />
