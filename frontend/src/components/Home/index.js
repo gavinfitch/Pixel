@@ -118,6 +118,7 @@ function Home({ isLoaded }) {
 
     useEffect(() => {
         dispatch(photoActions.thunk_getPhotosByUserId({ userId }))
+        console.log("this is the userId", userId)
         dispatch(albumActions.thunk_getAlbumsByUserId({ userId }))
         document.body.classList.remove('stop-scrolling');
     }, [dispatch])
