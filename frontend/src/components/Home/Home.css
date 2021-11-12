@@ -259,7 +259,7 @@
     display: block;
     color: white;
     position: fixed;
-    width: 132px;
+    width: fit-content;
     height: fit-content;
     top: 112px;
     left: 75px;
@@ -283,12 +283,14 @@
 .fa-caret-up {
     color: rgb(30, 30, 30);
     font-size: 48px;
+    z-index: 3000;
 }
 
 #caretDiv {
     position: fixed;
     top: 88px;
     left: 80px;
+    z-index: 3000;
 }
 
 .photo-albumSelect {
@@ -405,6 +407,20 @@
     background-size: cover;
     width: 100vw;
     height: 100vh;
+}
+
+.noContent-text {
+    margin-top: 150px;
+    font-size: 24px;
+}
+
+.noContent-link {
+    color: rgb(255, 225, 0);
+}
+
+.noContent-link:hover {
+    cursor: pointer;
+    text-decoration: underline;
 }
 
 
