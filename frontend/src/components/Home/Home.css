@@ -10,11 +10,15 @@
     z-index: 1000;
 }
 
+
 #home-logoText {
-    font-size: 35px;
+    padding-top: 1px;
+    font-size: 36px;
+    transition: all 0.15s linear;
 }
 #home-logoText:hover {
-    color: rgba(255, 255, 255, 0.90);
+    cursor: pointer;
+    color: rgb(228, 228, 228);
 }
 
 .upload-logout-container {

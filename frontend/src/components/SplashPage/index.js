@@ -66,9 +66,9 @@ function SplashPage() {
     return (
         <div id="splash-container">
             <nav id="splash-nav" className="home-nav">
-                <div onClick={redirectHome} className="formNav-logo" id="splash-logoContainer">
+                <div onClick={redirectHome} id="logo-container">
                     <Logo />
-                    <span className="form-logoText" id="home-logoText">Pixel</span>
+                    <div className="form-logoText" id="home-logoText">Pixel</div>
                 </div>
                 <div className="upload-logout-container">
                     <NavLink id="login-button" to="/login">Log in</NavLink>
@@ -80,7 +80,7 @@ function SplashPage() {
             <div id="splash-signup-container">
                 <div id="slogan-container">
                     <div id="inspiration" className="slogan">Find your inspiration.</div>
-                    <div id="join" className="slogan">Join the Pixel community, home to three seeder files and one guest account.</div>
+                    <div id="join" className="slogan">Join the Pixel community.</div>
                 </div>
                 <NavLink id="startForFree" className="signup-button splash-button" to="/signup">Start for free</NavLink>
             </div>

@@ -160,9 +160,9 @@ function Home({ isLoaded }) {
                 </div>}
 
                 <nav className="home-nav">
-                    <div onClick={redirectHome} className="formNav-logo">
+                    <div onClick={redirectHome} id="logo-container">
                         <Logo />
-                        <span className="form-logoText" id="home-logoText">Pixel</span>
+                        <div className="form-logoText" id="home-logoText">Pixel</div>
                     </div>
                     <div className="upload-logout-container">
                         <NavLink to='/photos/new'><i className="fas fa-cloud-upload-alt"></i></NavLink>

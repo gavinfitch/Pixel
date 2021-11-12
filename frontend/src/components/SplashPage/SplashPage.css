@@ -10,15 +10,20 @@
 
 /* Nav bar */
 #splash-nav {
-    height: 55px;
-    background-color: rgba(30, 30, 30, 0.65);
+    height: 50px;
+    background-color: rgba(30, 30, 30, 0.75);
+}
+
+#logo-container {
+    display: flex;
+    align-items: center;
 }
 
 .splash-button {
     width: fit-content;
     height: fit-content;
     margin: 0px 5px;
-    padding: 6px 16px;
+    padding: 5px 15px;
     background-color: white;
     border: none;
     border-radius: 4px;
@@ -29,7 +34,7 @@
 
 .splash-button:hover {
     cursor: pointer;
-    background-color: rgba(255, 255, 255, 0.75);
+    background-color: rgb(228, 228, 228);
     transition: all 0.15s linear;
 }
 
@@ -42,7 +47,7 @@
 
 #login-button:hover {
     cursor: pointer;
-    color: rgba(255, 255, 255, 0.75);
+    color: rgb(228, 228, 228);
 }
 
 /* #guestLogin-button {
@@ -56,10 +61,10 @@
     color: rgb(30, 30, 30);
 } */
 
-#guestLogin-button:hover {
+/* #guestLogin-button:hover {
     cursor: pointer;
-    background-color: rgba(255, 255, 255, 0.75);
-}
+    background-color: rgb(225, 225, 225);
+} */
 
 .signup-button {
     /* width: fit-content; */
@@ -98,21 +103,22 @@
 }
 
 #inspiration {
-    font-size: 50px;
+    font-size: 52px;
 }
 
 #join {
-    font-size: 25px;
+    font-size: 24px;
 }
 
 #startForFree {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 50px;
+    border-radius: 6px;
+    margin-top: 52px;
     width: 200px;
     height: 60px;
-    font-size: 25px;
+    font-size: 26px;
 }
 
 
@@ -125,7 +131,7 @@
     justify-content: flex-end;
     background-color: black;
     width: 100vw;
-    height: 55px;
+    height: 50px;
     padding: 0px 50px;
     z-index: 1000;
 }
@@ -137,7 +143,7 @@
 
 .connect-item {
     font-size: 21px;
-    color: rgba(255, 255, 255, 0.6);
+    color: rgb(180, 180, 180);
     margin: 10px;
 }
 
