@@ -10,6 +10,7 @@ import EditAlbumForm from "./components/EditAlbumForm";
 import CreateAlbumForm from "./components/CreateAlbumForm";
 import CreateCommentForm from "./components/CreateCommentForm";
 import AlbumSelectForm from "./components/AlbumSelectForm";
+import Logo from "./components/Logo";
 import * as sessionActions from "./store/session";
 // import Navigation from "./components/Navigation";
 import Home from "./components/Home";
@@ -57,6 +58,9 @@ function App() {
           </Route>
           <Route path="/comments/new">
             <CreateCommentForm />
+          </Route>
+          <Route path="/favicon">
+            <Logo />
           </Route>
         </Switch>
       )}
