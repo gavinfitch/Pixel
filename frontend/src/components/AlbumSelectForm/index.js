@@ -113,7 +113,7 @@ function AlbumSelectForm() {
                     <span className="form-logoText" id="home-logoText">Pixel</span>
                 </div>
             </nav>
-            <div className="form-background">
+            <div id="albumSelect-form-background">
                 <form onSubmit={handleSubmit} className="form-container" id="selectAlbum-form-container">
                     <div className="form-header">
                         {/* <div className="logo">

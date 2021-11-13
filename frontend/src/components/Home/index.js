@@ -30,10 +30,10 @@ function Home({ isLoaded }) {
     const userAlbumsArr = Object.values(userAlbumsObj);
 
     const config = {
-        bucketName: 'pixelphotostorage',
+        bucketName: 'pixelphotoapp',
         region: 'us-west-2',
-        accessKeyId: 'AKIAQ5HCEL66DJMSJ66K',
-        secretAccessKey: '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',
+        accessKeyId: 'AKIA236BPETUPHBH2PVT',
+        secretAccessKey: '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',
     }
 
     const ReactS3Client = new S3(config);

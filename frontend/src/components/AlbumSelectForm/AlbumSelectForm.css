@@ -51,7 +51,7 @@
     font-weight: bold;
 }
 
-.form-background {
+#albumSelect-form-background {
     display: flex;
     align-items: center;
     justify-content: center;
