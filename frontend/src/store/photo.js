@@ -56,9 +56,8 @@ export const thunk_getPhotosByUserId = ({ userId }) => async (dispatch) => {
 
     if (res.ok) {
         const photos = await res.json();
-        console.log("Thunk", photos)
+        // console.log("Thunk ordered", photos)
         dispatch(setPhotos(photos));
-
         return photos;
     }
 };

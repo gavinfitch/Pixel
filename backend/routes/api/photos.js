@@ -42,9 +42,13 @@ router.get(
         const userId = req.params.id;
         const photos = await Photo.findAll({
             // where: { userId },
-            include: [User]
+            order: [
+                ['title', 'ASC']
+            ],
+            include: [User],
         });
 
+        // console.log("In the route", photos)
         // await setTokenCookie(res, user);
         return res.json({
             photos,

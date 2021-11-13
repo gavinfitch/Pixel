@@ -39,7 +39,7 @@ function SplashPage() {
     const guestLogin = e => {
         e.preventDefault();
         setErrors([]);
-        return dispatch(sessionActions.thunk_login({ credential: "acek123", password: "password" }))
+        return dispatch(sessionActions.thunk_login({ credential: "guest", password: "password" }))
             .catch(async (res) => {
                 const data = await res.json();
                 if (data && data.errors) setErrors(data.errors);

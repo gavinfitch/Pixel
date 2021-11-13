@@ -29,6 +29,24 @@ function Home({ isLoaded }) {
     const allPhotosArr = Object.values(allPhotosObj);
     const userAlbumsArr = Object.values(userAlbumsObj);
 
+    const sortedAllPhotosArr = allPhotosArr.sort(function (a, b) {
+        let keyA = new Date(a.updatedAt);
+        let keyB = new Date(b.updatedAt);
+        // Compare the 2 dates
+        if (keyA < keyB) return 1;
+        if (keyA > keyB) return -1;
+        return 0;
+    });
+
+    const sortedUserAlbumsArr = userAlbumsArr.sort(function (a, b) {
+        let keyA = new Date(a.updatedAt);
+        let keyB = new Date(b.updatedAt);
+        // Compare the 2 dates
+        if (keyA < keyB) return 1;
+        if (keyA > keyB) return -1;
+        return 0;
+    });
+
     const config = {
         bucketName: 'pixelphotoapp',
         region: 'us-west-2',
@@ -118,7 +136,7 @@ function Home({ isLoaded }) {
 
     useEffect(() => {
         dispatch(photoActions.thunk_getPhotosByUserId({ userId }))
-        console.log("this is the userId", userId)
+        // console.log("this is the userId", userId)
         dispatch(albumActions.thunk_getAlbumsByUserId({ userId }))
         document.body.classList.remove('stop-scrolling');
     }, [dispatch])
@@ -198,7 +216,7 @@ function Home({ isLoaded }) {
                 }
 
                 {feedDisplay === "Your feed" && <ul className="home-photos-feed">
-                    {allPhotosArr.map(photo =>
+                    {sortedAllPhotosArr.map(photo =>
                         <li onClick={() => {
                             setFullScreen(true);
                             setFullScreenPhoto(photo);
@@ -255,7 +273,7 @@ function Home({ isLoaded }) {
                 {feedDisplay === "Albums" && <ul className="home-albums-feed">
                     <div id="createAlbum-button" onClick={() => history.push("/albums/new/")}><i className="far fa-plus-square createAlbum-plus"></i><span className="createAlbum-text">Create album</span></div>
                     {userAlbumsArr.length < 1 && <div className="noContent-container"><div className="noContent-text">You don't have any albums yet, try <span className="noContent-link" onClick={() => history.push("/albums/new")}>creating</span> one.</div></div>}
-                    {userAlbumsArr.length > 0 && userAlbumsArr.map((album) => {
+                    {sortedUserAlbumsArr.length > 0 && sortedUserAlbumsArr.map((album) => {
 
                         const albumPhotos = userPhotosArr.filter(photo => photo.albumId === album.id)
                         const date = new Date(album?.createdAt).toString().split(" ");
@@ -265,7 +283,7 @@ function Home({ isLoaded }) {
                             console.log(albumPhotos[0])
                             backgroundImgURL = albumPhotos[0].photoURL;
                         } else {
-                            backgroundImgURL = "https://pixelphotoapp.s3.us-west-2.amazonaws.com/pixel-seeder-photos/splash-images/BSmith-road.jpg";
+                            backgroundImgURL = "https://pixelphotoapp.s3.us-west-2.amazonaws.com/pixel-seeder-photos/splash-images/BSmith-sky.jpg";
                         }
 
                         return (
