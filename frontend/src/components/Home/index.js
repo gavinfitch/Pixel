@@ -265,7 +265,7 @@ function Home({ isLoaded }) {
                             console.log(albumPhotos[0])
                             backgroundImgURL = albumPhotos[0].photoURL;
                         } else {
-                            backgroundImgURL = "https://pixelphotostorage.s3.us-west-2.amazonaws.com/splash-images/BSmith-road.jpg";
+                            backgroundImgURL = "https://pixelphotoapp.s3.us-west-2.amazonaws.com/pixel-seeder-photos/splash-images/BSmith-road.jpg";
                         }
 
                         return (

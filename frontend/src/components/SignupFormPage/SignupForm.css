@@ -59,7 +59,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-image: url("https://pixelphotostorage.s3.us-west-2.amazonaws.com/splash-images/login-signup+form.jpg");
+    background-image: url("https://pixelphotoapp.s3.us-west-2.amazonaws.com/pixel-seeder-photos/splash-images/login-signup+form.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     width: 100vw;
