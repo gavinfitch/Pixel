@@ -262,6 +262,7 @@ function Home({ isLoaded }) {
 
                         let backgroundImgURL;
                         if (albumPhotos[0]) {
+                            console.log(albumPhotos[0])
                             backgroundImgURL = albumPhotos[0].photoURL;
                         } else {
                             backgroundImgURL = "https://pixelphotostorage.s3.us-west-2.amazonaws.com/splash-images/BSmith-road.jpg";
