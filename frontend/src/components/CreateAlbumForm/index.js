@@ -33,9 +33,11 @@ function CreateAlbumForm() {
 
         const userId = sessionUser.id;
 
-        // console.log("YOU ARE IN THE HANDLER", userId, title, description)
-        history.push("/");
         return dispatch(albumActions.thunk_addalbum({ userId, title, description }))
+            .catch(async (res) => {
+                const data = await res.json();
+                if (data && data.errors) setErrors(data.errors)
+            }).then((res) => res && history.push('/'));
 
         // if (password === confirmPassword) {
         //     setErrors([]);

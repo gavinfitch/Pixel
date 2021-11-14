@@ -48,10 +48,14 @@ function AlbumSelectForm() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        console.log(albumId)
+        console.log("THIS IS IT", photoId, albumId)
 
-        history.push("/")
         return dispatch(photoActions.thunk_selectalbum({ photoId, albumId }))
+            .catch(async (res) => {
+                const data = await res.json();
+                if (data && data.errors) setErrors(data.errors)
+            }).then((res) => res && history.push("/"))
+            
 
         // const userId = sessionUser.id;
         // let s3Photo;

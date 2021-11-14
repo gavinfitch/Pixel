@@ -134,6 +134,8 @@ export const thunk_updatephoto = ({ photoId, title, description }) => async (dis
 // Album select photo thunk
 export const thunk_selectalbum = ({ photoId, albumId }) => async (dispatch) => {
 
+    console.log(albumId, photoId)
+
     const res = await csrfFetch(`/api/photos/${photoId}/albumselect`, {
         method: 'PUT',
         headers: {
@@ -148,7 +150,6 @@ export const thunk_selectalbum = ({ photoId, albumId }) => async (dispatch) => {
     if (res.ok) {
         const updatedPhoto = await res.json();
         dispatch(updatePhoto(updatedPhoto));
-        // console.log("This is the updated photo ---> ", updatedPhoto);
         return updatedPhoto;
     }
 };

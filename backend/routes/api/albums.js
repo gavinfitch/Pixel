@@ -1,7 +1,7 @@
 const express = require('express');
 const asyncHandler = require('express-async-handler');
-// const { check } = require('express-validator');
-// const { handleValidationErrors } = require('../../utils/validation');
+const { check } = require('express-validator');
+const { handleValidationErrors } = require('../../utils/validation');
 const { setTokenCookie, restoreUser } = require('../../utils/auth');
 const { Album, Photo } = require('../../db/models');
 
@@ -55,13 +55,19 @@ router.get(
     }),
 );
 
+const validateCreateAlbum = [
+    check('title')
+        .exists({ checkFalsy: true })
+        .withMessage('Please provide title.'),
+    handleValidationErrors,
+];
 
 // Add album
 router.post(
     '/',
+    validateCreateAlbum,
     asyncHandler(async (req, res) => {
 
-        // console.log("YOU ARE IN THE BACKEND")
         const { userId, title, description } = req.body;
         const album = await Album.create({ userId, title, description });
 
@@ -72,12 +78,20 @@ router.post(
     }),
 );
 
+const validateEditAlbum = [
+    check('title')
+        .exists({ checkFalsy: true })
+        .withMessage('Please provide title.'),
+    handleValidationErrors,
+];
+
 // Edit album by id
 router.put(
     '/:id',
+    validateEditAlbum,
     asyncHandler(async (req, res) => {
         const { albumId, title, description } = req.body;
-        // console.log("YOU ARE HERE")
+
         const albumToUpdate = await Album.findByPk(albumId);
 
         await albumToUpdate.update({

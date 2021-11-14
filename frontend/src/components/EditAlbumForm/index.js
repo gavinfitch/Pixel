@@ -36,8 +36,11 @@ function CreateAlbumForm() {
 
     const updateAlbum = async (e) => {
         e.preventDefault();
-        history.push("/");
         return dispatch(albumActions.thunk_updatealbum({ albumId: id, title, description }))
+            .catch(async (res) => {
+                const data = await res.json();
+                if (data && data.errors) setErrors(data.errors)
+            }).then((res) => res && history.push('/'));
     };
 
     useEffect(() => {

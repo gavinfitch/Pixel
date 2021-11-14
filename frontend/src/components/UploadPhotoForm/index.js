@@ -51,22 +51,22 @@ function UploadPhotoForm() {
         const s3Name = s3Photo.key;
         const photoURL = s3Photo.location;
 
-        
-        
+
+
         return dispatch(photoActions.thunk_addphoto({ userId, title, description, photoURL, s3Name }))
             .catch(async (res) => {
                 const data = await res.json();
                 if (data && data.errors) setErrors(data.errors)
             }).then((res) => res && history.push("/"));
 
-       
 
-            
+
+
 
         // if (password === confirmPassword) {
         //     setErrors([]);
         //     return dispatch(sessionActions.thunk_signup({ firstName, lastName, username, email, password }))
-                
+
         // }
         // return setErrors(['Confirm password field must be the same as password field.']);
     };
@@ -139,7 +139,7 @@ function UploadPhotoForm() {
                             type="file"
                             // value={photo.name}
                             onChange={(e) => setPhoto(e.target.files[0])}
-                        // required
+                            required
                         />
                         <button className="form-button" type="submit">Upload</button>
                     </div>

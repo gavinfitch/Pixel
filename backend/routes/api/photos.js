@@ -111,9 +111,17 @@ router.put(
     }),
 );
 
+const validateAlbumSelect = [
+    check('albumId')
+        .exists({ checkFalsy: true })
+        .withMessage('Please select album.'),
+    handleValidationErrors,
+];
+
 // Album select
 router.put(
     '/:id/albumselect',
+    validateAlbumSelect,
     asyncHandler(async (req, res) => {
         const { photoId, albumId } = req.body;
         const photoToUpdate = await Photo.findByPk(photoId);
