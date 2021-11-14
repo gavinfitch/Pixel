@@ -27,14 +27,14 @@ function EditPhotoForm() {
     const [errors, setErrors] = useState([]);
 
 
-    // const config = {
-    //     bucketName: 'pixelphotostorage',
-    //     region: 'us-west-2',
-    //     accessKeyId: '',
-    //     secretAccessKey: '',
-    // }
+    const config = {
+        bucketName: 'pixelphotostorage',
+        region: 'us-west-2',
+        accessKeyId: '',
+        secretAccessKey: '',
+    }
 
-    // const ReactS3Client = new S3(config);
+    const ReactS3Client = new S3(config);
 
     const redirectHome = () => {
         history.push("/")

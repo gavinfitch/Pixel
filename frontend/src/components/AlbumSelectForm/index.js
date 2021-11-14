@@ -32,14 +32,14 @@ function AlbumSelectForm() {
     const photoId = useParams().id
     // console.log(photoId)
 
-    // const config = {
-    //     bucketName: 'pixelphotostorage',
-    //     region: 'us-west-2',
-    //     accessKeyId: '',
-    //     secretAccessKey: '',
-    // }
+    const config = {
+        bucketName: 'pixelphotostorage',
+        region: 'us-west-2',
+        accessKeyId: '',
+        secretAccessKey: '',
+    }
 
-    // const ReactS3Client = new S3(config);
+    const ReactS3Client = new S3(config);
 
     const redirectHome = () => {
         history.push("/")
