@@ -7,6 +7,10 @@
     transition: background-image 1s linear;
 }
 
+#imgCache {
+    display: none;
+}
+
 
 /* Nav bar */
 #splash-nav {
@@ -130,3 +134,4 @@
 .connect-icon:hover {
     color: white;
 }
+

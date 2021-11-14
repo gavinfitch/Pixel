@@ -61,14 +61,36 @@ function SplashPage() {
         }
     }
 
-    useEffect(() => {
-        const slideShowTimer = setInterval(slideShow, time);
+    let imagesLoaded = false;
 
-        return () => clearInterval(slideShowTimer);
-    }, [])
+    Promise.all(Array.from(document.images).filter(img => !img.complete).map(img => new Promise(resolve => { img.onload = img.onerror = resolve; }))).then((res) => {
+        imagesLoaded = true;
+        console.log(imagesLoaded)
+    });
+
+    useEffect(() => {
+
+        if (imagesLoaded = true) {
+            const slideShowTimer = setInterval(slideShow, time);
+
+            return () => clearInterval(slideShowTimer);
+        }
+
+    }, [imagesLoaded])
 
     return (
         <div id="splash-container">
+            <div id="imgCache">
+                <img src="https://pixelphotoapp.s3.us-west-2.amazonaws.com/pixel-seeder-photos/splash-images/Desert.jpg"></img>
+                <img src="https://pixelphotoapp.s3.us-west-2.amazonaws.com/pixel-seeder-photos/splash-images/Reflection.jpg"></img>
+                <img src="https://pixelphotoapp.s3.us-west-2.amazonaws.com/pixel-seeder-photos/splash-images/Frog.jpg"></img>
+                <img src="https://pixelphotoapp.s3.us-west-2.amazonaws.com/pixel-seeder-photos/splash-images/Car.jpg"></img>
+                <img src="https://pixelphotoapp.s3.us-west-2.amazonaws.com/pixel-seeder-photos/splash-images/Snowy-mountains.jpg"></img>
+                <img src="https://pixelphotoapp.s3.us-west-2.amazonaws.com/pixel-seeder-photos/splash-images/Power-plant.jpg"></img>
+                <img src="https://pixelphotoapp.s3.us-west-2.amazonaws.com/pixel-seeder-photos/splash-images/Sheep.jpg"></img>
+                <img src="https://pixelphotoapp.s3.us-west-2.amazonaws.com/pixel-seeder-photos/splash-images/Cottage.jpg"></img>
+                <img src="https://pixelphotoapp.s3.us-west-2.amazonaws.com/pixel-seeder-photos/splash-images/Beach.jpg"></img>
+            </div>
             <nav id="splash-nav" className="home-nav">
                 <div onClick={redirectHome} id="logo-container">
                     <Logo />
