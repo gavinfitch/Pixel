@@ -32,14 +32,14 @@ function AlbumSelectForm() {
     const photoId = useParams().id
     // console.log(photoId)
 
-    const config = {
-        bucketName: 'pixelphotostorage',
-        region: 'us-west-2',
-        accessKeyId: 'AKIAQ5HCEL66DJMSJ66K',
-        secretAccessKey: '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',
-    }
+    // const config = {
+    //     bucketName: 'pixelphotostorage',
+    //     region: 'us-west-2',
+    //     accessKeyId: '',
+    //     secretAccessKey: '',
+    // }
 
-    const ReactS3Client = new S3(config);
+    // const ReactS3Client = new S3(config);
 
     const redirectHome = () => {
         history.push("/")
@@ -48,10 +48,14 @@ function AlbumSelectForm() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        console.log(albumId)
+        console.log("THIS IS IT", photoId, albumId)
 
-        history.push("/")
         return dispatch(photoActions.thunk_selectalbum({ photoId, albumId }))
+            .catch(async (res) => {
+                const data = await res.json();
+                if (data && data.errors) setErrors(data.errors)
+            }).then((res) => res && history.push("/"))
+
 
         // const userId = sessionUser.id;
         // let s3Photo;
@@ -113,7 +117,7 @@ function AlbumSelectForm() {
                     <span className="form-logoText" id="home-logoText">Pixel</span>
                 </div>
             </nav>
-            <div className="form-background">
+            <div id="albumSelect-form-background">
                 <form onSubmit={handleSubmit} className="form-container" id="selectAlbum-form-container">
                     <div className="form-header">
                         {/* <div className="logo">

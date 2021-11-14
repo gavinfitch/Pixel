@@ -76,11 +76,11 @@ export const thunk_addalbum = ({ userId, title, description }) => async (dispatc
         })
     });
 
-    // if (res.ok) {
-    //     const album = await res.json();
-    //     dispatch(addAlbum(album));
-    //     return album;
-    // }
+    if (res.ok) {
+        const album = await res.json();
+        dispatch(addAlbum(album));
+        return album;
+    }
 };
 
 // Delete album thunk

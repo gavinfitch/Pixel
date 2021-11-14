@@ -56,15 +56,15 @@ export const thunk_getPhotosByUserId = ({ userId }) => async (dispatch) => {
 
     if (res.ok) {
         const photos = await res.json();
-        console.log("Thunk", photos)
+        // console.log("Thunk ordered", photos)
         dispatch(setPhotos(photos));
-
         return photos;
     }
 };
 
 // Add photo thunk
 export const thunk_addphoto = ({ userId, title, description, photoURL, s3Name }) => async (dispatch) => {
+
     const res = await csrfFetch("/api/photos", {
         method: 'POST',
         headers: {
@@ -110,7 +110,7 @@ export const thunk_deletephoto = ({ photoId }) => async (dispatch) => {
 // Update photo thunk
 export const thunk_updatephoto = ({ photoId, title, description }) => async (dispatch) => {
 
-    console.log(photoId, title, description)
+    // console.log(photoId, title, description)
 
     const res = await csrfFetch(`/api/photos/${photoId}`, {
         method: 'PUT',
@@ -127,13 +127,14 @@ export const thunk_updatephoto = ({ photoId, title, description }) => async (dis
     if (res.ok) {
         const updatedPhoto = await res.json();
         dispatch(updatePhoto(updatedPhoto));
-        // console.log("This is the updated photo ---> ", updatedPhoto);
         return updatedPhoto;
     }
 };
 
 // Album select photo thunk
 export const thunk_selectalbum = ({ photoId, albumId }) => async (dispatch) => {
+
+    console.log(albumId, photoId)
 
     const res = await csrfFetch(`/api/photos/${photoId}/albumselect`, {
         method: 'PUT',
@@ -149,7 +150,6 @@ export const thunk_selectalbum = ({ photoId, albumId }) => async (dispatch) => {
     if (res.ok) {
         const updatedPhoto = await res.json();
         dispatch(updatePhoto(updatedPhoto));
-        // console.log("This is the updated photo ---> ", updatedPhoto);
         return updatedPhoto;
     }
 };

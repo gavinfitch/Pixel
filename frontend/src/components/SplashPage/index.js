@@ -15,15 +15,15 @@ import Logo from '../Logo'
 function SplashPage() {
 
     const slideShowArr = [];
-    slideShowArr[0] = "https://pixelphotostorage.s3.us-west-2.amazonaws.com/splash-images/Desert.jpg";
-    slideShowArr[1] = "https://pixelphotostorage.s3.us-west-2.amazonaws.com/splash-images/Reflection.jpg";
-    slideShowArr[2] = "https://pixelphotostorage.s3.us-west-2.amazonaws.com/splash-images/Frog.jpg";
-    slideShowArr[3] = "https://pixelphotostorage.s3.us-west-2.amazonaws.com/splash-images/Car.jpg";
-    slideShowArr[4] = "https://pixelphotostorage.s3.us-west-2.amazonaws.com/splash-images/Snowy-mountains.jpg";
-    slideShowArr[5] = "https://pixelphotostorage.s3.us-west-2.amazonaws.com/splash-images/Power-plant.jpg";
-    slideShowArr[6] = "https://pixelphotostorage.s3.us-west-2.amazonaws.com/splash-images/Sheep.jpg";
-    slideShowArr[7] = "https://pixelphotostorage.s3.us-west-2.amazonaws.com/splash-images/Cottage.jpg";
-    slideShowArr[8] = "https://pixelphotostorage.s3.us-west-2.amazonaws.com/splash-images/Beach.jpg";
+    slideShowArr[0] = "https://pixelphotoapp.s3.us-west-2.amazonaws.com/pixel-seeder-photos/splash-images/Desert.jpg";
+    slideShowArr[1] = "https://pixelphotoapp.s3.us-west-2.amazonaws.com/pixel-seeder-photos/splash-images/Reflection.jpg";
+    slideShowArr[2] = "https://pixelphotoapp.s3.us-west-2.amazonaws.com/pixel-seeder-photos/splash-images/Frog.jpg";
+    slideShowArr[3] = "https://pixelphotoapp.s3.us-west-2.amazonaws.com/pixel-seeder-photos/splash-images/Car.jpg";
+    slideShowArr[4] = "https://pixelphotoapp.s3.us-west-2.amazonaws.com/pixel-seeder-photos/splash-images/Snowy-mountains.jpg";
+    slideShowArr[5] = "https://pixelphotoapp.s3.us-west-2.amazonaws.com/pixel-seeder-photos/splash-images/Power-plant.jpg";
+    slideShowArr[6] = "https://pixelphotoapp.s3.us-west-2.amazonaws.com/pixel-seeder-photos/splash-images/Sheep.jpg";
+    slideShowArr[7] = "https://pixelphotoapp.s3.us-west-2.amazonaws.com/pixel-seeder-photos/splash-images/Cottage.jpg";
+    slideShowArr[8] = "https://pixelphotoapp.s3.us-west-2.amazonaws.com/pixel-seeder-photos/splash-images/Beach.jpg";
 
     const [errors, setErrors] = useState(null)
     const dispatch = useDispatch();
@@ -39,7 +39,7 @@ function SplashPage() {
     const guestLogin = e => {
         e.preventDefault();
         setErrors([]);
-        return dispatch(sessionActions.thunk_login({ credential: "acek123", password: "password" }))
+        return dispatch(sessionActions.thunk_login({ credential: "guest", password: "password" }))
             .catch(async (res) => {
                 const data = await res.json();
                 if (data && data.errors) setErrors(data.errors);

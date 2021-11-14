@@ -1,7 +1,7 @@
 const express = require('express');
 const asyncHandler = require('express-async-handler');
-// const { check } = require('express-validator');
-// const { handleValidationErrors } = require('../../utils/validation');
+const { check } = require('express-validator');
+const { handleValidationErrors } = require('../../utils/validation');
 const { setTokenCookie, requireAuth } = require('../../utils/auth');
 const { Photo, User } = require('../../db/models');
 
@@ -42,9 +42,13 @@ router.get(
         const userId = req.params.id;
         const photos = await Photo.findAll({
             // where: { userId },
-            include: [User]
+            order: [
+                ['title', 'ASC']
+            ],
+            include: [User],
         });
 
+        // console.log("In the route", photos)
         // await setTokenCookie(res, user);
         return res.json({
             photos,
@@ -52,9 +56,20 @@ router.get(
     }),
 );
 
+const validateUploadPhoto = [
+    check('title')
+        .exists({ checkFalsy: true })
+        .withMessage('Please provide title.'),
+    check('photoURL')
+        .exists({ checkFalsy: true })
+        .withMessage('There was an error with the upload. Please try again.'),
+    handleValidationErrors,
+];
+
 // Add Photo
 router.post(
     '/',
+    validateUploadPhoto,
     asyncHandler(async (req, res) => {
         const { userId, title, description, photoURL, s3Name } = req.body;
         const photo = await Photo.create({ userId, title, description, photoURL, s3Name });
@@ -66,9 +81,17 @@ router.post(
     }),
 );
 
+const validateEditPhoto = [
+    check('title')
+        .exists({ checkFalsy: true })
+        .withMessage('Please provide title.'),
+    handleValidationErrors,
+];
+
 // Update Photo
 router.put(
     '/:id',
+    validateEditPhoto,
     asyncHandler(async (req, res) => {
         const { photoId, title, description } = req.body;
         // console.log("YOU ARE HERE")
@@ -88,9 +111,17 @@ router.put(
     }),
 );
 
+const validateAlbumSelect = [
+    check('albumId')
+        .exists({ checkFalsy: true })
+        .withMessage('Please select album.'),
+    handleValidationErrors,
+];
+
 // Album select
 router.put(
     '/:id/albumselect',
+    validateAlbumSelect,
     asyncHandler(async (req, res) => {
         const { photoId, albumId } = req.body;
         const photoToUpdate = await Photo.findByPk(photoId);

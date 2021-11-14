@@ -10,8 +10,18 @@ module.exports = {
       },
       {
         userId: 4,
-        title: 'Back home',
-        description: 'Trip back home visiting parents for the holidays.',
+        title: 'Matt\'s Photos',
+        description: 'Photos that Matt took.',
+      },
+      {
+        userId: 5,
+        title: 'Back Home',
+        description: 'Photos taken around Seattle 2019.',
+      },
+      {
+        userId: 6,
+        title: 'Misc.',
+        description: 'Miscellaneous photos.',
       },
     ], {});
   },

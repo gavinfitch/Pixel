@@ -51,11 +51,11 @@
     font-weight: bold;
 }
 
-.form-background {
+#albumSelect-form-background {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-image: url("../../images/form_background_mountains.jpg");
+    background-image: url("https://pixelphotoapp.s3.us-west-2.amazonaws.com/pixel-seeder-photos/splash-images/BSmith-road.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     width: 100vw;

@@ -15,14 +15,14 @@ function CreateAlbumForm() {
     const [photo, setPhoto] = useState("");
     const [errors, setErrors] = useState([]);
 
-    const config = {
-        bucketName: 'pixelphotostorage',
-        region: 'us-west-2',
-        accessKeyId: 'AKIAQ5HCEL66DJMSJ66K',
-        secretAccessKey: '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',
-    }
+    // const config = {
+    //     bucketName: 'pixelphotostorage',
+    //     region: 'us-west-2',
+    //     accessKeyId: '',
+    //     secretAccessKey: '',
+    // }
 
-    const ReactS3Client = new S3(config);
+    // const ReactS3Client = new S3(config);
 
     const redirectHome = () => {
         history.push("/")
@@ -33,9 +33,11 @@ function CreateAlbumForm() {
 
         const userId = sessionUser.id;
 
-        // console.log("YOU ARE IN THE HANDLER", userId, title, description)
-        history.push("/");
         return dispatch(albumActions.thunk_addalbum({ userId, title, description }))
+            .catch(async (res) => {
+                const data = await res.json();
+                if (data && data.errors) setErrors(data.errors)
+            }).then((res) => res && history.push('/'));
 
         // if (password === confirmPassword) {
         //     setErrors([]);
