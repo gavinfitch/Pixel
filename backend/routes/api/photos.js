@@ -132,7 +132,6 @@ router.put(
 
         const updatedPhoto = await Photo.findByPk(photoId);
 
-        // await setTokenCookie(res, user);
         return res.json({
             updatedPhoto,
         });

@@ -2,8 +2,8 @@ import { csrfFetch } from "./csrf";
 
 const SET_PHOTOS = "photo/SET_PHOTOS";
 const ADD_PHOTO = "photo/ADD_PHOTO";
-const DELETE_PHOTO = "photo/DELETE_PHOTO";
 const UPDATE_PHOTO = "photo/UPDATE_PHOTO";
+const DELETE_PHOTO = "photo/DELETE_PHOTO";
 
 const setPhotos = (photos) => ({
     type: SET_PHOTOS,
@@ -15,15 +15,16 @@ const addPhoto = (photo) => ({
     photo,
 });
 
+const updatePhoto = (photo) => ({
+    type: UPDATE_PHOTO,
+    photo,
+});
+
 const deletePhoto = (deletedPhotoId) => ({
     type: DELETE_PHOTO,
     deletedPhotoId,
 });
 
-const updatePhoto = (photo) => ({
-    type: UPDATE_PHOTO,
-    photo,
-});
 
 // Get photo by id thunk
 export const thunk_getPhotoById = ({ photoId }) => async (dispatch) => {
@@ -133,8 +134,6 @@ export const thunk_updatephoto = ({ photoId, title, description }) => async (dis
 
 // Album select photo thunk
 export const thunk_selectalbum = ({ photoId, albumId }) => async (dispatch) => {
-
-    console.log(albumId, photoId)
 
     const res = await csrfFetch(`/api/photos/${photoId}/albumselect`, {
         method: 'PUT',
