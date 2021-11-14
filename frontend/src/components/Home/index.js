@@ -228,7 +228,7 @@ function Home({ isLoaded }) {
                         }} className="home-photoLi" key={photo.id}>
                             <img className="home-img" src={photo.photoURL}></img>
                             <div id="home-photoMask">
-                                <div onClick={() => history.push(`/photos/${photo.id}/albumselect`)} className="photo-albumSelect"><i class="far fa-plus-square"></i></div>
+                                {photo.userId === userId && <div onClick={() => history.push(`/photos/${photo.id}/albumselect`)} className="photo-albumSelect"><i class="far fa-plus-square"></i></div>}
                                 <div className="mask-item">
                                     <div>{photo.title}</div>
                                 </div>
