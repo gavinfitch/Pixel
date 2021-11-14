@@ -55,24 +55,21 @@ function EditPhotoForm() {
 
         history.push("/")
         return dispatch(photoActions.thunk_addphoto({ userId, title, description, photoURL }))
+            .catch(async (res) => {
+                const data = await res.json();
+                if (data && data.errors) setErrors(data.errors)
+            }).then((res) => res && history.push("/"));
 
-
-        // if (password === confirmPassword) {
-        //     setErrors([]);
-        //     return dispatch(sessionActions.thunk_signup({ firstName, lastName, username, email, password }))
-        //         .catch(async (res) => {
-        //             const data = await res.json();
-        //             if (data && data.errors) setErrors(data.errors);
-        //         });
-        // }
-        // return setErrors(['Confirm password field must be the same as password field.']);
     };
 
     const updatePhoto = async (e) => {
         e.preventDefault();
-        // console.log("you are here!!!")
-        history.push("/")
+
         return dispatch(photoActions.thunk_updatephoto({ photoId: id, title, description }))
+            .catch(async (res) => {
+                const data = await res.json();
+                if (data && data.errors) setErrors(data.errors)
+            }).then((res) => res && history.push("/"));
     };
 
     const deletePhoto = async (e) => {
@@ -115,9 +112,9 @@ function EditPhotoForm() {
                         <Logo />
                         <div className="form-headerText">Edit {titleString || "photo"}</div>
                     </div>
-                    {/* {errors.length > 0 && <ul className="errors-container">
+                    {errors.length > 0 && <ul className="errors-container">
                         {errors.map((error, idx) => <li className="error" key={idx}>{error}</li>)}
-                    </ul>} */}
+                    </ul>}
                     <div id="edit-field-container" className="field-container">
                         <input
                             className="form-field"

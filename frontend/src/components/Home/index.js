@@ -15,6 +15,10 @@ import './Home.css';
 function Home({ isLoaded }) {
 
     const dropdownRef = useRef(null);
+    const s3envKey = process.env.REACT_APP_AWS_KEY;
+    const s3envSecretKey = process.env.REACT_APP_AWS_SECRET_KEY;
+
+    // console.log("This is the s3Key", s3Key, "This is the secret key", s3SecretKey)
 
     const [errors, setErrors] = useState(null)
     const [feedDisplay, setFeedDisplay] = useState("Your feed");
@@ -50,8 +54,8 @@ function Home({ isLoaded }) {
     const config = {
         bucketName: 'pixelphotoapp',
         region: 'us-west-2',
-        accessKeyId: 'AKIA236BPETUPHBH2PVT',
-        secretAccessKey: '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',
+        accessKeyId: s3envKey,
+        secretAccessKey: s3envSecretKey,
     }
 
     const ReactS3Client = new S3(config);
