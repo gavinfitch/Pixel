@@ -284,8 +284,9 @@ function Home({ isLoaded }) {
 
                         let backgroundImgURL;
                         if (albumPhotos[0]) {
-                            console.log(albumPhotos[0])
+                            // console.log(albumPhotos[0].photoURL)
                             backgroundImgURL = albumPhotos[0].photoURL;
+                            // console.log(backgroundImgURL)
                         } else {
                             backgroundImgURL = "https://pixelphotoapp.s3.us-west-2.amazonaws.com/pixel-seeder-photos/splash-images/Tim-empty-album-background.jpg";
                         }

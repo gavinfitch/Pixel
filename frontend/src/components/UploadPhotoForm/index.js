@@ -44,7 +44,7 @@ function UploadPhotoForm() {
         let s3Photo;
 
         await ReactS3Client
-            .uploadFile(photo, title)
+            .uploadFile(photo, title.split(" ").join("-"))
             .then(data => s3Photo = data)
             .catch(err => console.error(err))
 
