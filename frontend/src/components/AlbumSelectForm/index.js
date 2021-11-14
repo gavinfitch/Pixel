@@ -32,14 +32,14 @@ function AlbumSelectForm() {
     const photoId = useParams().id
     // console.log(photoId)
 
-    const config = {
-        bucketName: 'pixelphotostorage',
-        region: 'us-west-2',
-        accessKeyId: 'AKIAQ5HCEL66DJMSJ66K',
-        secretAccessKey: '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',
-    }
+    // const config = {
+    //     bucketName: 'pixelphotostorage',
+    //     region: 'us-west-2',
+    //     accessKeyId: '',
+    //     secretAccessKey: '',
+    // }
 
-    const ReactS3Client = new S3(config);
+    // const ReactS3Client = new S3(config);
 
     const redirectHome = () => {
         history.push("/")
@@ -55,7 +55,7 @@ function AlbumSelectForm() {
                 const data = await res.json();
                 if (data && data.errors) setErrors(data.errors)
             }).then((res) => res && history.push("/"))
-            
+
 
         // const userId = sessionUser.id;
         // let s3Photo;
