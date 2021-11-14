@@ -18,7 +18,7 @@ function Home({ isLoaded }) {
     const s3envKey = process.env.REACT_APP_AWS_KEY;
     const s3envSecretKey = process.env.REACT_APP_AWS_SECRET_KEY;
 
-    // console.log("This is the s3Key", s3Key, "This is the secret key", s3SecretKey)
+    console.log("This is the s3Key", s3Key, "This is the secret key", s3SecretKey)
 
     const [errors, setErrors] = useState(null)
     const [feedDisplay, setFeedDisplay] = useState("Your feed");
