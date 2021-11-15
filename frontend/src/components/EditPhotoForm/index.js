@@ -1,14 +1,20 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useHistory, useParams } from "react-router-dom";
-import S3 from 'react-aws-s3';
-import * as photoActions from "../../store/photo";
-import './EditPhotoForm.css';
+
 import Logo from '../Logo';
 
-function EditPhotoForm() {
+import * as photoActions from "../../store/photo";
 
+import './EditPhotoForm.css';
+
+function EditPhotoForm() {
+    const dispatch = useDispatch();
+    const history = useHistory();
+
+    const sessionUser = useSelector((state) => state.session.user);
     const photos = useSelector((state) => state.photos);
+
     const { id } = useParams()
     const currentPhoto = photos[id];
 
@@ -17,54 +23,18 @@ function EditPhotoForm() {
         titleString = currentPhoto.title;
     }
 
-    const dispatch = useDispatch();
-    const history = useHistory();
-    const sessionUser = useSelector((state) => state.session.user);
     const [title, setTitle] = useState(currentPhoto?.title);
     const [description, setDescription] = useState(currentPhoto?.description);
-    const [photo, setPhoto] = useState();
-    // const [album, setAlbum] = useState(null);
     const [errors, setErrors] = useState([]);
 
-
-    const config = {
-        bucketName: 'pixelphotostorage',
-        region: 'us-west-2',
-        accessKeyId: '',
-        secretAccessKey: '',
-    }
-
-    const ReactS3Client = new S3(config);
-
+    // Redirect home function
     const redirectHome = () => {
         history.push("/")
     };
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-
-        const userId = sessionUser.id;
-        let s3Photo;
-
-        await ReactS3Client
-            .uploadFile(photo, title)
-            .then(data => s3Photo = data)
-            .catch(err => console.error(err))
-
-        const photoURL = s3Photo.location;
-
-        history.push("/")
-        return dispatch(photoActions.thunk_addphoto({ userId, title, description, photoURL }))
-            .catch(async (res) => {
-                const data = await res.json();
-                if (data && data.errors) setErrors(data.errors)
-            }).then((res) => res && history.push("/"));
-
-    };
-
+    // Update photo function
     const updatePhoto = async (e) => {
         e.preventDefault();
-
         return dispatch(photoActions.thunk_updatephoto({ photoId: id, title, description }))
             .catch(async (res) => {
                 const data = await res.json();
@@ -72,31 +42,12 @@ function EditPhotoForm() {
             }).then((res) => res && history.push("/"));
     };
 
-    const deletePhoto = async (e) => {
-        e.preventDefault();
-        // console.log("you are here")
-
-        return dispatch(photoActions.thunk_deletephoto({ photoId: 16 }))
-    };
-
-    const getPhotoById = async (e) => {
-        e.preventDefault();
-        // console.log("you are here")
-
-        return dispatch(photoActions.thunk_getPhotoById({ photoId: 1 }))
-    };
-
-
     useEffect(() => {
         const userId = sessionUser.id;
         dispatch(photoActions.thunk_getPhotosByUserId({ userId }))
     }, [dispatch])
 
-
-
     if (!sessionUser) return <Redirect to="/" />;
-
-
 
     return (
         <>
@@ -107,7 +58,7 @@ function EditPhotoForm() {
                 </div>
             </nav>
             <div id="editPhoto-form-background">
-                <form onSubmit={handleSubmit} id="editPhoto-form-container">
+                <form id="editPhoto-form-container">
                     <div className="form-header">
                         <Logo />
                         <div className="form-headerText">Edit {titleString || "photo"}</div>
@@ -122,7 +73,6 @@ function EditPhotoForm() {
                             placeholder="Title"
                             value={title}
                             onChange={(e) => setTitle(e.target.value)}
-                        // required
                         />
                         <input
                             className="form-field"
@@ -130,15 +80,9 @@ function EditPhotoForm() {
                             placeholder="Description (optional)"
                             value={description}
                             onChange={(e) => setDescription(e.target.value)}
-                        // required
                         />
                         <button className="form-button" onClick={updatePhoto}>Edit</button>
                     </div>
-
-                    {/* <div className="redirect-container">
-                        <span className="redirect-text">Already a Pixel member? </span>
-                        <NavLink className="redirect-link" to="/login">Log in here.</NavLink>
-                    </div> */}
                 </form>
             </div>
         </>

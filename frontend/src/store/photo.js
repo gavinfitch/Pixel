@@ -26,7 +26,7 @@ const deletePhoto = (deletedPhotoId) => ({
 });
 
 
-// Get photo by id thunk
+// Get photo by photoId thunk
 export const thunk_getPhotoById = ({ photoId }) => async (dispatch) => {
     const res = await csrfFetch(`/api/photos/${photoId}`, {
         method: 'GET',
@@ -43,10 +43,8 @@ export const thunk_getPhotoById = ({ photoId }) => async (dispatch) => {
     }
 };
 
-// Get photo by user id thunk
+// Get photos by user id thunk
 export const thunk_getPhotosByUserId = ({ userId }) => async (dispatch) => {
-
-    console.log("thunk", userId)
 
     const res = await csrfFetch(`/api/photos/users/${userId}`, {
         method: 'GET',
@@ -57,7 +55,6 @@ export const thunk_getPhotosByUserId = ({ userId }) => async (dispatch) => {
 
     if (res.ok) {
         const photos = await res.json();
-        // console.log("Thunk ordered", photos)
         dispatch(setPhotos(photos));
         return photos;
     }
@@ -108,8 +105,6 @@ export const thunk_deletephoto = ({ photoId }) => async (dispatch) => {
 
 // Update photo thunk
 export const thunk_updatephoto = ({ photoId, title, description }) => async (dispatch) => {
-
-    // console.log(photoId, title, description)
 
     const res = await csrfFetch(`/api/photos/${photoId}`, {
         method: 'PUT',

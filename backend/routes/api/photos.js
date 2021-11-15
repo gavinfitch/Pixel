@@ -35,21 +35,17 @@ router.get(
     }),
 );
 
-// Get photo by userId
+// Get photos by userId
 router.get(
     '/users/:id',
     asyncHandler(async (req, res) => {
-        const userId = req.params.id;
         const photos = await Photo.findAll({
-            // where: { userId },
             order: [
                 ['title', 'ASC']
             ],
             include: [User],
         });
 
-        // console.log("In the route", photos)
-        // await setTokenCookie(res, user);
         return res.json({
             photos,
         });
@@ -94,7 +90,6 @@ router.put(
     validateEditPhoto,
     asyncHandler(async (req, res) => {
         const { photoId, title, description } = req.body;
-        // console.log("YOU ARE HERE")
         const photoToUpdate = await Photo.findByPk(photoId);
 
         await photoToUpdate.update({
@@ -104,7 +99,6 @@ router.put(
 
         const updatedPhoto = await Photo.findByPk(photoId);
 
-        // await setTokenCookie(res, user);
         return res.json({
             updatedPhoto,
         });
