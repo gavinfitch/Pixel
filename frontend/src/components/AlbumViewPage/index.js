@@ -1,87 +1,66 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { NavLink, useHistory, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
+import { NavLink, useHistory, useParams } from 'react-router-dom';
+
+import Logo from '../Logo';
 
 import * as sessionActions from '../../store/session';
 import * as photoActions from "../../store/photo";
 import * as albumActions from "../../store/album";
 
-import ProfileButton from '../Navigation/ProfileButton';
-import Logo from '../Logo';
 import '../Home/Home.css';
-import './AlbumViewPage.css';
 
-function AlbumViewPage({ isLoaded }) {
+function AlbumViewPage() {
 
     const dropdownRef = useRef(null);
 
-    const [feedDisplay, setFeedDisplay] = useState("Photostream");
     const [dropDownOpen, setDropDownOpen] = useState(false);
     const [fullScreen, setFullScreen] = useState(false);
     const [fullScreenPhoto, setFullScreenPhoto] = useState(null);
 
-
-
     const sessionUser = useSelector(state => state.session.user);
-    const userPhotosObj = useSelector(state => state.photos);
+
     const userAlbumsObj = useSelector(state => state.albums);
+    const userAlbumsArr = Object.values(userAlbumsObj);
 
     const albumId = useParams().id;
     const currentAlbum = userAlbumsObj[albumId];
 
-    let albumTitle = null;
-    if (currentAlbum) {
-        albumTitle = currentAlbum.title;
-    }
-
+    const userPhotosObj = useSelector(state => state.photos);
     const userPhotosArr = Object.values(userPhotosObj).filter((photo) => photo.albumId === +albumId);
-    const userAlbumsArr = Object.values(userAlbumsObj);
 
     let userId;
     if (sessionUser) {
         userId = sessionUser.id;
     }
 
-
-    // console.log("photos arr", userPhotosArr);
+    let albumTitle = null;
+    if (currentAlbum) {
+        albumTitle = currentAlbum.title;
+    }
 
     const history = useHistory();
     const dispatch = useDispatch();
 
-    // let hover = false;
-
     // Redirect home function
     const redirectHome = () => {
-        setFeedDisplay("Photostream");
         history.push("/");
     };
 
     // Logout function
     const logout = (e) => {
         e.preventDefault();
-        dispatch(sessionActions.thunk_logout());
+        return dispatch(sessionActions.thunk_logout());
     };
 
     // Delete photo function
     const deletePhoto = async (e) => {
         e.preventDefault();
         e.stopPropagation();
-        // console.log("you are here")
-
-        // console.log(e.target.value)
         return dispatch(photoActions.thunk_deletephoto({ photoId: e.target.value }))
     };
 
-    // Delete photo function
-    const deleteAlbum = async (e) => {
-        e.preventDefault();
-        // console.log("you are here")
-
-        // console.log(e.target.value)
-        return dispatch(albumActions.thunk_deletealbum({ albumId: e.target.value }))
-    };
-
-    // Remove album function
+    // Remove photo from album function
     const removeAlbum = async (e) => {
         e.preventDefault();
         e.stopPropagation();
@@ -95,9 +74,8 @@ function AlbumViewPage({ isLoaded }) {
     }, [dispatch])
 
     useEffect(() => {
-
         const pageClickEvent = (e) => {
-            console.log(e)
+
             if (dropdownRef.current !== null && !dropdownRef.current.contains(e.target)) {
                 setDropDownOpen(!dropDownOpen);
             }
@@ -149,27 +127,17 @@ function AlbumViewPage({ isLoaded }) {
                         <ul ref={dropdownRef} className="feedDisplay-list">
                             {userAlbumsArr.map(album => {
                                 return (<li onClick={() => {
-                                    setFeedDisplay("Photostream")
                                     setDropDownOpen(false)
                                     history.push(`/albums/${album.id}`)
                                 }}>{album.title}</li>)
                             })}
-                            {/* <li onClick={() => {
-                                setFeedDisplay("Photostream")
-                                setDropDownOpen(false)
-                            }}>Photostream</li>
-
-                            <li onClick={() => {
-                                setFeedDisplay("Albums")
-                                setDropDownOpen(false)
-                            }}>Albums</li> */}
                         </ul>
                     </>
                 }
 
                 <div id="createAlbum-button" onClick={() => history.push("/albums/new/")}><i className="far fa-plus-square createAlbum-plus"></i><span className="createAlbum-text">Create album</span></div>
 
-                {feedDisplay === "Photostream" && <ul className="home-photos-feed">
+                <ul className="home-photos-feed">
                     {userPhotosArr.map(photo =>
                         <li onClick={() => {
                             setFullScreen(true);
@@ -184,9 +152,9 @@ function AlbumViewPage({ isLoaded }) {
                                 </div>
                                 <div className="mask-item">
                                     <button id="albumRemove-button" onClick={removeAlbum} value={photo.id} className="photo-albumSelect far fa-minus-square"></button>
-                                    <button className="mask-button" onClick={(e) => { 
+                                    <button className="mask-button" onClick={(e) => {
                                         e.stopPropagation();
-                                        history.push(`/photos/${photo.id}/edit`) 
+                                        history.push(`/photos/${photo.id}/edit`)
                                     }}>Edit</button>
                                     <button className="mask-button" value={photo.id} onClick={deletePhoto}>Delete</button>
                                 </div>
@@ -194,45 +162,8 @@ function AlbumViewPage({ isLoaded }) {
                             </div>
                         </li>
                     )}
-                </ul>}
-
-                {feedDisplay === "Albums" && <ul className="home-albums-feed">
-                    {userAlbumsArr.map((album) => {
-
-                        const albumPhotos = userPhotosArr.filter(photo => photo.albumId === album.id)
-                        const date = new Date(album.createdAt).toString().split(" ");
-
-                        return (
-                            <li onClick={() => history.push(`/albums/${album.id}`)} style={{ backgroundImage: `url(${albumPhotos[0].photoURL})` }} className="album-thumb-container">
-                                <div id="album-thumbMask">
-
-                                    <div id="album-details" className="album-maskItem">
-                                        <div id="album-title">{album.title}</div>
-                                        <div id="album-photoCount">{albumPhotos.length} photos</div>
-                                        <div id="album-date">Created {date[1]} {date[3]}</div>
-
-                                    </div>
-                                    <div className="album-editDelete-buttons">
-                                        <button onClick={() => history.push(`/albums/${album.id}/edit`)} className="album-maskButton">Edit</button>
-                                        <button value={album.id} onClick={deleteAlbum} className="album-maskButton">Delete</button>
-                                    </div>
-                                </div>
-                            </li>
-                        )
-                    })}
-
-                </ul>}
-
+                </ul>
             </div>
-        );
-    }
-
-    else {
-        return (
-            <>
-                <NavLink to="/login">Log In</NavLink>
-                <NavLink to="/signup">Sign Up</NavLink>
-            </>
         );
     }
 }

@@ -101,9 +101,7 @@ export const thunk_deletephoto = ({ photoId }) => async (dispatch) => {
 
     if (res.ok) {
         const deletedPhoto = await res.json();
-        // console.log("THIS IS THE CONESOLE", deletedPhoto.photoToDelete.id)
         dispatch(deletePhoto(deletedPhoto.photoToDelete.id));
-
         return "Deletion successful";
     }
 };
@@ -169,11 +167,9 @@ export const thunk_removealbum = ({ photoId }) => async (dispatch) => {
     if (res.ok) {
         const updatedPhoto = await res.json();
         dispatch(updatePhoto(updatedPhoto));
-        // console.log("This is the updated photo ---> ", updatedPhoto);
         return updatedPhoto;
     }
 };
-
 
 // Photo Reducer
 const photoReducer = (state = {}, action) => {
