@@ -70,7 +70,6 @@ router.post(
         const { userId, title, description, photoURL, s3Name } = req.body;
         const photo = await Photo.create({ userId, title, description, photoURL, s3Name });
 
-        // await setTokenCookie(res, user);
         return res.json({
             photo,
         });
