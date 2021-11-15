@@ -10,11 +10,9 @@ import * as sessionActions from '../../store/session';
 import * as photoActions from "../../store/photo";
 import * as albumActions from "../../store/album";
 
-
 import './Home.css';
 
 function Home() {
-
     const dispatch = useDispatch();
     const history = useHistory();
 

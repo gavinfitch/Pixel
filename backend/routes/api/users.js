@@ -15,7 +15,6 @@ const validateSignup = [
         .exists({ checkFalsy: true })
         .withMessage('Please provide last name.'),
     check('username')
-        // .exists({ checkFalsy: true })
         .isLength({ min: 1 })
         .withMessage('Please provide username of at least 1 character.'),
     check('username')
@@ -23,11 +22,9 @@ const validateSignup = [
         .isEmail()
         .withMessage('Username cannot be an email address.'),
     check('email')
-        // .exists({ checkFalsy: true })
         .isEmail()
         .withMessage('Please provide valid email address.'),
     check('password')
-        // .exists({ checkFalsy: true })
         .isLength({ min: 6 })
         .withMessage('Please provide password of at least 6 characters.'),
 

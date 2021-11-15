@@ -1,14 +1,16 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect, useHistory, NavLink } from "react-router-dom";
-import * as sessionActions from "../../store/session";
-import './SignupForm.css';
+import { Redirect, NavLink } from "react-router-dom";
+
 import Logo from '../Logo';
+
+import * as sessionActions from "../../store/session";
+
+import './SignupForm.css';
 
 function SignupFormPage() {
     const dispatch = useDispatch();
-    const history = useHistory();
-    const sessionUser = useSelector((state) => state.session.user);
+
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [username, setUsername] = useState("");
@@ -17,11 +19,9 @@ function SignupFormPage() {
     const [confirmPassword, setConfirmPassword] = useState("");
     const [errors, setErrors] = useState([]);
 
-    if (sessionUser) return <Redirect to="/" />;
+    const sessionUser = useSelector((state) => state.session.user);
 
-    const redirectHome = () => {
-        history.push("/")
-    };
+    if (sessionUser) return <Redirect to="/" />;
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -47,11 +47,6 @@ function SignupFormPage() {
             <div className="form-background">
                 <form onSubmit={handleSubmit} id="signup-form-container">
                     <div className="form-header">
-                        {/* <div className="logo">
-                            <div id="logo-yellow"></div>
-                            <div id="logo-red"></div>
-                            <div id="logo-blue"></div>
-                        </div> */}
                         <Logo />
                         <div className="form-headerText">Sign up for Pixel</div>
                     </div>
@@ -65,7 +60,6 @@ function SignupFormPage() {
                             placeholder="First name"
                             value={firstName}
                             onChange={(e) => setFirstName(e.target.value)}
-                        // required
                         />
                         <input
                             className="form-field"
@@ -73,7 +67,6 @@ function SignupFormPage() {
                             placeholder="Last name"
                             value={lastName}
                             onChange={(e) => setLastName(e.target.value)}
-                        // required
                         />
                         <input
                             className="form-field"
@@ -81,7 +74,6 @@ function SignupFormPage() {
                             placeholder="Username"
                             value={username}
                             onChange={(e) => setUsername(e.target.value)}
-                        // required
                         />
                         <input
                             className="form-field"
@@ -89,7 +81,6 @@ function SignupFormPage() {
                             placeholder="Email address"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
-                        // required
                         />
                         <input
                             className="form-field"
@@ -97,7 +88,6 @@ function SignupFormPage() {
                             placeholder="Password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
-                        // required
                         />
                         <input
                             className="form-field"
@@ -105,7 +95,6 @@ function SignupFormPage() {
                             placeholder="Confirm password"
                             value={confirmPassword}
                             onChange={(e) => setConfirmPassword(e.target.value)}
-                        // required
                         />
                         <button id="signup-form-button" type="submit">Sign up</button>
                     </div>
