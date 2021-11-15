@@ -10,13 +10,12 @@ import './AlbumSelectForm.css';
 
 
 function AlbumSelectForm() {
+    const dispatch = useDispatch();
+    const history = useHistory();
 
     const sessionUser = useSelector((state) => state.session.user);
     const userAlbumsObj = useSelector(state => state.albums);
     const userAlbumsArr = Object.values(userAlbumsObj);
-
-    const dispatch = useDispatch();
-    const history = useHistory();
 
     const [albumId, setAlbumId] = useState(null);
     const [errors, setErrors] = useState([]);

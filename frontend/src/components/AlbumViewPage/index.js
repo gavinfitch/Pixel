@@ -11,6 +11,8 @@ import * as albumActions from "../../store/album";
 import '../Home/Home.css';
 
 function AlbumViewPage() {
+    const dispatch = useDispatch();
+    const history = useHistory();
 
     const dropdownRef = useRef(null);
 
@@ -38,9 +40,6 @@ function AlbumViewPage() {
     if (currentAlbum) {
         albumTitle = currentAlbum.title;
     }
-
-    const history = useHistory();
-    const dispatch = useDispatch();
 
     // Redirect home function
     const redirectHome = () => {

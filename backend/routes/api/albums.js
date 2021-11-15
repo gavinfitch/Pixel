@@ -71,7 +71,6 @@ router.post(
         const { userId, title, description } = req.body;
         const album = await Album.create({ userId, title, description });
 
-        // await setTokenCookie(res, user);
         return res.json({
             album,
         });

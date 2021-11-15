@@ -12,17 +12,17 @@ const setAlbums = (albums) => ({
 
 const addAlbum = (album) => ({
     type: ADD_ALBUM,
-    album,
+    album
 });
 
 const deleteAlbum = (deletedAlbumId) => ({
     type: DELETE_ALBUM,
-    deletedAlbumId,
+    deletedAlbumId
 });
 
 const updateAlbum = (album) => ({
     type: UPDATE_ALBUM,
-    album,
+    album
 });
 
 // Get album by id thunk
