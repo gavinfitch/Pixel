@@ -1,26 +1,28 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { NavLink, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
+import { NavLink, useHistory } from 'react-router-dom';
 import S3 from 'react-aws-s3';
+
+import Logo from '../Logo';
 import SplashPage from '../SplashPage';
 
 import * as sessionActions from '../../store/session';
 import * as photoActions from "../../store/photo";
 import * as albumActions from "../../store/album";
 
-import ProfileButton from '../Navigation/ProfileButton';
-import Logo from '../Logo';
+
 import './Home.css';
 
-function Home({ isLoaded }) {
+function Home() {
+
+    const dispatch = useDispatch();
+    const history = useHistory();
 
     const dropdownRef = useRef(null);
+
     const s3envKey = process.env.REACT_APP_AWS_KEY;
     const s3envSecretKey = process.env.REACT_APP_AWS_SECRET_KEY;
 
-    // console.log("This is the s3Key", s3envKey, "This is the secret key", s3envSecretKey)
-
-    const [errors, setErrors] = useState(null)
     const [feedDisplay, setFeedDisplay] = useState("Your feed");
     const [dropDownOpen, setDropDownOpen] = useState(false);
     const [fullScreen, setFullScreen] = useState(false);
@@ -67,29 +69,11 @@ function Home({ isLoaded }) {
 
     const userPhotosArr = allPhotosArr.filter(photo => photo.userId === userId)
 
-
-    // console.log("photos arr", userPhotosArr);
-
-    const history = useHistory();
-    const dispatch = useDispatch();
-
-    // let hover = false;
-
     // Redirect home function
     const redirectHome = () => {
         setFeedDisplay("Your feed");
         history.push("/");
     };
-
-    const guestLogin = e => {
-        e.preventDefault();
-        setErrors([]);
-        return dispatch(sessionActions.thunk_login({ credential: "acek123", password: "password" }))
-            .catch(async (res) => {
-                const data = await res.json();
-                if (data && data.errors) setErrors(data.errors);
-            });
-    }
 
     // Logout function
     const logout = (e) => {
@@ -104,9 +88,6 @@ function Home({ isLoaded }) {
 
         const { id, s3Name } = JSON.parse(e.target.value);
 
-        console.log(s3Name)
-
-
         await ReactS3Client
             .deleteFile(s3Name)
             .then(response => console.log(response))
@@ -115,32 +96,20 @@ function Home({ isLoaded }) {
         return dispatch(photoActions.thunk_deletephoto({ photoId: id }))
     };
 
-    // Delete photo function
-    const removePhotoFromAlbum = async (e) => {
-        e.preventDefault();
-        // console.log("you are here")
-
-        // console.log(e.target.value)
-        return dispatch(photoActions.thunk_deletephoto({ photoId: e.target.value }))
-    };
-
-    // Delete photo function
+    // Delete album function
     const deleteAlbum = async (e) => {
         e.preventDefault();
         e.stopPropagation();
-        // console.log("you are here")
 
-        // console.log(e.target.value)
         history.push("/");
         if (!(userAlbumsArr.length - 1)) {
-            setFeedDisplay("Photostream")
+            setFeedDisplay("Your feed")
         }
         return dispatch(albumActions.thunk_deletealbum({ albumId: e.target.value }))
     };
 
     useEffect(() => {
         dispatch(photoActions.thunk_getPhotosByUserId({ userId }))
-        // console.log("this is the userId", userId)
         dispatch(albumActions.thunk_getAlbumsByUserId({ userId }))
         document.body.classList.remove('stop-scrolling');
     }, [dispatch])
@@ -148,7 +117,6 @@ function Home({ isLoaded }) {
     useEffect(() => {
 
         const pageClickEvent = (e) => {
-            console.log(e)
             if (dropdownRef.current !== null && !dropdownRef.current.contains(e.target)) {
                 setDropDownOpen(!dropDownOpen);
             }
@@ -284,9 +252,7 @@ function Home({ isLoaded }) {
 
                         let backgroundImgURL;
                         if (albumPhotos[0]) {
-                            // console.log(albumPhotos[0].photoURL)
                             backgroundImgURL = albumPhotos[0].photoURL;
-                            // console.log(backgroundImgURL)
                         } else {
                             backgroundImgURL = "https://pixelphotoapp.s3.us-west-2.amazonaws.com/pixel-seeder-photos/splash-images/Tim-empty-album-background.jpg";
                         }
@@ -314,9 +280,7 @@ function Home({ isLoaded }) {
                             </li>
                         )
                     })}
-
                 </ul>}
-
             </div>
         );
     }

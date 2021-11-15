@@ -157,11 +157,9 @@ router.delete(
     '/:id',
     asyncHandler(async (req, res) => {
         const photoId = req.params.id;
-        // const { userId, title, description, photoURL } = req.body;
         const photoToDelete = await Photo.findByPk(photoId);
         await photoToDelete.destroy()
 
-        // await setTokenCookie(res, user);
         return res.json({
             photoToDelete,
         });

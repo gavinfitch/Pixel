@@ -122,11 +122,9 @@ router.delete(
             })
         })
 
-        // const { userId, title, description, photoURL } = req.body;
         const albumToDelete = await Album.findByPk(albumId);
         await albumToDelete.destroy()
 
-        // await setTokenCookie(res, user);
         return res.json({
             albumToDelete,
         });
