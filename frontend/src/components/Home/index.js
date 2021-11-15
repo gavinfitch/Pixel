@@ -77,7 +77,7 @@ function Home({ isLoaded }) {
 
     // Redirect home function
     const redirectHome = () => {
-        setFeedDisplay("Photostream");
+        setFeedDisplay("Your feed");
         history.push("/");
     };
 

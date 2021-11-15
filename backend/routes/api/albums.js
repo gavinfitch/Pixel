@@ -38,16 +38,15 @@ router.get(
     }),
 );
 
-// Get photo by userId
+// Get albums by userId
 router.get(
     '/users/:id',
     asyncHandler(async (req, res) => {
         const userId = req.params.id;
-        console.log("YOU ARE HITTING THE BACKEND", userId)
+
         const albums = await Album.findAll({
             where: { userId }
         });
-        console.log("ALBUMS", albums)
 
         return res.json({
             albums,
@@ -100,7 +99,6 @@ router.put(
 
         const updatedAlbum = await Album.findByPk(albumId);
 
-        // await setTokenCookie(res, user);
         return res.json({
             updatedAlbum,
         });
