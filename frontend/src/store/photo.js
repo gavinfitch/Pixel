@@ -38,7 +38,6 @@ export const thunk_getPhotoById = ({ photoId }) => async (dispatch) => {
     if (res.ok) {
         const photo = await res.json();
         // dispatch(getPhotoById(photo));
-        console.log(photo)
         return photo;
     }
 };

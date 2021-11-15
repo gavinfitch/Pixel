@@ -2,7 +2,6 @@ const express = require('express');
 const asyncHandler = require('express-async-handler');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
-const { setTokenCookie, restoreUser } = require('../../utils/auth');
 const { Album, Photo } = require('../../db/models');
 
 const router = express.Router();
@@ -11,10 +10,8 @@ const router = express.Router();
 router.get(
     '/',
     asyncHandler(async (req, res) => {
-        // const { userId, title, description, photoURL } = req.body;
         const albums = await Album.findAll();
 
-        // await setTokenCookie(res, user);
         return res.json({
             albums,
         });
@@ -26,12 +23,9 @@ router.get(
     '/:id',
     asyncHandler(async (req, res) => {
 
-        console.log("YOU ARE IN THE BACKEND")
         const albumId = req.params.id;
-        console.log(albumId)
         const album = await Album.findByPk(albumId);
 
-        // await setTokenCookie(res, user);
         return res.json({
             album,
         });

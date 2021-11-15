@@ -2,7 +2,6 @@ const express = require('express');
 const asyncHandler = require('express-async-handler');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
-const { setTokenCookie, requireAuth } = require('../../utils/auth');
 const { Photo, User } = require('../../db/models');
 
 const router = express.Router();
@@ -11,10 +10,8 @@ const router = express.Router();
 router.get(
     '/',
     asyncHandler(async (req, res) => {
-        // const { userId, title, description, photoURL } = req.body;
         const photos = await Photo.findAll();
 
-        // await setTokenCookie(res, user);
         return res.json({
             photos,
         });
@@ -28,7 +25,6 @@ router.get(
         const photoId = req.params.id;
         const photo = await Photo.findByPk(photoId);
 
-        // await setTokenCookie(res, user);
         return res.json({
             photo,
         });
@@ -144,7 +140,6 @@ router.put(
 
         const updatedPhoto = await Photo.findByPk(photoId);
 
-        // await setTokenCookie(res, user);
         return res.json({
             updatedPhoto,
         });

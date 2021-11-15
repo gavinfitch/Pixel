@@ -31,7 +31,6 @@ export const thunk_getCommentById = ({ commentId }) => async (dispatch) => {
     if (res.ok) {
         const comment = await res.json();
         // dispatch(getPhotoById(photo));
-        console.log(comment.comment)
         return comment;
     }
 };
@@ -78,9 +77,6 @@ export const thunk_deletecomment = ({ commentId }) => async (dispatch) => {
 
 // Update comment thunk
 export const thunk_updatecomment = ({ commentId, content }) => async (dispatch) => {
-
-    // console.log(albumId, title, description)
-
     const res = await csrfFetch(`/api/comments/${commentId}`, {
         method: 'PUT',
         headers: {
