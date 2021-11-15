@@ -1,16 +1,12 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { NavLink, useHistory } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
 
-
-
-import './SplashPage.css'
-
-
-import * as sessionActions from '../../store/session';
 import Logo from '../Logo'
 
+import * as sessionActions from '../../store/session';
 
+import './SplashPage.css'
 
 function SplashPage() {
 
@@ -31,7 +27,6 @@ function SplashPage() {
 
     // Redirect home function
     const redirectHome = () => {
-        // setFeedDisplay("Photostream");
         history.push("/");
     };
 
@@ -65,7 +60,6 @@ function SplashPage() {
 
     Promise.all(Array.from(document.images).filter(img => !img.complete).map(img => new Promise(resolve => { img.onload = img.onerror = resolve; }))).then((res) => {
         imagesLoaded = true;
-        console.log(imagesLoaded)
     });
 
     useEffect(() => {
@@ -118,7 +112,6 @@ function SplashPage() {
                     <a className="connect-item connect-icon" id="linkedin-link" href="https://www.linkedin.com/in/gavinfitch/" target="_blank"><i class="fab fa-linkedin"></i></a>
                     <a className="connect-item connect-icon" id="github-link" href="https://github.com/gavinfitch/authenticate-me" target="_blank"><i class="fab fa-github"></i></a>
                 </div>
-
             </footer>
         </div>
     )

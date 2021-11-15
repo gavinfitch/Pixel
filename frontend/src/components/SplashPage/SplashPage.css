@@ -11,7 +11,6 @@
     display: none;
 }
 
-
 /* Nav bar */
 #splash-nav {
     height: 50px;
@@ -95,7 +94,6 @@
     font-size: 26px;
 }
 
-
 /* Footer */
 .splash-footer {
     position: fixed;
@@ -134,4 +132,3 @@
 .connect-icon:hover {
     color: white;
 }
-

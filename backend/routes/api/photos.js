@@ -2,7 +2,6 @@ const express = require('express');
 const asyncHandler = require('express-async-handler');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
-const { setTokenCookie, requireAuth } = require('../../utils/auth');
 const { Photo, User } = require('../../db/models');
 
 const router = express.Router();
@@ -11,10 +10,8 @@ const router = express.Router();
 router.get(
     '/',
     asyncHandler(async (req, res) => {
-        // const { userId, title, description, photoURL } = req.body;
         const photos = await Photo.findAll();
 
-        // await setTokenCookie(res, user);
         return res.json({
             photos,
         });
@@ -28,28 +25,23 @@ router.get(
         const photoId = req.params.id;
         const photo = await Photo.findByPk(photoId);
 
-        // await setTokenCookie(res, user);
         return res.json({
             photo,
         });
     }),
 );
 
-// Get photo by userId
+// Get photos by userId
 router.get(
     '/users/:id',
     asyncHandler(async (req, res) => {
-        const userId = req.params.id;
         const photos = await Photo.findAll({
-            // where: { userId },
             order: [
                 ['title', 'ASC']
             ],
             include: [User],
         });
 
-        // console.log("In the route", photos)
-        // await setTokenCookie(res, user);
         return res.json({
             photos,
         });
@@ -74,7 +66,6 @@ router.post(
         const { userId, title, description, photoURL, s3Name } = req.body;
         const photo = await Photo.create({ userId, title, description, photoURL, s3Name });
 
-        // await setTokenCookie(res, user);
         return res.json({
             photo,
         });
@@ -94,7 +85,6 @@ router.put(
     validateEditPhoto,
     asyncHandler(async (req, res) => {
         const { photoId, title, description } = req.body;
-        // console.log("YOU ARE HERE")
         const photoToUpdate = await Photo.findByPk(photoId);
 
         await photoToUpdate.update({
@@ -104,7 +94,6 @@ router.put(
 
         const updatedPhoto = await Photo.findByPk(photoId);
 
-        // await setTokenCookie(res, user);
         return res.json({
             updatedPhoto,
         });
@@ -132,7 +121,6 @@ router.put(
 
         const updatedPhoto = await Photo.findByPk(photoId);
 
-        // await setTokenCookie(res, user);
         return res.json({
             updatedPhoto,
         });
@@ -152,7 +140,6 @@ router.put(
 
         const updatedPhoto = await Photo.findByPk(photoId);
 
-        // await setTokenCookie(res, user);
         return res.json({
             updatedPhoto,
         });
@@ -164,11 +151,9 @@ router.delete(
     '/:id',
     asyncHandler(async (req, res) => {
         const photoId = req.params.id;
-        // const { userId, title, description, photoURL } = req.body;
         const photoToDelete = await Photo.findByPk(photoId);
         await photoToDelete.destroy()
 
-        // await setTokenCookie(res, user);
         return res.json({
             photoToDelete,
         });

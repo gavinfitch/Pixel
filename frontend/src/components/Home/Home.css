@@ -62,8 +62,6 @@
     background-color: rgb(228, 228, 228);
 }
 
-
-
 #your-photos {
     display: flex;
     align-items: center;
@@ -168,8 +166,6 @@
     background-color: rgba(0, 0, 0, 0);
     transition: all 0.25s linear;
 }
-
-
 
 /* Album feed */
 .home-albums-feed {
@@ -422,6 +418,3 @@
     cursor: pointer;
     text-decoration: underline;
 }
-
-
-

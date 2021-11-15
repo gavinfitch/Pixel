@@ -1,13 +1,20 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useHistory, useParams } from "react-router-dom";
-import * as albumActions from "../../store/album";
-import './EditAlbumForm.css';
+
 import Logo from '../Logo';
 
-function CreateAlbumForm() {
+import * as albumActions from "../../store/album";
 
+import './EditAlbumForm.css';
+
+function CreateAlbumForm() {
+    const dispatch = useDispatch();
+    const history = useHistory();
+
+    const sessionUser = useSelector((state) => state.session.user);
     const albums = useSelector((state) => state.albums);
+
     const { id } = useParams()
     const currentAlbum = albums[id];
 
@@ -16,24 +23,16 @@ function CreateAlbumForm() {
         titleString = currentAlbum.title;
     }
 
-
-    const dispatch = useDispatch();
-    const history = useHistory();
-    const sessionUser = useSelector((state) => state.session.user);
     const [title, setTitle] = useState(currentAlbum?.title);
     const [description, setDescription] = useState(currentAlbum?.description);
     const [errors, setErrors] = useState([]);
 
+    // Redirect home function
     const redirectHome = () => {
         history.push("/")
     };
 
-    // const handleSubmit = async (e) => {
-    //     e.preventDefault();
-
-    //     return dispatch(albumActions.thunk_updatealbum({ albumId: id, title, description }))
-    // };
-
+    // Update album function
     const updateAlbum = async (e) => {
         e.preventDefault();
         return dispatch(albumActions.thunk_updatealbum({ albumId: id, title, description }))
@@ -47,7 +46,6 @@ function CreateAlbumForm() {
         const userId = sessionUser.id;
         dispatch(albumActions.thunk_getAlbumsByUserId({ userId }))
     }, [dispatch])
-
 
     if (!sessionUser) return <Redirect to="/" />;
 
@@ -75,7 +73,6 @@ function CreateAlbumForm() {
                             placeholder="Title"
                             value={title}
                             onChange={(e) => setTitle(e.target.value)}
-                        // required
                         />
                         <input
                             className="form-field"
@@ -83,15 +80,9 @@ function CreateAlbumForm() {
                             placeholder="Description (optional)"
                             value={description}
                             onChange={(e) => setDescription(e.target.value)}
-                        // required
                         />
                         <button className="form-button" onClick={updateAlbum}>Edit</button>
                     </div>
-
-                    {/* <div className="redirect-container">
-                        <span className="redirect-text">Already a Pixel member? </span>
-                        <NavLink className="redirect-link" to="/login">Log in here.</NavLink>
-                    </div> */}
                 </form>
             </div>
         </>

@@ -1,25 +1,25 @@
 import React, { useState } from 'react';
-import * as sessionActions from '../../store/session';
 import { useDispatch, useSelector } from 'react-redux';
-import { Redirect, useHistory, NavLink } from 'react-router-dom';
-import './LoginForm.css';
+import { Redirect, NavLink } from 'react-router-dom';
+
 import Logo from '../Logo';
+
+import * as sessionActions from '../../store/session';
+
+import './LoginForm.css';
 
 function LoginFormPage() {
     const dispatch = useDispatch();
-    const history = useHistory();
-    const sessionUser = useSelector(state => state.session.user);
+
     const [credential, setCredential] = useState('');
     const [password, setPassword] = useState('');
     const [errors, setErrors] = useState([]);
 
+    const sessionUser = useSelector(state => state.session.user);
+
     if (sessionUser) return (
         <Redirect to="/" />
     );
-
-    const redirectHome = () => {
-        history.push("/")
-    };
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -42,11 +42,6 @@ function LoginFormPage() {
             <div className="form-background">
                 <form onSubmit={handleSubmit} className="form-container" id="login-form-container">
                     <div className="form-header">
-                        {/* <div className="logo">
-                            <div id="logo-yellow"></div>
-                            <div id="logo-red"></div>
-                            <div id="logo-blue"></div>
-                        </div> */}
                         <Logo />
                         <div className="form-headerText">Log in to Pixel</div>
                     </div>
@@ -60,7 +55,6 @@ function LoginFormPage() {
                             type="text"
                             value={credential}
                             onChange={(e) => setCredential(e.target.value)}
-                        // required
                         />
                         <input
                             className="form-field"
@@ -68,7 +62,6 @@ function LoginFormPage() {
                             type="password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
-                        // required
                         />
                         <button className="form-button" type="submit">Log in</button>
                     </div>

@@ -12,17 +12,17 @@ const setAlbums = (albums) => ({
 
 const addAlbum = (album) => ({
     type: ADD_ALBUM,
-    album,
+    album
 });
 
 const deleteAlbum = (deletedAlbumId) => ({
     type: DELETE_ALBUM,
-    deletedAlbumId,
+    deletedAlbumId
 });
 
 const updateAlbum = (album) => ({
     type: UPDATE_ALBUM,
-    album,
+    album
 });
 
 // Get album by id thunk
@@ -42,10 +42,9 @@ export const thunk_getAlbumById = ({ albumId }) => async (dispatch) => {
     }
 };
 
-// Get photo by user id thunk
+// Get albums by user id
 export const thunk_getAlbumsByUserId = ({ userId }) => async (dispatch) => {
 
-    console.log("thunk_getAlbumsByUserId", userId)
     const res = await csrfFetch(`/api/albums/users/${userId}`, {
         method: 'GET',
         headers: {
@@ -55,9 +54,7 @@ export const thunk_getAlbumsByUserId = ({ userId }) => async (dispatch) => {
 
     if (res.ok) {
         const albums = await res.json();
-        // console.log("Frontend thunk albums", albums)
         dispatch(setAlbums(albums));
-
         return albums;
     }
 };
@@ -104,8 +101,6 @@ export const thunk_deletealbum = ({ albumId }) => async (dispatch) => {
 
 // Update album thunk
 export const thunk_updatealbum = ({ albumId, title, description }) => async (dispatch) => {
-
-    console.log(albumId, title, description)
 
     const res = await csrfFetch(`/api/albums/${albumId}`, {
         method: 'PUT',
