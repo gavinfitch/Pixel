@@ -50,7 +50,7 @@ function UploadPhotoForm() {
         const s3Name = s3Photo.key;
         const photoURL = s3Photo.location;
 
-        return dispatch(photoActions.thunk_addphoto({ userId, title, description, photoURL, s3Name }))
+        return dispatch(photoActions.thunk_addphoto({ title, userId, description, photoURL, s3Name }))
             .catch(async (res) => {
                 const data = await res.json();
                 if (data && data.errors) setErrors(data.errors)
