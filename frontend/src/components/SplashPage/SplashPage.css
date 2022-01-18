@@ -132,3 +132,21 @@
 .connect-icon:hover {
     color: white;
 }
+
+@media screen and (max-width: 750px) {
+    #splash-nav {
+        padding: 0px 15px;
+    }
+  }
+
+@media screen and (max-height: 475px) {
+    #splash-signup-container {
+        position: absolute;
+        top: 20px;
+    }
+
+    #startForFree {
+        margin-top: 12px;
+    }
+    
+  }
