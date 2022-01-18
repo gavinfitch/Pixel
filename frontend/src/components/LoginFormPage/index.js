@@ -41,7 +41,7 @@ function LoginFormPage() {
             </nav>
             <div className="form-background">
                 <form onSubmit={handleSubmit} className="form-container" id="login-form-container">
-                    <div className="form-header">
+                    <div id="login_form-header" className="form-header">
                         <Logo />
                         <div className="form-headerText">Log in to Pixel</div>
                     </div>

@@ -155,7 +155,7 @@
     }
   }
 
-  @media screen and (max-height: 810px) {
+  @media screen and (max-height: 800px) {
     #signup-form-container {
         max-height: 70vh;
     }
