@@ -179,6 +179,7 @@
     position: relative;
     box-sizing: border-box;
     width: 550px;
+    min-width: 550px;
     height: 550px;
     padding: 0px;
     margin: 0px 10px 20px 10px;
