@@ -59,7 +59,7 @@ function CreateAlbumForm() {
             </nav>
             <div id="editAlbum-form-background">
                 <form className="form-container" id="editAlbum-form-container">
-                    <div className="form-header">
+                    <div id="editAlbum_form-header" className="form-header">
                         <Logo />
                         <div className="form-headerText">Edit {titleString || "album"}</div>
                     </div>
