@@ -400,11 +400,12 @@
     justify-content: center;
     left: 0px;
     margin: 0px;
-    padding: 0px;
+    padding: 0px 10px;
     background-image: url("https://pixelphotoapp.s3.us-west-2.amazonaws.com/pixel-seeder-photos/splash-images/Stockwell-buildings.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     width: 100vw;
+    min-width: max-content;
     height: 100vh;
 }
 
