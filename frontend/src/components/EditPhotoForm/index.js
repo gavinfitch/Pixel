@@ -59,7 +59,7 @@ function EditPhotoForm() {
             </nav>
             <div id="editPhoto-form-background">
                 <form id="editPhoto-form-container">
-                    <div className="form-header">
+                    <div id="editPhoto_form-header" className="form-header">
                         <Logo />
                         <div className="form-headerText">Edit {titleString || "photo"}</div>
                     </div>

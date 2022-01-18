@@ -146,3 +146,21 @@
     margin-left: 3px;
     color: rgb(22, 142, 220);
 }
+
+@media screen and (max-height: 515px) {
+    #editPhoto-form-container {
+        position: absolute;
+        top: 70px;
+        overflow: scroll;
+    }
+  }
+
+  @media screen and (max-height: 465px) {
+    #editPhoto-form-container {
+        max-height: 70vh;
+    }
+
+    #editPhoto_form-header {
+        margin: 30px 0px;
+    }
+  }
