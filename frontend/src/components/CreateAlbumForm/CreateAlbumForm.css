@@ -154,3 +154,21 @@
 #createAlbum-form-button {
     margin-top: 25px;
 }
+
+@media screen and (max-height: 510px) {
+    #createAlbum-form-container {
+        position: absolute;
+        top: 70px;
+        overflow: scroll;
+    }
+  }
+
+  @media screen and (max-height: 460px) {
+    #createAlbum-form-container {
+        max-height: 70vh;
+    }
+
+    #createAlbum_form-header {
+        margin: 30px 0px;
+    }
+  }
