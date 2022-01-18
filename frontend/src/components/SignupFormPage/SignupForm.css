@@ -146,3 +146,21 @@
     margin-left: 3px;
     color: rgb(22, 142, 220);
 }
+
+@media screen and (max-height: 850px) {
+    #signup-form-container {
+        position: absolute;
+        top: 70px;
+        overflow: scroll;
+    }
+  }
+
+  @media screen and (max-height: 810px) {
+    #signup-form-container {
+        max-height: 70vh;
+    }
+
+    #signUp_form-header {
+        margin: 30px 0px;
+    }
+  }

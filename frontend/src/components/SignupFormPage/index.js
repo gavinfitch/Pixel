@@ -44,9 +44,9 @@ function SignupFormPage() {
                     <div className="form-logoText" id="home-logoText">Pixel</div>
                 </a>
             </nav>
-            <div className="form-background">
+            <div id="signUp_form-background" className="form-background">
                 <form onSubmit={handleSubmit} id="signup-form-container">
-                    <div className="form-header">
+                    <div id="signUp_form-header" className="form-header">
                         <Logo />
                         <div className="form-headerText">Sign up for Pixel</div>
                     </div>
