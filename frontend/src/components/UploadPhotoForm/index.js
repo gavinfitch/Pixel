@@ -69,7 +69,7 @@ function UploadPhotoForm() {
             </nav>
             <div id="uploadPhoto-form-background">
                 <form onSubmit={handleSubmit} className="form-container" id="uploadPhoto-form-container">
-                    <div className="form-header">
+                    <div id="uploadPhoto_form-header" className="form-header">
                         <Logo />
                         <div className="form-headerText">Upload a photo</div>
                     </div>
