@@ -48,7 +48,7 @@ function CreateAlbumForm() {
             </nav>
             <div id="createAlbum-form-background">
                 <form onSubmit={handleSubmit} className="form-container" id="createAlbum-form-container">
-                    <div className="form-header">
+                    <div id="createAlbum_form-header" className="form-header">
                         <Logo />
                         <div className="form-headerText">Create Album</div>
                     </div>

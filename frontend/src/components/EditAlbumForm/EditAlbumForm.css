@@ -146,3 +146,21 @@
     margin-left: 3px;
     color: rgb(22, 142, 220);
 }
+
+@media screen and (max-height: 505px) {
+    #editAlbum-form-container {
+        position: absolute;
+        top: 70px;
+        overflow: scroll;
+    }
+  }
+
+  @media screen and (max-height: 455px) {
+    #editAlbum-form-container {
+        max-height: 70vh;
+    }
+
+    #editAlbum_form-header {
+        margin: 32px 0px 23px 0px;
+    }
+  }
