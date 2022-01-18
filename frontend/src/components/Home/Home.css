@@ -100,6 +100,10 @@
     margin: 0px 10px;
 }
 
+.home-photoLi:hover {
+    cursor: pointer;
+}
+
 .home-img {
     height: 750px;
 }
@@ -179,11 +183,16 @@
     position: relative;
     box-sizing: border-box;
     width: 550px;
+    min-width: 550px;
     height: 550px;
     padding: 0px;
     margin: 0px 10px 20px 10px;
     background-repeat: no-repeat;
     background-size: cover;
+}
+
+.album-thumb-container:hover {
+    cursor: pointer;
 }
 
 #album-thumbMask {
@@ -313,6 +322,7 @@
     height: 100%;
     background-color: rgba(0, 0, 0, 0.95);
     z-index: 1001;
+    overflow: scroll;
 }
 
 .fullScreen-photo-container {
@@ -320,9 +330,10 @@
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
-    margin: 100px 0px;
+    margin: 100px 5px;
     padding: 0px;
     height: 82vh;
+    max-width: 95vw;
 }
 
 .fullScreen-photo {
@@ -397,11 +408,12 @@
     justify-content: center;
     left: 0px;
     margin: 0px;
-    padding: 0px;
+    padding: 0px 10px;
     background-image: url("https://pixelphotoapp.s3.us-west-2.amazonaws.com/pixel-seeder-photos/splash-images/Stockwell-buildings.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     width: 100vw;
+    min-width: max-content;
     height: 100vh;
 }
 
