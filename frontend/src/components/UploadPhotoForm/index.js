@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useHistory } from "react-router-dom";
 import S3 from 'react-aws-s3';
@@ -38,23 +38,30 @@ function UploadPhotoForm() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setErrors([]);
+        const fileType = photo['type'];
+        const validImageTypes = ['image/gif', 'image/jpeg', 'image/png'];
 
         const userId = sessionUser.id;
         let s3Photo;
 
-        await ReactS3Client
-            .uploadFile(photo, title.split(" ").join("-"))
-            .then(data => s3Photo = data)
-            .catch(err => console.error(err))
+        if (validImageTypes.includes(fileType)) {
+            await ReactS3Client
+                .uploadFile(photo, title.split(" ").join("-"))
+                .then(data => s3Photo = data)
+                .catch(err => console.error(err))
 
-        const s3Name = s3Photo.key;
-        const photoURL = s3Photo.location;
+            const s3Name = s3Photo.key;
+            const photoURL = s3Photo.location;
 
-        return dispatch(photoActions.thunk_addphoto({ title, userId, description, photoURL, s3Name }))
-            .catch(async (res) => {
-                const data = await res.json();
-                if (data && data.errors) setErrors(data.errors)
-            }).then((res) => res && history.push("/"));
+            return dispatch(photoActions.thunk_addphoto({ title, userId, description, photoURL, s3Name }))
+                .catch(async (res) => {
+                    const data = await res.json();
+                    if (data && data.errors) setErrors(data.errors)
+                }).then((res) => res && history.push("/"));
+        } else {
+            setErrors(["Please upload valid file type."])
+        }
     };
 
     if (!sessionUser) return <Redirect to="/" />;
