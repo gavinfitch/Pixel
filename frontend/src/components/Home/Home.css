@@ -430,3 +430,26 @@
     cursor: pointer;
     text-decoration: underline;
 }
+
+.scroll {
+    position: fixed;
+    top: 80px;
+    left: 202px;
+    color: rgba(0, 0, 0, 0.75);
+    font-size: 12.5px;
+    z-index: 1001;
+}
+
+.scroll-photostream {
+    position: fixed;
+    top: 80px;
+    left: 225px;
+    color: rgba(0, 0, 0, 0.75);
+    font-size: 12.5px;
+    z-index: 1001;
+}
+
+.fa-arrow-right {
+    margin-left: 5px;
+    font-size: 12.5px;
+}

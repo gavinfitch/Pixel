@@ -162,7 +162,8 @@ function Home() {
                 <div id="dropdown-container">
                     <div onClick={() => setDropDownOpen(!dropDownOpen)} id="your-photos">{feedDisplay}<i className="fas fa-chevron-down"></i></div>
                 </div>
-
+                {feedDisplay === "Your feed" && <div className="scroll">Scroll<i class="fas fa-arrow-right"></i></div>}
+                {(feedDisplay === "Photostream" && userPhotosArr.length > 0) && <div className="scroll-photostream">Scroll<i class="fas fa-arrow-right"></i></div>}
                 {dropDownOpen &&
                     <>
                         <div id="caretDiv"><i className="fas fa-caret-up"></i></div>
