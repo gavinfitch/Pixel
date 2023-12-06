@@ -12,6 +12,10 @@
     "sequelize-cli": "npm run --prefix backend sequelize-cli",
     "start": "npm start --prefix backend"
   },
+  "engines": {
+    "node": "20.0.0",
+    "npm": "9.6.6"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/gavinfitch/authenticate-me.git"
